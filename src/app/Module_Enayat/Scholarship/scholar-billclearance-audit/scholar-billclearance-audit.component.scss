@@ -1,0 +1,52 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+// button {
+//     width: 100%;
+//     color: #153e71;
+//     font-weight: bold;
+// }
+
+// .card-header {
+//     height: fit-content;
+// }
+
+// .card-body {
+//     background: #eee;
+// }
+
+.navbar-part3 {
+    background     : #00b050;
+    color          : white;
+    //border-radius: 7px;
+    font-size      : 12pt;
+}
+
+.pending {
+    color      : red;
+    font-weight: bold;
+    font-size  : 12pt;
+}
+
+.received {
+    color      : green;
+    font-weight: bold;
+    font-size  : 12pt;
+}
+
+.badge {
+    font-size: 11pt;
+}
+
+#kgphoto {
+
+
+    transition: transform .2s;
+    /* Animation */
+
+    margin: 0 auto;
+}
+
+#kgphoto:hover {
+    transform: scale(1.7);
+}

@@ -1,0 +1,104 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div class="row align-items-center pr-5 pl-5 mb-2">
+        <div class="col-lg-6 p-2 text-center">
+            <div class="navbar navbar-answer col-lg-12 mb-1">
+                <div class="input-group">
+                    <ng-select class="col-lg-8 p-0" [items]="vendorDetails" appearance="string" *ngIf="!isShow"
+                        (keyup.enter)="loadData(vendorId)" [searchable]="true" bindLabel="name" bindValue="id"
+                        [(ngModel)]="vendorId" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                        [multiple]="false">
+                    </ng-select>
+                    <input placeholder="ITS No" class="form-control" type="text" *ngIf="isShow" [(ngModel)]="name"
+                        readonly />&nbsp;&nbsp;
+                    <button mat-button mat-raised-button color="primary" (click)="loadData(vendorId)">View
+                        Ledger</button>&nbsp;
+                    <button mat-button mat-raised-button color="warn" (click)="clear()">Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="isShow" class="row justify-content-start-lg">
+        <div class="btn-group pb-2 pt-2">
+
+
+
+            <button class="btn btn-light" color="accent">
+                Alloted&nbsp;&nbsp;
+                <span class="badge badge-primary" [innerText]="allocated"></span>
+            </button>
+
+
+            <button class="btn btn-light" color="accent">
+                Paid&nbsp;&nbsp;
+                <span class="badge badge-success" [innerText]="paid"></span>
+            </button>
+
+
+            <button class="btn btn-light" color="accent">
+                Waived&nbsp;&nbsp;
+                <span class="badge badge-info" [innerText]="waived"></span>
+            </button>
+
+
+            <button class="btn btn-light" color="accent">
+                Reversed&nbsp;&nbsp;
+                <span class="badge badge-info" [innerText]="reversed"></span>
+            </button>
+
+
+            <button class="btn btn-light" color="accent">
+                Balance&nbsp;&nbsp;
+                <span class="badge badge-danger" [innerText]="balance"></span>
+            </button>
+
+            <!-- <button class="btn btn-light" color="accent">
+            Wallet Credit&nbsp;&nbsp;
+            <span class="badge badge-danger" [innerText]="wallet_c"></span>
+        </button>
+        <button class="btn btn-light" color="accent">
+            Wallet Debit&nbsp;&nbsp;
+            <span class="badge badge-danger" [innerText]="wallet_d"></span>
+        </button> -->
+            <button class="btn btn-light" color="accent">
+                Advance&nbsp;&nbsp;
+                <span class="badge badge-success" [innerText]="wallet_b"></span>
+            </button>
+
+        </div>
+    </div>
+
+    <div *ngIf="isShow" class="row">
+        <div class="text-center col-lg-12 col-sm-12 table-responsive">
+            <table class="table table-bordered table-sm">
+                <tr class="table-header">
+                    <td class="align-middle p-2">ID</td>
+                    <td class="align-middle p-2">Bill Unique ID</td>
+                    <td class="align-middle p-2">Date & Time</td>
+                    <td class="align-middle p-2">Credit</td>
+                    <td class="align-middle p-2">Debit</td>
+                    <td class="align-middle p-2">Balance</td>
+                    <td class="align-middle p-2">Payment Type</td>
+                    <td class="align-middle p-2">Note</td>
+                    <td class="align-middle p-2">CreatedBy</td>
+                </tr>
+                <tr class="text-center" *ngFor="let m of leaders" [class]="m.cssClass">
+                    <td class="align-middle p-2">{{m.id}}</td>
+                    <td class="align-middle p-2">{{m.reference}}</td>
+                    <td class="align-middle p-2">{{m.dateTime | date}}</td>
+                    <td class="align-middle p-2">{{m.credit}}</td>
+                    <td class="align-middle p-2">{{m.debit}}</td>
+                    <td class="align-middle p-2">{{m.balance}}</td>
+                    <td class="align-middle p-2">{{m.paymentType}}</td>
+                    <td class="align-middle p-2">{{m.note}}</td>
+                    <td class="align-middle p-2">{{m.createdBy}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

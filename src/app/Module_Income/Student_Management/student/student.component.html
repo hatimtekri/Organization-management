@@ -1,0 +1,519 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <!-- <div class="mr-4 ml-4 mb-2">
+    <div class="row justify-content-center">
+        <div class="col-lg p-0">
+            <div class="navbar navbar-status bg-tayeen m-1 form-check">
+                <label class="form-check-label ml-4" for="defaultCheck1">Mukhayyam (Boys)
+                    <span class="badge badge-info" [innerText]="filterMetadata.count"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="col-lg p-0">
+            <div class="navbar navbar-status bg-non-tayeen m-1 form-check">
+                <label class="form-check-label ml-4" for="defaultCheck2">Mukhayyam (Girls)
+                    <span class="badge badge-info" [innerText]="filterMetadata.count"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="col-lg p-0">
+            <div class="navbar navbar-status bg-recruited m-1 form-check">
+                <label class="form-check-label ml-4" for="defaultCheck4">Nisab Mahad al-Zahra (Boys)
+                    <span class="badge badge-info" [innerText]="filterMetadata.count"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="col-lg p-0">
+            <div class="navbar navbar-status bg-teacher m-1 form-check">
+                <label class="form-check-label ml-4" for="defaultCheck5">E-Learning Quran
+                    <span class="badge badge-info" [innerText]="filterMetadata.count"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="col-lg p-0">
+            <div class="navbar navbar-status bg-other-idara m-1 form-check">
+                <label class="form-check-label ml-4" for="defaultCheck3">Mauze Tahfeez
+                    <span class="badge badge-info" [innerText]="filterMetadata.count"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+    <div class="row justify-content-center">
+        <h2 class="text-danger" *ngIf="!onOffModule">Data fetching from ELQ site is <b>CLOSED</b> for sometime.</h2>
+        <div class="navbar navbar-answer col-lg-12 mb-1">
+            <div class="input-group">
+                <ng-select class="col-lg-11" [items]="programDD" appearance="string" [searchable]="true"
+                    bindLabel="reportName" bindValue="rId" [(ngModel)]="allocateManual.monthList"
+                    placeholder="Select Program" appendTo="body" [closeOnSelect]="false" [multiple]="true">
+                </ng-select>&nbsp;&nbsp;
+                <button mat-button mat-raised-button color="primary" (click)="search()">Search</button>&nbsp;
+            </div>
+        </div>
+    </div>
+    <div *ngIf="students.length == 0 && isloaded">
+        <div class="row justify-content-center">
+            <h2><strong class="text-danger">No students found.</strong></h2>
+        </div>
+    </div>
+    <div *ngIf="students.length != 0">
+        <div class="col-lg-12 col-sm-12">
+            <div class="row justify-content-center mb-2">
+                <div class="navbar navbar-category col-lg-3 form-check">
+                    <input class="form-check-input ml-1 mt-0" [(ngModel)]="searchObject.search_Active" type="checkbox"
+                        id="defaultCheck6" />
+                    <label class="form-check-label ml-4" for="defaultCheck6">Active</label>
+                </div>
+                &nbsp;
+                <div class="navbar navbar-category col-lg-3 form-check">
+                    <input *ngIf="isInActive" class="form-check-input ml-1 mt-0"
+                        [(ngModel)]="searchObject.search_Inactive" type="checkbox" id="defaultCheck7" />
+                    <label *ngIf="isInActive" class="form-check-label ml-4" for="defaultCheck7">In-Active</label>
+                    <label *ngIf="!isInActive" class="form-check-label ml-4 text-danger" for="defaultCheck7">Loading
+                        In-Active Students...</label>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- <div id="accordion">
+    <div class="card">
+        <div class="card-header p-1" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="false" aria-controls="collapseOne">
+                    <span class="pull-left">Bulk Update:</span>
+                    <i class="fa fa-caret-down pull-right"></i>
+                </button>
+            </h5>
+        </div>
+        <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row justify-content-center align-items-center mb-2 p-3">
+                    <nav class="navbar navbar-answer col-lg-12 p-2 text-center">
+                        <div class="col-lg-3 p-1">
+                            <textarea class="form-control" rows="1" placeholder="ITS CSV"></textarea>
+                        </div>
+                        <div class="col-lg-5 p-1">
+                            <ng-select [items]="feecategoryDD" appearance="string" [searchable]="true"
+                                bindLabel="reportName" bindValue="rId" placeholder="Select Program" appendTo="body"
+                                [closeOnSelect]="true" [multiple]="false">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-2 p-1">
+                            <button mat-button mat-raised-button color="primary" class="col-lg-9">Submit</button>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+        <br />
+
+        <div id="accordion1" class="mb-1">
+            <div class="card">
+                <div class="card-header p-1" id="headingtwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsetwo"
+                            aria-expanded="false" aria-controls="collapsetwo">
+                            <span class="pull-left">Basic Filters:</span>
+                            <i class="fa fa-caret-down pull-right"></i>
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapsetwo" class="collapse show" aria-labelledby="headingtwo" data-parent="#accordion1">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <nav class="navbar navbar-answer m-1">
+                                    <span class="col-lg-12">ITS ID:</span>
+                                    <ng-select class="col-lg-12" [items]="itsIdDD" appearance="string"
+                                        [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                        appendTo="body" [closeOnSelect]="false" [(ngModel)]="searchObject.itsId"
+                                        [multiple]="true">
+                                    </ng-select>
+                                </nav>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <nav class="navbar navbar-answer m-1">
+                                    <span class="col-lg-12">Name:</span>
+                                    <ng-select class="col-lg-12" [items]="nameDD" appearance="string"
+                                        [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                        appendTo="body" [closeOnSelect]="false" [(ngModel)]="searchObject.studentName"
+                                        [multiple]="true">
+                                    </ng-select>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <nav class="navbar navbar-answer m-1">
+                                    <span class="col-lg-12">Program:</span>
+                                    <ng-select class="col-lg-12" [items]="programDD1" appearance="string"
+                                        [searchable]="true" bindLabel="name" bindValue="name"
+                                        [(ngModel)]="searchObject.pset_Name" placeholder="Select" appendTo="body"
+                                        [closeOnSelect]="false" [multiple]="false">
+                                    </ng-select>
+                                </nav>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <nav class="navbar navbar-answer m-1">
+                                    <span class="col-lg-12">Fee Category:</span>
+                                    <ng-select class="col-lg-12" [items]="feecategoryDD" appearance="string"
+                                        [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                        appendTo="body" [closeOnSelect]="false" [(ngModel)]="searchObject.fc_name"
+                                        [multiple]="true">
+                                    </ng-select>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-start">
+            <div class="btn btn-group pb-2 pt-2">
+                <button mat-button mat-flat-button color="accent">
+                    Total Students&nbsp;&nbsp;
+                    <span class="badge badge-info" [innerText]="filterMetadata.count"></span>
+                </button>&nbsp;
+                <button mat-button mat-raised-button color="primary" (click)="ExportStudentData()" class="customized">
+                    <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+                    Export
+                </button>
+                <!-- <button mat-button mat-flat-button color="primary" (click)="edit = !edit" *ngIf="!edit">
+            Edit Fee Category
+        </button>
+        <button mat-button mat-flat-button color="primary" *ngIf="edit">
+            Save Fee Category
+        </button> -->
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="text-center col-lg-12 col-sm-12 table-responsive-sm">
+                <table class="table table-bordered">
+                    <tr class="table-header sticky-header">
+                        <!-- <td class="align-middle p-2">
+                    <input type="checkbox" id="exampleCheck1" />
+                </td> -->
+                        <td class="align-middle p-2">Sr No.</td>
+                        <td class="align-middle p-2">Photo</td>
+                        <td class="align-middle p-2">ITS No.</td>
+                        <td class="align-middle p-2">Name</td>
+                        <td class="align-middle p-2">Age</td>
+                        <td class="align-middle p-2">Contact Details</td>
+                        <td class="align-middle p-2">Program</td>
+                        <td class="align-middle p-2">Fee Category</td>
+                        <td class="align-middle p-2">Pending Amount</td>
+                        <td class="align-middle p-2">Wallet Amount</td>
+                        <td class="align-middle p-2">Action</td>
+                    </tr>
+                    <tr class="text-center" *ngFor="let m of students | multiSearchIncome : {
+                itsId: searchObject.itsId,
+                studentName: searchObject.studentName,
+                fc_name: searchObject.fc_name,
+                pset_Name: searchObject.pset_Name,
+                activeStatusString: [
+                      searchObject.search_Active ? '1' : undefined,
+                      searchObject.search_Inactive ? '0' : undefined
+                    ]
+              }
+            : filterMetadata;
+        let i = index
+      " [class]="m.activeStatusString2">
+                        <!-- <td class="align-middle p-2">
+                    <input type="checkbox" id="exampleCheck1" />
+                </td> -->
+                        <td class="align-middle p-2">{{ i + 1 }}</td>
+                        <td class="align-middle p-2">
+                            <div id="stdphoto">
+                                <img src="https://www.mahadalzahra.org/uploads/Its_Photos/{{m.itsId}}.jpeg"
+                                    onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`"
+                                    width="60" height="60" class="img-responsive rounded-circle" />
+                            </div>
+                        </td>
+                        <td class="align-middle p-2">{{m.itsId}}</td>
+                        <td class="align-middle text-left text-wrap p-2">{{m.studentName}}</td>
+                        <td class="align-middle p-2">{{m.age}}</td>
+                        <td class="align-middle p-2"><u><a href="#" data-toggle="modal" (click)="contactClick(m)"
+                                    data-target=".bd-example-modal-sm">View</a></u></td>
+                        <td class="align-middle text-left text-wrap p-2">{{m.pset_Name}}</td>
+                        <td class="align-middle text-wrap p-2">
+                            <div *ngIf="!edit">{{m.fc_name}}</div>
+                            <!-- <ng-select *ngIf="edit" class="col-lg-12" [items]="stdfeecategoryDD" appearance="string"
+                        [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select" appendTo="body"
+                        [closeOnSelect]="false" [multiple]="true">
+                    </ng-select> -->
+                        </td>
+                        <td class="align-middle text-wrap p-2">{{m.pendingAmount}}</td>
+                        <td class="align-middle text-wrap p-2">{{m.walletAmount}}</td>
+                        <td class="align-middle p-2">
+                            <a *ngIf="changestatus" (click)="excludeClick(m)" data-toggle="modal"
+                                data-target="#exampleModal" type="button" title="Exclude Student" class="btn p-1"><img
+                                    src="./assets/decision.png" width="27" height="28" /></a>
+                            <a type="button" title="View Fee Ledger" data-toggle="modal" (click)="loadData(m.itsId)"
+                                data-target=".bd-example-modal-lg" class="btn p-1"><img src="./assets/ledger.png"
+                                    width="27" height="28" /></a>
+                            <button mat-button mat-raised-button color="warn" (click)="refreshFromIts(m.itsId)">
+                                <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+                                Refresh ITS Data
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" readonly [(ngModel)]="filterMetadata.count" />
+
+        <!-- contact modal -->
+        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="mySmallModalLabel">
+                            <b class="text-danger">Contact Details</b><br />({{studentContacts.studentName}})
+                        </h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-7 p-1 pl-4">
+                            <nav class="navbar navbar-answer2 m-1 p-0">
+                                <div class="col-lg-12">
+                                    <strong>Email Id:</strong>
+                                    <div class="input-group">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-primary p-1" (click)="copyInputMessage(semailid)">
+                                                <i class="fa fa-clipboard"></i>
+                                            </span>
+                                        </label>
+                                        <input class="form-control" type="text" [value]="studentContacts.emailId"
+                                            readonly #semailid>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="col-lg-5 p-1 pr-4">
+                            <nav class="navbar navbar-answer2 m-1 p-0">
+                                <div class="col-lg-12">
+                                    <strong class="align-middle">Mobile No:</strong>
+                                    <div class="input-group">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-primary p-1" (click)="copyInputMessage(smobno)">
+                                                <i class="fa fa-clipboard"></i>
+                                            </span>
+                                        </label>
+                                        <input class="form-control" type="text" [value]="studentContacts.mobileNo"
+                                            readonly #smobno>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="col-lg-7 p-1 pl-4">
+                            <nav class="navbar navbar-answer2 m-1 p-0">
+                                <div class="col-lg-12">
+                                    <strong class="align-middle">Father Email ID:</strong>
+                                    <div class="input-group">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-primary p-1" (click)="copyInputMessage(femailid)">
+                                                <i class="fa fa-clipboard"></i>
+                                            </span>
+                                        </label>
+                                        <input class="form-control" type="text" [value]="studentContacts.fatherEmail"
+                                            readonly #femailid>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="col-lg-5 p-1 pr-4">
+                            <nav class="navbar navbar-answer2 m-1 p-0">
+                                <div class="col-lg-12">
+                                    <strong class="align-middle">Father Mobile No:</strong>
+                                    <div class="input-group">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-primary p-1" (click)="copyInputMessage(fmobno)">
+                                                <i class="fa fa-clipboard"></i>
+                                            </span>
+                                        </label>
+                                        <input class="form-control" type="text" [value]="studentContacts.fatherMobile"
+                                            readonly #fmobno>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="col-lg-7 p-1 pl-4">
+                            <nav class="navbar navbar-answer2 m-1 p-0">
+                                <div class="col-lg-12">
+                                    <strong class="align-middle">Mother Email ID:</strong>
+                                    <div class="input-group">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-primary p-1" (click)="copyInputMessage(memailid)">
+                                                <i class="fa fa-clipboard"></i>
+                                            </span>
+                                        </label>
+                                        <input class="form-control" type="text" [value]="studentContacts.motherEmail"
+                                            readonly #memailid>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="col-lg-5 p-1 pr-4">
+                            <nav class="navbar navbar-answer2 m-1 p-0">
+                                <div class="col-lg-12">
+                                    <strong class="align-middle">Mother Mobile No:</strong>
+                                    <div class="input-group">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-primary p-1" (click)="copyInputMessage(mmobno)">
+                                                <i class="fa fa-clipboard"></i>
+                                            </span>
+                                        </label>
+                                        <input class="form-control" type="text" [value]="studentContacts.motherMobile"
+                                            readonly #mmobno>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- fee ledger -->
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <mat-toolbar class="page-subheader-toolbar modal-toolbar justify-content-center">
+                        <span>{{name}}</span>
+                    </mat-toolbar>
+                    <br />
+                    <div class="row justify-content-start-lg">
+                        <div class="btn-group p-3 pb-2 pt-2">
+
+
+                            <button class="btn btn-light" color="accent">
+                                Alloted&nbsp;&nbsp;
+                                <span class="badge badge-primary" [innerText]="allocated"></span>
+                            </button>
+
+
+                            <button class="btn btn-light" color="accent">
+                                Paid&nbsp;&nbsp;
+                                <span class="badge badge-success" [innerText]="paid"></span>
+                            </button>
+
+
+                            <button class="btn btn-light" color="accent">
+                                Waived&nbsp;&nbsp;
+                                <span class="badge badge-info" [innerText]="waived"></span>
+                            </button>
+
+
+                            <button class="btn btn-light" color="accent">
+                                Reversed&nbsp;&nbsp;
+                                <span class="badge badge-info" [innerText]="reversed"></span>
+                            </button>
+
+
+                            <button class="btn btn-light" color="accent">
+                                Balance&nbsp;&nbsp;
+                                <span class="badge badge-danger" [innerText]="balance"></span>
+                            </button>
+
+                            <!-- <button class="btn btn-light" color="accent">
+                        Wallet Credit&nbsp;&nbsp;
+                        <span class="badge badge-danger" [innerText]="wallet_c"></span>
+                    </button>
+                    <button class="btn btn-light" color="accent">
+                        Wallet Debit&nbsp;&nbsp;
+                        <span class="badge badge-danger" [innerText]="wallet_d"></span>
+                    </button> -->
+                            <button class="btn btn-light" color="accent">
+                                Advance&nbsp;&nbsp;
+                                <span class="badge badge-success" [innerText]="wallet_b"></span>
+                            </button>
+
+
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center p-2">
+                        <div class="text-center col-lg-12 col-sm-12 table-responsive">
+                            <table class="table-bordered table-striped table-sm">
+                                <tr class="table-header">
+
+                                    <td class="align-middle p-2">Reference</td>
+                                    <td class="align-middle p-2">Date & Time</td>
+                                    <td class="align-middle p-2">Hub Allocated</td>
+                                    <td class="align-middle p-2">Hub Paid</td>
+                                    <td class="align-middle p-2">Balance</td>
+                                    <td class="align-middle p-2">Payment Type</td>
+                                    <td class="align-middle p-2">Note</td>
+
+                                </tr>
+                                <tr class="text-center" *ngFor="let m of leaders">
+
+                                    <td class="align-middle p-2">{{m.reference}}</td>
+                                    <td class="align-middle p-2">{{m.dateTime | date}}</td>
+                                    <td class="align-middle p-2">{{m.debit}}</td>
+                                    <td class="align-middle p-2">{{m.credit}}</td>
+                                    <td class="align-middle p-2">{{m.balance}}</td>
+                                    <td class="align-middle p-2">{{m.paymentType}}</td>
+                                    <td class="align-middle p-2">{{m.note}}</td>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- exclude student modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="exampleModalLabel">
+                            <b class="text-danger">Exclude Student</b><br />({{studentContacts.studentName}} - {{studentContacts.itsId}})
+                        </h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <ng-select class="col-lg-6 p-1" [items]="allocateMonthDD" appearance="string"
+                                [(ngModel)]="excludeHijriMonth" [searchable]="true" bindLabel="name" bindValue="id"
+                                placeholder="Select Month" appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                            </ng-select>
+                            <ng-select class="col-lg-6 p-1" [items]="allocateYearDD" appearance="string"
+                                [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select Year"
+                                appendTo="body" [(ngModel)]="excludeHijriYear" [closeOnSelect]="true" [multiple]="false">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-button mat-raised-button color="warn" (click)="excludestudent()">
+                            Exclude
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

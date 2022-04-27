@@ -1,0 +1,505 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="btn btn-group pull-right">
+            <button mat-button mat-raised-button color="primary" (click)="edit = !edit" *ngIf="!edit">
+                Edit
+            </button>
+            <button mat-button mat-raised-button color="primary" (click)="submitdata()" *ngIf="edit">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="table-responsive-lg table-responsive-sm col-lg-12 col-sm-12">
+            <table class="table table-style table-bordered table-sm">
+                <tr>
+                    <th class="align-middle text-left">
+
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Khidmat Year
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="align-middle text-left">
+                        <div *ngIf="!edit">{{profileData.khidmatYear}}</div>
+                        <ng-select [items]="hijriYearDD" *ngIf="edit" [searchable]="true" bindLabel="name"
+                            bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                            [(ngModel)]="profileData.khidmatYear">
+                        </ng-select>
+
+                    </td>
+                    <th class="align-middle text-left">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Khidmat Duration
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="align-middle text-left">{{profileData.totalKhidmatYear}}
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <th class="align-middle text-left">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Khidmat in Mahad al-Zahra
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="align-middle text-left">
+                        <div *ngIf="!edit">{{profileData.mahad_khidmatYear}}</div>
+                        <ng-select [items]="hijriYearDD" *ngIf="edit" [searchable]="true" bindLabel="name"
+                            bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                            [(ngModel)]="profileData.mahad_khidmatYear">
+                        </ng-select>
+                    </td>
+                    <th class="align-middle text-left">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Tayeen in Mahad al-Zahra
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="align-middle text-left">
+                        <div *ngIf="!edit">{{profileData.tayeenYear}}</div>
+                        <ng-select [items]="hijriYearDD" *ngIf="edit" [searchable]="true" bindLabel="name"
+                            bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                            [(ngModel)]="profileData.tayeenYear">
+                        </ng-select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th class="align-middle text-left">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Tayeen Duration
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="align-middle text-left">{{profileData.totalTayeenYear}}
+
+                    </td>
+                    <th class="align-middle text-left">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Main Department
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="align-middle text-left">
+                        <div *ngIf="!edit">{{profileData.deptVenueName}}</div>
+                        <ng-select *ngIf="edit" class="col-lg-12 p-0" [items]="mainDepartmentDD" [(ngModel)]="profileData.deptVenueId"
+                            appearance="string" [searchable]="true" bindLabel="deptVenueName" bindValue="id"
+                            placeholder="Select" appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                        </ng-select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="align-middle text-left">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Qism al-Tahfeez
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="align-middle text-left">{{profileData.qismTahfeez}}
+
+                    </td>
+                    <th class="align-middle text-left">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Current Mauze
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="align-middle text-left">{{profileData.moze}}
+
+                    </td>
+                </tr>
+                <tr>
+                    <th class="align-middle text-left">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Program
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="Select the program you are currently involved in (multiple options can be selected)">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="align-middle text-left">
+                        <div *ngIf="!edit">
+                            <a class="view-attachment" data-toggle="modal" data-target="#exampleModal">[View
+                                Details]</a>
+                        </div>
+                        <ng-select [items]="workTypeDD" *ngIf="edit" [searchable]="true" bindLabel="name"
+                            bindValue="name" [(ngModel)]="profileData.programList" placeholder="Select" appendTo="body"
+                            [closeOnSelect]="false" [multiple]="true">
+                        </ng-select>
+                    </td>
+                    <th class="align-middle text-left">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Main Program
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="Select the option in which you are giving your maximum time.">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="align-middle text-left">
+                        <div *ngIf="!edit">{{profileData.mainProgram}}</div>
+                        <ng-select [items]="workTypeDD" *ngIf="edit" [searchable]="true" bindLabel="name" bindValue="id"
+                            placeholder="Select" appendTo="body" [(ngModel)]="profileData.workTypeId"
+                            [multiple]="false">
+                        </ng-select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- <div class="row">
+    <div class="col-lg-12 col-sm-12 overflow-scroll">
+        <div class="card scrollable-div">
+            <div class="card-body">
+                <div class="table-responsive-lg table-responsive-sm text-center">
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th colspan="2">Current Mauze Details</th>
+                            <th colspan="2">1442</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Academic work</th>
+                            <th colspan="2">Administrative work</th>
+                        </tr>
+                        <tr>
+                            <th>Type of work</th>
+                            <th>Hours per day</th>
+                            <th>Type of work</th>
+                            <th>Hours per day</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="name" class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text" name="name" class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text" name="name" class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text" name="name" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <button mat-button mat-raised-button class="btn-yellow">Add Row</button>&nbsp;
+                                <button mat-button mat-raised-button color="warn">Save</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-responsive-lg table-responsive-sm text-center">
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th colspan="2">Current Mauze Details</th>
+                            <th colspan="2">1441</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Academic work</th>
+                            <th colspan="2">Administrative work</th>
+                        </tr>
+                        <tr>
+                            <th>Type of work</th>
+                            <th>Hours per day</th>
+                            <th>Type of work</th>
+                            <th>Hours per day</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="name" class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text" name="name" class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text" name="name" class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text" name="name" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <button mat-button mat-raised-button class="btn-yellow">Add Row</button>&nbsp;
+                                <button mat-button mat-raised-button color="warn">Save</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<br />
+<div class="row">
+    <div class="col-lg-6 col-sm-12 pb-lg-2 pb-sm-2">
+        <div class="card">
+            <div class="card-body">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span class="text-wrap text-center">Past Mahad al-Zahra Mawaaze Details</span>
+                </mat-toolbar>
+                <br />
+                <div>
+
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">From
+                                year</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="hijriYearDD" appearance="string" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="mahadPastMData.fromYear">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">To
+                                year</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="hijriYearDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="mahadPastMData.toYear">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Mauze</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="mawaze2DD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="mahadPastMData.mauze">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Program (Multiple fields can be
+                                selected)</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="programDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select" appendTo="body" [closeOnSelect]="false" [multiple]="true"
+                                [(ngModel)]="mahadPastMData.programList">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="text-center">
+                        <button mat-button mat-raised-button color="warn" (click)="AddMahadPastM()">Add</button>
+                    </div>
+                </div>
+                <br />
+                <div class="table-responsive-lg table-responsive-sm text-center">
+                    <table class="table table-bordered table-sm">
+
+                        <tr *ngFor="let m1 of mahadPastMawazeList">
+                            <td class="align-middle">{{m1.fromYear}}-{{m1.toYear}} </td>
+                            <td class="align-middle">{{m1.mauze}}</td>
+                            <td class="align-middle">{{m1.program}}</td>
+                            <td class="align-middle">
+                                <a class="btn btn-danger btn-sm rounded-circle" title="Delete"
+                                    (click)="DeleteMahadPastM(m1.id!)" role="button"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-6 col-sm-12 pb-lg-2 pb-sm-2">
+        <div class="card">
+            <div class="card-body">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span class="text-wrap text-center">Other Idara Mawaaze Details</span>
+                    &nbsp;&nbsp;
+                    <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                        data-placement="top" data-trigger="focus" tabindex="0" data-content="If you have performed in any other Idara apart from Mahad
+                        al-Zahra">
+                        <img src="./assets/information.png" alt="" height="20" width="20">
+                    </a>
+                </mat-toolbar>
+                <br />
+                <div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">From
+                                year</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="hijriYearDD" appearance="string" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="otherIdaraMData.fromYear">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">To
+                                year</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="hijriYearDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="otherIdaraMData.toYear">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Khidmat
+                                Nature</strong>&nbsp;<a class="btn rounded-circle btn-sm p-0" data-container="body"
+                                data-toggle="popover" data-placement="top" data-trigger="focus" tabindex="0"
+                                data-content="If khidmat nature is not in the list, please email at itsupport@mahadalzahra.com">
+                                <img src="./assets/information-black.png" alt="" height="20" width="20">
+                            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="khidmatnatureDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="otherIdaraMData.khidmatNature">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Mauze</strong>&nbsp;
+                            <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                data-placement="top" data-trigger="focus" tabindex="0"
+                                data-content="If mauze is not in the list, please email at itsupport@mahadalzahra.com">
+                                <img src="./assets/information-black.png" alt="" height="20" width="20">
+                            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="mawazeDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="otherIdaraMData.mauze">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="text-center">
+                        <button mat-button mat-raised-button color="warn" (click)="AddOtherIdaraM()">Add</button>
+                    </div>
+                </div>
+                <br />
+                <div class="table-responsive-lg table-responsive-sm text-center">
+                    <table class="table table-bordered table-sm">
+
+                        <tr *ngFor="let m of otherIdaraMawazeList">
+                            <td class="align-middle">{{m.fromYear}}-{{m.toYear}}</td>
+                            <td class="align-middle">{{m.khidmatNature}}</td>
+                            <td class="align-middle">{{m.mauze}}</td>
+                            <td class="align-middle">
+                                <a class="btn btn-danger btn-sm rounded-circle" title="Delete"
+                                    (click)="DeleteOtherIdaraM(m.id!)" role="button"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Current Mauze Programs</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{profileData.programs}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div class="row justify-content-center p-2 mb-2">
+        <div class="navbar navbar-answer col-lg-6 mb-1">
+            <div class="col-lg-8">
+                <mat-form-field class="col-12 p-0">
+                    <mat-label>Select Date Range</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input [(ngModel)]="searchObject.fromDate1" readonly matStartDate placeholder="From Date">
+                        <input [(ngModel)]="searchObject.toDate1" readonly matEndDate placeholder="To Date">
+                    </mat-date-range-input>
+
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+                <button class="col-lg-5" mat-button mat-raised-button color="warn"
+                    (click)="search()">Search</button>&nbsp;
+                <button class="col-lg-5" mat-button mat-raised-button color="primary" (click)="clear()">Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                        <span>
+                            <h1>Total Income: {{gTotal |currency:'INR' }}</h1>
+                        </span>
+                    </mat-toolbar>
+                    <br />
+                    <canvas height="100" baseChart [datasets]="mainChartData" [labels]="mainChartLabels"
+                        [options]="mainChartOptions" [plugins]="mainChartPlugins" [legend]="mainChartLegend"
+                        [chartType]="mainChartType">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-lg-4 mb-2" *ngFor="let m of psetIncomes">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-info">{{m.psetName}}
+                    </h2>
+                    <h1 class="card-subtitle text-danger">{{m.totalIncome |currency:'INR' }} INR</h1>
+                    <h3 class="card-subtitle text-danger">{{m.incomePercentage}} % of total income</h3>
+                    <div class="row">
+                        <div class="col-lg-12 align-self-center">
+                            <canvas baseChart [datasets]="m.data" [labels]="pSetChartLabels"
+                                [options]="pSetChartOptions" [plugins]="pSetChartPlugins" [legend]="pSetChartLegend"
+                                [chartType]="pSetChartType">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

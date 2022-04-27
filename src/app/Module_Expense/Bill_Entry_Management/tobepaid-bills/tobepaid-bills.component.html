@@ -1,0 +1,102 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div class="row justify-content-center" *ngIf="packages.length == 0">
+        <h2 class="text-danger">NO ENTRIES FOUND</h2>
+    </div>
+    <div class="row" *ngIf="packages.length != 0">
+        <div class="col-md-12 mb-5" *ngFor="let pack of packages">
+            <div class="card">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span>Package ID: {{pack.id}}</span> &nbsp;&nbsp; <span class="text-danger">| |</span> &nbsp;&nbsp;
+                    <span>Package Name: {{pack.name}}</span> &nbsp;&nbsp; <span class="text-danger">| |</span>
+                    &nbsp;&nbsp;
+                    <span>Payment From: {{pack.paymentFrom_BankName}}</span>
+                </mat-toolbar>
+                <div class="card-body p-1">
+                    <div class="row justify-content-end mb-2">
+                        <button mat-button mat-raised-button *ngIf="pack.paymentMode_Admin == 'NEFT'" class="customized mr-4" color="primary"
+                            (click)="ExportNEFT(pack.bills)">
+                            Export
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover table-sm">
+                            <tr class="text-center table-header">
+                                <td class="align-middle">Sr No</td>
+                                <td class="align-middle">Bill ID</td>
+                                <td class="align-middle">Vendor</td>
+                                <td class="align-middle">Payment Details</td>
+                                <td class="align-middle">Bill From</td>
+                                <td class="align-middle">Bill No.</td>
+                                <td class="align-middle">Bill Date</td>
+                                <td class="align-middle">TDS</td>
+                                <td class="align-middle">Bill Amount<br /><span class="badge badge-danger">{{pack.sum |
+                                        currency:'INR'
+                                        :'': '1.0-0'}}</span></td>
+                                <td class="align-middle">Payable<br /><span
+                                        class="badge badge-success">{{pack.sumPayableAmount |
+                                        currency:'INR'
+                                        :'': '1.0-0'}}</span></td>
+                                <td class="align-middle">TXN ID</td>
+                            </tr>
+                            <tr *ngFor="let m of pack.bills; let i = index">
+                                <td class="align-middle">{{ i + 1 }}</td>
+                                <td class="align-middle">{{m.id}}</td>
+                                <td class="align-middle">{{m.vendorName}}</td>
+                                <td class="align-middle text-left">
+                                    {{m.paymentTo_AccNum}}<br />{{m.paymentTo_AccName}}<br />{{m.paymentTo_ifsc}}<br />{{m.paymentTo_BankName}}
+                                </td>
+                                <td class="align-middle">{{m.deptVenueName}} : {{m.baseItemName}}</td>
+                                <td class="align-middle">{{m.billNumber}}</td>
+                                <td class="align-middle">{{m.billDate | date: 'dd-MM-yyyy'}}</td>
+                                <td class="align-middle">
+                                    Applicable: {{m.tdsApplicableAmount != undefined ? m.tdsApplicableAmount : 0}}
+                                    <br />
+                                    Percentage: {{m.tdsPercentage != undefined ? m.tdsPercentage : 0}} %
+                                    <br />
+                                    <b class="text-danger">Amount: {{(m.tdsApplicableAmount != undefined ?
+                                        m.tdsApplicableAmount : 0) * (m.tdsPercentage != undefined ?
+                                        m.tdsPercentage : 0) / 100 | number: '1.0-0'}}</b>
+                                </td>
+                                <td class="align-middle">
+                                    Gross: {{(m.totalAmount != undefined ?
+                                    m.totalAmount : 0) - (m.conveyanceAmount != undefined ?
+                                    m.conveyanceAmount : 0) - (m.gstAmount != undefined ?
+                                    m.gstAmount : 0)}}
+                                    <br />
+                                    GST: {{m.gstAmount != undefined ? m.gstAmount : 0}}
+                                    <br />
+                                    Conveyance: {{m.conveyanceAmount != undefined ? m.conveyanceAmount : 0}}
+                                    <br />
+                                    <b class="text-danger">Total: {{m.totalAmount != undefined ? m.totalAmount :
+                                        0}}</b>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <b class="text-success">{{m.payableAmount | number: '1.0-0'}}</b>
+                                </td>
+                                <td class="align-middle">
+                                    <input id="reasonText" class="form-control max-content" placeholder="Type"
+                                        [(ngModel)]="m.txnId" type="text">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <!-- <button mat-button mat-raised-button color="warn" class="col-lg-4">Paid</button> -->
+                        <a class="btn" title="Mark as PAID" (click)="payBills(pack.bills)"><img src="./assets/paid.png"
+                                alt="" height="72" width="72"></a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn" title="Send Back to change Bank Selection"
+                            (click)="reverseBills(pack.bills)"><img src="./assets/back.png" alt="" height="72"
+                                width="72"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

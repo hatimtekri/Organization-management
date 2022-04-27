@@ -1,0 +1,25 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+td {
+    width: 25%;
+}
+
+.table-font-yellow {
+    color: #fff176;
+}
+.badge {
+  font-size: 11pt;
+}
+
+#kgphoto{
+
+
+  transition: transform .2s; /* Animation */
+
+  margin: 0 auto;
+}
+
+#kgphoto:hover{
+  transform: scale(1.7);
+}

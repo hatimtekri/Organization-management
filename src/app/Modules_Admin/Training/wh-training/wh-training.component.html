@@ -1,0 +1,666 @@
+<div class="row justify-content-end">
+    <div class="btn btn-group">
+        <a href="./assets/Training_Overview.pdf" target="_blank"><button type="button" class="btn btn-dark">Training
+                Overview</button>
+        </a>
+        &nbsp;
+
+        <a href="./assets/Training_Chart.pdf" target="_blank"><button type="button" class="btn btn-dark">Training
+                Chart</button>
+        </a>
+        &nbsp;
+        <a href="./assets/Training_MonthlyPlannerChart.pdf" target="_blank"><button type="button"
+                class="btn btn-dark">Monthly
+                Planner</button></a>
+    </div>
+</div>
+
+<div id="accordion1" class="mb-1">
+    <div class="card">
+        <div class="card-header p-1" id="headingone">
+            <h5 class="mb-0">
+                <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseone"
+                    aria-expanded="false" aria-controls="collapseone">
+                    <span class="pull-left">Basic Search:</span>
+                    <i class="fa fa-caret-down pull-right"></i>
+                </button>
+            </h5>
+        </div>
+        <div id="collapseone" class="collapse hide" aria-labelledby="headingone" data-parent="#accordion1">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 p-0">
+                        <nav class="navbar navbar-answer m-1">
+                            <span class="col-lg-12">ITS ID:</span>
+                            <ng-select class="col-lg-12" [items]="itsIdDD" appearance="string" [searchable]="true"
+                                bindLabel="name" [(ngModel)]="searchObject.search_itsIdDD" bindValue="name"
+                                placeholder="Select" appendTo="body" [closeOnSelect]="false" [multiple]="true">
+                            </ng-select>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 p-0">
+                        <nav class="navbar navbar-answer m-1">
+                            <span class="col-lg-12">Name:</span>
+                            <ng-select class="col-lg-12" [items]="nameDD" appearance="string" [searchable]="true"
+                                bindLabel="name" bindValue="name" [(ngModel)]="searchObject.search_nameDD"
+                                placeholder="Select" appendTo="body" [closeOnSelect]="false" [multiple]="true">
+                            </ng-select>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 p-0">
+                        <nav class="navbar navbar-answer m-1">
+                            <span class="col-lg-12">Current Mauze</span>
+                            <ng-select class="col-lg-12" [items]="mozeDD" appearance="string" [searchable]="true"
+                                bindLabel="name" bindValue="name" [(ngModel)]="searchObject.search_moze"
+                                placeholder="Select" appendTo="body" [closeOnSelect]="false" [multiple]="true">
+                            </ng-select>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 p-0">
+                        <nav class="navbar navbar-answer m-1">
+                            <span class="col-lg-12">Training Darajah:</span>
+                            <ng-select class="col-lg-12" [items]="trainingDarajaDD" appearance="string"
+                                [searchable]="true" bindLabel="name" [(ngModel)]="searchObject.search_trainingDarajaDD"
+                                bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                                [multiple]="true">
+                            </ng-select>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 p-0">
+                        <nav class="navbar navbar-answer m-1">
+                            <span class="col-lg-12">Farig From:</span>
+                            <ng-select class="col-lg-12" [items]="farigFromDD" appearance="string" [searchable]="true"
+                                bindLabel="name" bindValue="name" [(ngModel)]="searchObject.search_categoryDD"
+                                placeholder="Select" appendTo="body" [closeOnSelect]="false" [multiple]="true">
+                            </ng-select>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 p-0">
+                        <nav class="navbar navbar-answer m-1">
+                            <span class="col-lg-12">Farig Darajah:</span>
+                            <ng-select class="col-lg-12" [items]="farigDarajahDD" appearance="string"
+                                [searchable]="true" bindLabel="name" [(ngModel)]="searchObject.search_farigDarajah"
+                                bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                                [multiple]="true">
+                            </ng-select>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="accordion2" class="mb-1">
+    <div class="card">
+        <div class="card-header p-1" id="headingtwo">
+            <h5 class="mb-0">
+                <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsetwo"
+                    aria-expanded="false" aria-controls="collapsetwo">
+                    <span class="pull-left">Hide/Unhide basic details:</span>
+                    <i class="fa fa-caret-down pull-right"></i>
+                </button>
+            </h5>
+        </div>
+        <div id="collapsetwo" class="collapse hide" aria-labelledby="headingtwo" data-parent="#accordion2">
+            <div class="card-body p-2">
+                <div class="navbar navbar-header col-lg-12 form-check">
+                    <input class="form-check-input ml-1 mt-0" type="checkbox" id="exampleCheck1"
+                        (click)="selectAll_basic()" [(ngModel)]="selectall_basic" />
+                    <label class="form-check-label ml-4" for="exampleCheck1">Select All</label>
+                </div>
+                <div class="row mb-2 m-2">
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="itsno"
+                                [(ngModel)]="columndisplay.show_its" />
+                            <label class="form-check-label ml-4" for="itsno">ITS No.</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="age"
+                                [(ngModel)]="columndisplay.show_age" />
+                            <label class="form-check-label ml-4" for="age">Age</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="mobile"
+                                [(ngModel)]="columndisplay.show_mobile" />
+                            <label class="form-check-label ml-4" for="mobile">Mobile No.</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="whatsapp"
+                                [(ngModel)]="columndisplay.show_whatsapp" />
+                            <label class="form-check-label ml-4" for="whatsapp">Whatsapp No.</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="primaryemail"
+                                [(ngModel)]="columndisplay.show_primary" />
+                            <label class="form-check-label ml-4" for="primaryemail">Primary Email ID</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="farigyear"
+                                [(ngModel)]="columndisplay.show_farigyear" />
+                            <label class="form-check-label ml-4" for="farigyear">Farig Year</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="farigdarajah"
+                                [(ngModel)]="columndisplay.show_farigdarajah" />
+                            <label class="form-check-label ml-4" for="farigdarajah">Farig Darajah</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="farigfrom"
+                                [(ngModel)]="columndisplay.show_farigfrom" />
+                            <label class="form-check-label ml-4" for="farigfrom">Farig From</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="hifzyear"
+                                [(ngModel)]="columndisplay.show_hifzyear" />
+                            <label class="form-check-label ml-4" for="hifzyear">Hifz Year</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="accordion3" class="mb-1">
+    <div class="card">
+        <div class="card-header p-1" id="headingthree">
+            <h5 class="mb-0">
+                <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsethree"
+                    aria-expanded="false" aria-controls="collapsethree">
+                    <span class="pull-left">Hide/Unhide training details:</span>
+                    <i class="fa fa-caret-down pull-right"></i>
+                </button>
+            </h5>
+        </div>
+        <div id="collapsethree" class="collapse hide" aria-labelledby="headingthree" data-parent="#accordion3">
+            <div class="card-body p-2">
+                <div class="navbar navbar-header col-lg-12 form-check">
+                    <input class="form-check-input ml-1 mt-0" type="checkbox" id="exampleCheck2"
+                        (click)="selectAll_training()" [(ngModel)]="selectall_training" />
+                    <label class="form-check-label ml-4" for="exampleCheck2">Select All</label>
+                </div>
+                <div class="row mb-2 m-2">
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="1"
+                                [(ngModel)]="columndisplay.show_assessmentstart" />
+                            <label class="form-check-label ml-4" for="1">Assessment starts from</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="2"
+                                [(ngModel)]="columndisplay.show_assessmenttill" />
+                            <label class="form-check-label ml-4" for="2">Assessment till</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="3"
+                                [(ngModel)]="columndisplay.show_quranikh" />
+                            <label class="form-check-label ml-4" for="3">Quran ikhtibaar marks (100)</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="4"
+                                [(ngModel)]="columndisplay.show_maqraatattended" />
+                            <label class="form-check-label ml-4" for="4">Maqra'at sessions attended</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="5"
+                                [(ngModel)]="columndisplay.show_maqraatmarks" />
+                            <label class="form-check-label ml-4" for="5">Maqra'at avg. marks (100)</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="6"
+                                [(ngModel)]="columndisplay.show_essaycount" />
+                            <label class="form-check-label ml-4" for="6">Essay count</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="7"
+                                [(ngModel)]="columndisplay.show_essaymarks" />
+                            <label class="form-check-label ml-4" for="7">Essay avg. marks (50)</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="8"
+                                [(ngModel)]="columndisplay.show_bmcount" />
+                            <label class="form-check-label ml-4" for="8">B/M count</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="9"
+                                [(ngModel)]="columndisplay.show_bmmarks" />
+                            <label class="form-check-label ml-4" for="9">B/M avg. marks (50)</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="10"
+                                [(ngModel)]="columndisplay.show_nazamcount" />
+                            <label class="form-check-label ml-4" for="10">Nazam count</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="11"
+                                [(ngModel)]="columndisplay.show_nazammarks" />
+                            <label class="form-check-label ml-4" for="11">Nazam avg. marks (50)</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="12"
+                                [(ngModel)]="columndisplay.show_isitinsakhcompletion" />
+                            <label class="form-check-label ml-4" for="12">Istinsakh completion %</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="13"
+                                [(ngModel)]="columndisplay.show_istinsakhmarks" />
+                            <label class="form-check-label ml-4" for="13">Istinsakh marks (20)</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="14"
+                                [(ngModel)]="columndisplay.show_researchlongessaypaper" />
+                            <label class="form-check-label ml-4" for="14">Research Paper/Long Essay Marks</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="15"
+                                [(ngModel)]="columndisplay.show_cwcount" />
+                            <label class="form-check-label ml-4" for="15">Courses/Workshop count</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="23"
+                                [(ngModel)]="columndisplay.show_cwcountmarks" />
+                            <label class="form-check-label ml-4" for="23">Courses/Workshop count Marks</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="16"
+                                [(ngModel)]="columndisplay.show_totalhours" />
+                            <label class="form-check-label ml-4" for="16">C/W Total hours</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="16"
+                                [(ngModel)]="columndisplay.show_totalhoursmarks" />
+                            <label class="form-check-label ml-4" for="16">C/W Total hours marks</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="17"
+                                [(ngModel)]="columndisplay.show_cwmarks" />
+                            <label class="form-check-label ml-4" for="17">Couses/Workshop Marks (100)</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="18"
+                                [(ngModel)]="columndisplay.show_fitnesscount" />
+                            <label class="form-check-label ml-4" for="18">Fitness Activity count (Min 2)</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="19"
+                                [(ngModel)]="columndisplay.show_fitnessmarks" />
+                            <label class="form-check-label ml-4" for="19">Fitness activity marks (20)</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="23"
+                                [(ngModel)]="columndisplay.show_bmiValue" />
+                            <label class="form-check-label ml-4" for="23">BMI</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="24"
+                                [(ngModel)]="columndisplay.show_bmiMarks" />
+                            <label class="form-check-label ml-4" for="24">BMI marks (20)</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="20"
+                                [(ngModel)]="columndisplay.show_totalmarks" />
+                            <label class="form-check-label ml-4" for="20">Total Marks</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="21"
+                                [(ngModel)]="columndisplay.show_outof" />
+                            <label class="form-check-label ml-4" for="21">Out of</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="navbar navbar-header form-check m-1">
+                            <input class="form-check-input ml-1 mt-0" type="checkbox" id="22"
+                                [(ngModel)]="columndisplay.show_overallpercentage" />
+                            <label class="form-check-label ml-4" for="22">Overall Percentage</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="row justify-content-start">
+    <div class="btn btn-group pb-2 pt-2">
+        <button mat-button mat-flat-button color="accent">
+            Total KGs&nbsp;&nbsp;
+            <span class="badge badge-info" [innerText]="filterMetadata.count"></span>
+        </button>
+
+        &nbsp;
+        <div class="btn-group">
+            <button class="dropdown-toggle" mat-button mat-raised-button color="primary" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+                Export (Basic)
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="btn dropdown-item" (click)="Export_Basic(14)">With photo</a>
+                <a class="btn dropdown-item" (click)="Export_Basic(13)">Without photo</a>
+            </div>
+        </div>
+        &nbsp;
+        <button mat-button mat-raised-button color="primary" class="section" data-toggle="modal"
+            data-target=".bd-example-modal-lg1">
+            <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+            Export (Section Wise)
+        </button>
+        &nbsp;
+        <button mat-button mat-raised-button color="primary" class="customized" data-toggle="modal"
+            data-target=".bd-example-modal-lg">
+            <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+            Export (PDF Files)
+        </button>
+        
+    </div>
+</div>
+
+<div class="row">
+    <div class="text-center col-lg-12 col-sm-12 table-responsive-sm">
+        <table class="table table-bordered">
+            <tr class="table-header">
+                <td class="align-middle p-2">
+                    <input type="checkbox" (click)="ListSelectAll()" [(ngModel)]="listselectAll" id="exampleCheck1" />
+                </td>
+                <td class="align-middle p-2">Sr No.</td>
+                <td class="align-middle p-2">Photo</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_its">ITS No.</td>
+                <td class="align-middle p-2">Name</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_age">Age</td>
+                <td class="align-middle p-2">Current Mauze</td>
+                <td class="align-middle p-2">Training Darajah</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_mobile">Mobile No.</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_whatsapp">Whatsapp No.</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_primary">Primary Email ID</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_farigyear">Farig Year</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_farigdarajah">Farig Darajah</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_farigfrom">Farig From</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_hifzyear">Hifz Year</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_assessmentstart">Assessment starts from</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_assessmenttill">Assessment till</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_quranikh">Quran ikhtibaar marks (100)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_maqraatattended">Maqra'at sessions attended</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_maqraatmarks">Maqra'at avg. marks (100)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_essaycount">Essay count</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_essaymarks">Essay avg. marks (50)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_bmcount">B/M count</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_bmmarks">B/M avg. marks (50)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_nazamcount">Nazam count</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_nazammarks">Nazam avg. marks (50)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_isitinsakhcompletion">Istinsakh completion %</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_istinsakhmarks">Istinsakh marks (20)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_researchlongessaypaper">Research Paper/Long Essay
+                    Marks (100)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_cwcount">Courses/Workshop count</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_cwcountmarks">Courses/Workshop count Marks (50)
+                </td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_totalhours">C/W Total hours (Min: 25 hrs/Year)
+                </td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_totalhoursmarks">C/W Total hours Marks (50)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_cwmarks">Courses/Workshop Marks (100)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_fitnesscount">Fitness Activity count (Min 2)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_fitnessmarks">Fitness activity marks (20)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_bmiValue">BMI</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_bmiMarks">BMI marks (20)</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_totalmarks">Total Marks</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_outof">Out of</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_overallpercentage">Overall Percentage</td>
+            </tr>
+            <tr class="text-center" *ngFor="
+            let m of SummaryData
+            | multisearch
+            : {
+                itsId: searchObject.search_itsIdDD,
+                name: searchObject.search_nameDD,
+                moze: searchObject.search_moze,
+                darajah: searchObject.search_trainingDarajaDD,
+                farigfrom: searchObject.search_categoryDD,
+                farigDarajah: searchObject.search_farigDarajah
+                
+              }
+            : filterMetadata;
+        let i = index
+          ">
+                <td class="align-middle p-2">
+                    <input type="checkbox" [(ngModel)]="m.select" id="exampleCheck1" />
+                </td>
+                <td class="align-middle p-2">{{ i + 1 }}</td>
+                <td class="align-middle p-2">
+
+                    <div id="kgphoto">
+                        <img src="https://www.mahadalzahra.org/uploads/Huffaz_images/{{m.itsId}}.jpeg"
+                            onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`"
+                            alt="{{ m.itsId }}" width="60" height="60" class="img-responsive rounded-circle" />
+                    </div>
+
+                </td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_its">{{m.itsId}}</td>
+                <td class="align-middle text-left p-2">{{m.name}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_age">{{m.age}}</td>
+                <td class="align-middle p-2">{{m.moze}}</td>
+                <td class="align-middle p-2">{{m.darajah}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_mobile">{{m.mobile}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_whatsapp">{{m.whatsappNumber}}</td>
+                <td class="align-middle text-left p-2" *ngIf="columndisplay.show_primary">{{m.primaryEmailId}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_farigyear">{{m.farigYear}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_farigdarajah">{{m.farigDarajah}}</td>
+                <td class="align-middle text-left p-2" *ngIf="columndisplay.show_farigfrom">{{m.farigfrom}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_hifzyear">{{m.hifzYear}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_assessmentstart">{{m.startDate}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_assessmenttill">{{m.currentDate}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_quranikh">{{m.quranIkhMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_maqraatattended">{{m.maqaraatAtended}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_maqraatmarks">{{m.maqaraatAvgMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_essaycount">{{m.essayCount}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_essaymarks">{{m.essayAvgMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_bmcount">{{m.bmCount}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_bmmarks">{{m.bmAvgMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_nazamcount">{{m.nazamCount}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_nazammarks">{{m.nazamAvgMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_isitinsakhcompletion">{{m.istinsakhCompletion}}
+                </td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_istinsakhmarks">{{m.istinsakhMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_researchlongessaypaper">{{m.rpLeMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_cwcount">{{m.cwCount}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_cwcountmarks">{{m.cwCountMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_totalhours">{{m.cwTotalHours}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_totalhoursmarks">{{m.cwHoursMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_cwmarks">{{m.cwTotalMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_fitnesscount">{{m.fitnessCount}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_fitnessmarks">{{m.fitnessMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_bmiValue">{{m.bmiValue}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_bmiMarks">{{m.bmiMarks}}</td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_totalmarks"><strong
+                        class="text-danger">{{m.totalMarks}}</strong></td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_outof"><strong
+                        class="text-success">{{m.outOf}}</strong></td>
+                <td class="align-middle p-2" *ngIf="columndisplay.show_overallpercentage">
+                    <strong>{{m.overAllPercentage | number:
+                        '2.0-0'}} %</strong>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<input type="hidden" readonly [(ngModel)]="filterMetadata.count" />
+
+<!-- Zip File Modal -->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content p-3">
+            <mat-toolbar class="page-subheader-toolbar modal-toolbar justify-content-center">
+                <span>Download PDF Files (Zipped)</span>
+            </mat-toolbar>
+            <div class="row p-2">
+                <div class="col-lg-3 col-sm-12 pl-0 pr-0 mb-2">
+                    <ng-select class="col-lg-12 p-1" [items]="assignmentDD" appearance="string" [searchable]="true"
+                        bindLabel="name" bindValue="id" placeholder="Select Assignment Type" appendTo="body"
+                        [closeOnSelect]="true" [(ngModel)]="zipAssignment" [multiple]="false">
+                    </ng-select>
+                </div>
+                <div class="col-lg-3 col-sm-12 pl-0 pr-0 mb-2">
+                    <ng-select class="col-lg-12 p-1" [items]="yearDD" appearance="string" [searchable]="true"
+                        bindLabel="year" bindValue="year" placeholder="Select Academic Year" appendTo="body"
+                        [closeOnSelect]="true" [(ngModel)]="zipYear" [multiple]="false">
+                    </ng-select>
+                </div>
+                <div class="col-lg-3 col-sm-12 pl-0 pr-0 mb-2" *ngIf="zipAssignment != 2">
+                    <ng-select class="col-lg-12 p-1" [items]="monthDD" appearance="string" [searchable]="true"
+                        bindLabel="id" bindValue="id" placeholder="Select Hijri Month" appendTo="body"
+                        [closeOnSelect]="true" [(ngModel)]="zipMonth" [multiple]="false">
+                    </ng-select>
+                </div>
+                <div class="col-lg-3 col-sm-12 pl-0 pr-0 mb-2" *ngIf="zipAssignment == 2">
+                    <ng-select class="col-lg-12 p-1" [items]="miqaatDD" appearance="string" [searchable]="true"
+                        bindLabel="name" bindValue="id" placeholder="Select Miqaat" appendTo="body"
+                        [closeOnSelect]="true" [(ngModel)]="zipMiqaat" [multiple]="false">
+                    </ng-select>
+                </div>
+                <div class="col-lg-3 col-sm-12 pl-0 pr-0 mb-2" *ngIf="zipAssignment != 2">
+                    <ng-select class="col-lg-12 p-1" [items]="darajahDD" appearance="string" [searchable]="true"
+                        bindLabel="name" bindValue="id" placeholder="Select Darajah" appendTo="body"
+                        [closeOnSelect]="true" [(ngModel)]="zipTrainingDarajah" [multiple]="false">
+                    </ng-select>
+                </div>
+                <div class="col-lg-3 col-sm-12 pl-0 pr-0 mb-2" *ngIf="zipAssignment == 2">
+                    <ng-select class="col-lg-12 p-1" [items]="darajahDD" appearance="string" [searchable]="true"
+                        bindLabel="name" bindValue="id" placeholder="Select Darajah" appendTo="body"
+                        [closeOnSelect]="false" [(ngModel)]="zipDarajahMultiple" [multiple]="true">
+                    </ng-select>
+                </div>
+                <div class="col-lg-12 col-sm-12 pl-0 pr-0 mb-2">
+                    <button mat-button mat-raised-button color="primary" (click)="callZipApi()" class="section">
+                        Download
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content p-1">
+            <mat-toolbar class="page-subheader-toolbar modal-toolbar justify-content-center">
+                <span>Export (Section Wise)</span>
+            </mat-toolbar>
+
+            <div class="btn-group pull-left pb-2 pt-2">
+                <button mat-button mat-raised-button color="primary" (click)="ExportSection()">
+                    <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+                    Export
+                </button>
+            </div>
+
+            <div class="row mb-2 m-2">
+                <div class="col-lg-3 p-0">
+                    <div class="navbar navbar-header1 form-check p-1 m-1">
+                        <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId"
+                            name="flexRadioDefault" value="23" id="check1" />
+                        <label class="form-check-label ml-4" for="check1">Maqraat</label>
+                    </div>
+                </div>
+                <div class="col-lg-3 p-0">
+                    <div class="navbar navbar-header1 form-check p-1 m-1">
+                        <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId"
+                            name="flexRadioDefault" value="24" id="check2" />
+                        <label class="form-check-label ml-4" for="check2">Essay</label>
+                    </div>
+                </div>
+                <div class="col-lg-3 p-0">
+                    <div class="navbar navbar-header1 form-check p-1 m-1">
+                        <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId"
+                            name="flexRadioDefault" value="25" id="check3" />
+                        <label class="form-check-label ml-4" for="check3">Book/Magazine Review</label>
+                    </div>
+                </div>
+                <div class="col-lg-3 p-0">
+                    <div class="navbar navbar-header1 form-check p-1 m-1">
+                        <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId"
+                            name="flexRadioDefault" value="26" id="check5" />
+                        <label class="form-check-label ml-4" for="check5">Nazam</label>
+                    </div>
+                </div>
+                <div class="col-lg-3 p-0">
+                    <div class="navbar navbar-header1 form-check p-1 m-1">
+                        <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId"
+                            name="flexRadioDefault" value="27" id="check6" />
+                        <label class="form-check-label ml-4" for="check6">Istinsakh</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

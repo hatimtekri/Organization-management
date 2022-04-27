@@ -1,0 +1,134 @@
+<!-- <div class="row">
+    <div class="col-lg-12">
+        <div class="btn btn-group pull-right">
+
+        </div>
+    </div>
+</div> -->
+<div class="row justify-content-center" *ngIf="SalaryPage" >
+    <div class="col-lg-6 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span>Salary</span>
+                </mat-toolbar>
+                <br />
+                <div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Gross Wazifa</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.grossSalary" *ngIf="!edit" type="text" readonly>
+                            <input matInput class="form-control" [(ngModel)]="profileData.grossSalary" *ngIf="edit" placeholder="Type" type="text">
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Rent Allowance</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.rentAllowance" *ngIf="!edit" type="text" readonly>
+                            <input matInput class="form-control" [(ngModel)]="profileData.rentAllowance"  *ngIf="edit" placeholder="Type" type="text">
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Marriage Allowance</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.marriageAllowance" *ngIf="!edit" type="text" readonly>
+                            <input matInput class="form-control" [(ngModel)]="profileData.marriageAllowance"  *ngIf="edit" placeholder="Type" type="text">
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Mumbai Allowance</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.mumbaiAllowance" *ngIf="!edit" placeholder="Type" type="text" readonly>
+                            <input matInput class="form-control" [(ngModel)]="profileData.mumbaiAllowance"  *ngIf="edit" placeholder="Type" type="text">
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Profession Tax</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.professionTax"  type="text" readonly>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">TDS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.tds" *ngIf="!edit" type="text" readonly>
+                            <input matInput class="form-control" [(ngModel)]="profileData.tds"  *ngIf="edit" placeholder="Type" type="text">
+                        </div>
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Qardan Hasanah</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.qardanHasanah" *ngIf="!edit" type="text" readonly>
+                            <input matInput class="form-control" [(ngModel)]="profileData.qardanHasanah"  *ngIf="edit" placeholder="Type" type="text">
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Marafiq Khairiyah</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.marafiqKhairiyah" *ngIf="!edit" type="text" readonly>
+                            <input matInput class="form-control" [(ngModel)]="profileData.marafiqKhairiyah"  *ngIf="edit" placeholder="Type" type="text">
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Sabeel</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.sabeel" *ngIf="!edit" type="text" readonly>
+                            <input matInput class="form-control" [(ngModel)]="profileData.sabeel"  *ngIf="edit" placeholder="Type" type="text">
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>BQHS</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.bqhs" *ngIf="!edit" type="text" readonly>
+                            <input matInput class="form-control" [(ngModel)]="profileData.bqhs"  *ngIf="edit" placeholder="Type" type="text">
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Net Wazifa</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.wazifa" *ngIf="!edit" type="text" readonly>
+
+                            <ng-select [items]="currency" *ngIf="edit" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select Account Type" [(ngModel)]="profileData.currency"  appendTo="body" [multiple]="false">
+                            </ng-select>
+                            <ng-select [items]="isMahadWazifa" *ngIf="edit" [searchable]="true" bindLabel="name"
+                                bindValue="name" [(ngModel)]="profileData.isMahadWazifa"  placeholder="Select Account Type" appendTo="body" [multiple]="false">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Salary Tag</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput class="form-control" [ngModel]="profileData.salaryTagName" *ngIf="!edit" type="text" readonly>
+                            <ng-select *ngIf="edit" class="col-lg-12 p-0" [items]="mainDepartmentDD" [(ngModel)]="profileData.salaryTag"
+                            appearance="string" [searchable]="true" bindLabel="deptVenueName" bindValue="id"
+                            placeholder="Select" appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                        </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="text-center">
+
+                        <button mat-button mat-raised-button color="primary" (click)="edit = !edit"
+                            *ngIf="!edit">Edit</button>
+                        <button mat-button mat-raised-button color="primary" (click)="submitdata()" *ngIf="edit">Save</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

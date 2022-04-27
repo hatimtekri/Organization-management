@@ -1,0 +1,115 @@
+<div class="btn-group pull-right">
+    <a><button mat-button mat-raised-button color="warn" (click)="exportExcel()">Export</button></a>
+
+    &nbsp;
+    <a href="#item-2"><button mat-button mat-flat-button color="accent">Total&nbsp;&nbsp;
+            <span class="badge badge-success">{{pending}}</span>
+        </button></a>
+</div>
+<br />
+<br />
+<br />
+
+<!-- <div class="row justify-content-center">
+  <div class="text-center col-lg-12 col-sm-12 table-responsive">
+      <table class="table table-bordered table-sm">
+          <tr class="table-header table-font-yellow">
+              <td class="align-middle">Select QTM Category</td>
+
+              <td class="align-middle">Enayat Year & Term<br />(Multiple options can be selected)</td>
+              <td class="align-middle">Action</td>
+          </tr>
+          <tr>
+              <td class="align-middle">
+                {{serach.category}}
+                  <ng-select [items]="category" (change)="search2()" appearance="string" [searchable]="true" bindLabel="name"
+                      bindValue="name" placeholder="Select" [(ngModel)]="serach.category"  appendTo="body" [multiple]="false">
+                  </ng-select>
+              </td>
+
+              <td class="align-middle">
+
+                  <ng-select  [items]="periods_m" (change)="search1()" appearance="string" [searchable]="true" bindLabel="periodName"
+                      bindValue="id" placeholder="Select"periodId (ngModel)="serach.periodId" appendTo="body" [multiple]="true">
+                  </ng-select>
+
+              </td>
+               <td class="align-middle">
+                  <button class="btn btn-yellow" (click)="search1()"  type="button">Search</button>
+              </td>
+          </tr>
+      </table>
+  </div>
+</div> -->
+<br />
+<input [(ngModel)]="searchText" class="form-control justify-content-center col-lg-12" placeholder="Search" />
+<br />
+<div class="row justify-content-center">
+    <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+        <table class="table table-bordered table-sm">
+            <tr class="table-header">
+                <td class="align-middle p-2">Sr No.</td>
+                <td class="align-middle p-2">Photo</td>
+                <td class="align-middle p-2">ITS</td>
+                <td class="align-middle p-2">Name</td>
+                <td class="align-middle p-2">Khidmat Mauze</td>
+                <td class="align-middle p-2">Category</td>
+                <td class="align-middle p-2">Type</td>
+                <td class="align-middle p-2">Year</td>
+                <td class="align-middle p-2">Term</td>
+                <td class="align-middle p-2">Bill Period</td>
+                <td class="align-middle p-2">Bills</td>
+                <td class="align-middle p-2">Cover</td>
+                <td class="align-middle p-2">Summary</td>
+                <td class="align-middle p-2">Currency</td>
+                <td class="align-middle p-2">Self</td>
+                <td class="align-middle p-2">Spouse</td>
+                <td class="align-middle p-2">1st Child</td>
+                <td class="align-middle p-2">2nd Child</td>
+                <td class="align-middle p-2">3rd Child</td>
+                <td class="align-middle p-2">4th Child</td>
+                <td class="align-middle p-2">Enayat Amount</td>
+            </tr>
+            <tr *ngFor="let m of data | searchnew: searchText">
+                <td class="align-middle p-2">{{m.srNo}}</td>
+                <td class="align-middle p-2">
+                    <div id="kgphoto">
+                        <img src="https://mahadalzahra.org{{ m.photo }}"
+                            onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`"
+                            alt="{{ m.itsId }}" width="60" height="60" class="img-responsive rounded-circle" />
+                    </div>
+                </td>
+                <td class="align-middle p-2">{{m.itsId}}</td>
+                <td class="align-middle p-2 text-left">{{m.name}}</td>
+                <td class="align-middle p-2">{{m.khidmatMoze}}</td>
+                <td class="align-middle p-2">{{m.category}}</td>
+                <td class="align-middle p-2">{{m.type}}</td>
+                <td class="align-middle p-2">{{m.term}}</td>
+                <td class="align-middle p-2">{{m.year}}</td>
+                <td class="align-middle p-2">{{m.billPeriod}}</td>
+                <td class="align-middle p-2">
+                    <a class="btn btn-warning btn-sm rounded-circle" (click)="openBulk(m.itsId!)"><i
+                            class="fa fa-file-pdf-o"></i></a>
+                </td>
+                <td class="align-middle p-2">
+                    <a class="btn btn-warning btn-sm rounded-circle" (click)="printBills(m.itsId!,m.currency!)"><i
+                            class="fa fa-file-pdf-o"></i></a>
+                </td>
+                <td class="align-middle p-2">
+                    <a class="btn btn-warning btn-sm rounded-circle" (click)="printBillSummary(m.itsId!)"><i
+                            class="fa fa-file-pdf-o"></i></a>
+                </td>
+
+                <td class="align-middle p-2">{{m.currency}}</td>
+                <td class="align-middle p-2">{{m.self}}</td>
+                <td class="align-middle p-2">{{m.spouse}}</td>
+                <td class="align-middle p-2">{{m.child1}}</td>
+                <td class="align-middle p-2">{{m.child2}}</td>
+                <td class="align-middle p-2">{{m.child3}}</td>
+                <td class="align-middle p-2">{{m.child4}}</td>
+                <td class="align-middle p-2"><strong class="text-danger">{{m.self + m.spouse + m.child1 + m.child2 +
+                        m.child3 + m.child4}}</strong></td>
+            </tr>
+        </table>
+    </div>
+</div>

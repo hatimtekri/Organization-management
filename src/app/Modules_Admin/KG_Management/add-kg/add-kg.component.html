@@ -1,0 +1,342 @@
+<div class="row justify-content-center">
+    <div class="col-lg-3 p-0">
+        <nav class="navbar navbar-answer m-1">
+            <span class="col-lg-12">ITS No:</span>
+        </nav>
+    </div>
+
+    <div class="col-lg-7 p-0">
+        <nav class="navbar navbar-answer m-1">
+            <input matInput class="form-control" [(ngModel)]="kg.itsId" placeholder="ITS Number" type="number" />
+        </nav>
+    </div>
+
+    <div class="col-lg-2 p-0">
+        <nav class="navbar navbar-answer m-1  justify-content-center">
+            <button mat-button mat-raised-button color="warn" (click)="fetchName(kg.itsId)" >
+                Search
+            </button>
+        </nav>
+    </div>
+</div>
+<div class="row justify-content-center" *ngIf="level1">
+    <div class="col-lg-3 p-0">
+        <nav class="navbar navbar-details m-1">
+            <span class="col-lg-12">Name:</span>
+        </nav>
+    </div>
+
+    <div class="col-lg-7 p-0">
+        <nav class="navbar navbar-details m-1">
+            <span class="col-lg-12"><strong>{{name}}</strong></span>
+        </nav>
+    </div>
+
+    <div class="col-lg-2 p-0">
+        <nav class="navbar navbar-details m-1 justify-content-center align-content-center">
+            <img src="https://mahadalzahra.org/uploads/Its_Photos/{{kg.itsId}}.jpeg" alt="" width="85"
+                height="100" class="img-responsive img-thumbnail" />
+        </nav>
+    </div>
+</div>
+<br />
+
+<div class="col-lg-12 border" *ngIf="level1"></div>
+
+<div class="row justify-content-center" *ngIf="level1" >
+    <div class="col-lg-3 p-0">
+        <nav class="navbar navbar-category m-1">
+            <span class="col-lg-12">Select MZ Category:</span>
+        </nav>
+    </div>
+
+    <div class="col-lg-3 p-0">
+        <nav class="navbar navbar-category m-1">
+            <ng-select class="col-lg-12" [items]="category" appearance="string" [searchable]="true"
+                bindLabel="Name" bindValue="Name1" (change)="mzidarachange()" [(ngModel)]="kg.mz_idara" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                [multiple]="false">
+            </ng-select>
+        </nav>
+    </div>
+
+    
+</div>
+
+<div class="col-lg-12 border" *ngIf="level1"></div>
+
+<br/>
+<!-- MZ Tayeen -->
+<div class="row justify-content-center" *ngIf="kg.mz_idara == 'MAHADALZAHRA KHDGZ'" >
+    <div class="col-lg-4 p-0">
+        <nav class="navbar navbar-options m-1">
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig From:</span>
+                <ng-select class="col-lg-12 p-0" [items]="categoryDD" [(ngModel)]="kg.category" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name"  placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig Darajah:</span>
+                <ng-select class="col-lg-12 p-0" [items]="farigDarajagDD" [(ngModel)]="kg.farigDarajah" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig Year:</span>
+                <ng-select class="col-lg-12 p-0" [items]="farigYearDD" [(ngModel)]="kg.fariqYear" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">TR No.:</span> 
+                <input matInput class="form-control col-lg-12" [(ngModel)]="kg.trNo" placeholder="Type" type="text" />
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Aljamea Degree:</span>
+                <ng-select class="col-lg-12 p-0" [items]="alJameaDegreeDD" [(ngModel)]="kg.alJameaDegree" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Khidmat Year:</span>
+                <ng-select class="col-lg-12 p-0" [items]="khidmatYearDD" [(ngModel)]="kg.khidmatYear" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Khidmat in Mahad al-Zahra:</span>
+                <ng-select class="col-lg-12 p-0" [items]="khidmatinMahadDD" [(ngModel)]="kg.mahad_khidmatYear" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Tayeen in Mahad al-Zahra:</span>
+                <ng-select class="col-lg-12 p-0" [items]="khidmatinMahadDD" [(ngModel)]="kg.tayeenYear" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Main Department:</span>
+                <ng-select class="col-lg-12 p-0" [items]="mainDepartmentDD" [(ngModel)]="kg.deptVenueId" appearance="string" [searchable]="true"
+                    bindLabel="deptVenueName" bindValue="id" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12 text-center">
+                <button mat-button mat-raised-button color="warn" (click)="AddTayeen()">
+                    ADD
+                </button>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- MZ Non-Tayeen -->
+<div class="row justify-content-center" *ngIf="kg.mz_idara == 'WafdAlHuffaz'">
+    <div class="col-lg-4 p-0">
+        <nav class="navbar navbar-options m-1">
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig From:</span>
+                <ng-select class="col-lg-12 p-0" [items]="categoryDD" [(ngModel)]="kg.category" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig Darajah:</span>
+                <ng-select class="col-lg-12 p-0" [items]="farigDarajagDD" [(ngModel)]="kg.farigDarajah" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig Year:</span>
+                <ng-select class="col-lg-12 p-0" [items]="farigYearDD" [(ngModel)]="kg.fariqYear" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">TR No.:</span>
+                <input matInput class="form-control col-lg-12" [(ngModel)]="kg.trNo" placeholder="Type" type="text" />
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Aljamea Degree:</span>
+                <ng-select class="col-lg-12 p-0" [items]="alJameaDegreeDD" [(ngModel)]="kg.alJameaDegree" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Khidmat Year:</span>
+                <ng-select class="col-lg-12 p-0" [items]="khidmatYearDD" [(ngModel)]="kg.khidmatYear" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Khidmat in Mahad al-Zahra:</span>
+                <ng-select class="col-lg-12 p-0" [items]="khidmatinMahadDD" [(ngModel)]="kg.mahad_khidmatYear" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Main Department:</span>
+                <ng-select class="col-lg-12 p-0" [items]="mainDepartmentDD" [(ngModel)]="kg.deptVenueId" appearance="string" [searchable]="true"
+                    bindLabel="deptVenueName" bindValue="id" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            
+            <div class="mb-3 col-lg-12 text-center">
+                <button mat-button mat-raised-button color="warn" (click)="AddNonTayeen()">
+                    ADD
+                </button>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- Recruited Muhaffiz -->
+<div class="row justify-content-center" *ngIf="kg.mz_idara == 'Recruited Muhaffiz'">
+    <div class="col-lg-4 p-0">
+        <nav class="navbar navbar-options m-1">
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig From:</span>
+                <ng-select class="col-lg-12 p-0" [items]="categoryDD" [(ngModel)]="kg.category" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig Darajah:</span>
+                <ng-select class="col-lg-12 p-0" [items]="farigDarajagDD" [(ngModel)]="kg.farigDarajah" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig Year:</span>
+                <ng-select class="col-lg-12 p-0" [items]="farigYearDD" [(ngModel)]="kg.fariqYear" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">TR No.:</span>
+                <input matInput class="form-control col-lg-12" placeholder="Type" type="text" />
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Aljamea Degree:</span>
+                <ng-select class="col-lg-12 p-0" [items]="alJameaDegreeDD" [(ngModel)]="kg.alJameaDegree" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+           
+          
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Main Department:</span>
+                <ng-select class="col-lg-12 p-0" [items]="mainDepartmentDD" [(ngModel)]="kg.deptVenueId" appearance="string" [searchable]="true"
+                    bindLabel="deptVenueName" bindValue="id" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+           
+            <div class="mb-3 col-lg-12 text-center">
+                <button mat-button mat-raised-button color="warn" (click)="AddrecrutedMuffiz()" >
+                    ADD
+                </button>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- Other Idara KG -->
+<div class="row justify-content-center" *ngIf="kg.mz_idara == 'Other Idara KG'">
+    <div class="col-lg-4 p-0">
+        <nav class="navbar navbar-options m-1">
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig From:</span>
+                <ng-select class="col-lg-12 p-0" [items]="categoryDD" [(ngModel)]="kg.category" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig Darajah:</span>
+                <ng-select class="col-lg-12 p-0" [items]="farigDarajagDD" [(ngModel)]="kg.farigDarajah" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Farig Year:</span>
+                <ng-select class="col-lg-12 p-0" [items]="farigYearDD" [(ngModel)]="kg.fariqYear" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">TR No.:</span>
+                <input matInput class="form-control col-lg-12"  [(ngModel)]="kg.trNo" placeholder="Type" type="text" />
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Aljamea Degree:</span>
+                <ng-select class="col-lg-12 p-0" [items]="alJameaDegreeDD" [(ngModel)]="kg.alJameaDegree" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Khidmat Year:</span>
+                <ng-select class="col-lg-12 p-0" [items]="khidmatYearDD" [(ngModel)]="kg.khidmatYear" appearance="string" [searchable]="true"
+                    bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Main Department:</span>
+                <ng-select class="col-lg-12 p-0" [items]="mainDepartmentDD" [(ngModel)]="kg.deptVenueId" appearance="string" [searchable]="true"
+                    bindLabel="deptVenueName" bindValue="id" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="mb-3 col-lg-12 text-center">
+                <button mat-button mat-raised-button color="warn" (click)="AddOtherIdara()">
+                    ADD
+                </button>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- Recruited Teacher -->
+<div class="row justify-content-center" *ngIf="kg.mz_idara == 'Recruited Teacher'">
+    <div class="col-lg-4 p-0">
+        <nav class="navbar navbar-options m-1">
+           
+            <div class="mb-3 col-lg-12">
+                <span class="col-lg-12 p-0">Main Department:</span>
+                <ng-select class="col-lg-12 p-0" [items]="mainDepartmentDD" [(ngModel)]="kg.deptVenueId" appearance="string" [searchable]="true"
+                    bindLabel="deptVenueName" bindValue="id" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                    [multiple]="false">
+                </ng-select>
+            </div>
+            
+            <div class="mb-3 col-lg-12 text-center">
+                <button mat-button mat-raised-button color="warn" (click)="AddrecrutedTeacher()">
+                    ADD
+                </button>
+            </div>
+        </nav>
+    </div>
+</div>

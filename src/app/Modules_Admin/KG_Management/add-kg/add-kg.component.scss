@@ -1,0 +1,36 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.navbar-answer {
+    //border: 1px solid #fff176;
+    border-radius: 5px;
+    background   : #eee;
+    height       : 60px;
+    font-size: 12pt;
+}
+
+.navbar-category {
+    background: rgba(128,128,128,1);
+    color: white;
+    border-radius: 5px;
+    height       : 60px;
+    font-size: 12pt;
+  }
+
+.navbar-details {
+    border-radius: 5px;
+    background   : rgba(248, 203, 173, 0.6);
+    height       : 105px;
+    font-size: 12pt;
+}
+
+.border{
+    background-color: #153e71;
+    height: 7px;
+}
+
+.navbar-options{
+    border-radius: 5px;
+    background   : #eee;
+    
+}

@@ -1,0 +1,40 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.card {
+    border-color: #153e71;
+}
+
+span.btn {
+    border-radius: 5px 0px 0px 5px;
+}
+
+.item.mat-button.mat-primary {
+    background-color: rgba(57, 87, 33, 255);
+}
+
+.clear.mat-button.mat-primary {
+    background-color: #E1C16E;
+}
+
+.item.mat-toolbar {
+    background-color: #296E85;
+}
+
+.today-entry.mat-toolbar {
+    background-color: rgba(57,87,33,255);
+}
+
+hr {
+    background-color: black;
+}
+
+.lock {
+    pointer-events: none;
+    background-color: #DCDCDC;
+}
+
+.badge {
+    font-size: 11pt;
+}
+

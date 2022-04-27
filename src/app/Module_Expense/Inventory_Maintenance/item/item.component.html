@@ -1,0 +1,58 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div class="row justify-content-center align-items-center mb-4" *ngIf="add">
+        <nav class="navbar navbar-answer col-lg-6 p-2 align-middle text-center">
+            <input placeholder="Type New Item Name" [(ngModel)]="itemName" class="form-control col-lg-5 col-sm-7"
+                type="text" />
+            <ng-select class="col-lg-5 p-0" [items]="uomDD" appearance="string" [searchable]="true" bindLabel="uom"
+                bindValue="uom" [(ngModel)]="uom" placeholder="Select UOM" appendTo="body" [closeOnSelect]="true"
+                [multiple]="false">
+            </ng-select>
+            <button mat-button mat-raised-button (click)="Add_Item()" color="primary">ADD</button>
+        </nav>
+    </div>
+    <div class="row justify-content-center">
+        <input [(ngModel)]="searchText" class="form-control justify-content-center col-lg-6" placeholder="Search" />
+    </div>
+    <div class="row justify-content-center">
+
+        <div class="text-center col-lg-6 col-sm-12 table-responsive p-0">
+            <table class="table table-bordered table-sm">
+                <tr class="table-header">
+                    <td class="align-middle p-2">Item Name</td>
+                    <td class="align-middle p-2">UOM</td>
+                    <td class="align-middle p-2" *ngIf="edit">Action</td>
+                </tr>
+                <tr class="text-center" *ngFor="let m of items  | searchExpense: searchText">
+                    <td class="align-middle text-left p-2">
+                        <div *ngIf="!m.edit">
+                            <h3 class="m-0">{{m.name}}</h3>
+                        </div>
+                        <input *ngIf="m.edit" [(ngModel)]="m.name" placeholder="Type Amount" class="form-control"
+                            type="text" />
+
+                    </td>
+                    <td class="align-middle text-left p-2">
+                        <div *ngIf="!m.edit">
+                            <h3 class="m-0">{{m.uom}}</h3>
+                        </div>
+                        <ng-select *ngIf="m.edit" class="p-0" [items]="uomDD" appearance="string" [searchable]="true"
+                            bindLabel="uom" bindValue="uom" [(ngModel)]="m.uom" placeholder="Select UOM" appendTo="body"
+                            [closeOnSelect]="true" [multiple]="false">
+                        </ng-select>
+                    </td>
+                    <td class="align-middle p-2" *ngIf="edit">
+                        <a class="btn btn-primary btn-sm rounded-circle" (click)="m.edit = !m.edit" title="Edit"
+                            role="button" *ngIf="!m.edit"><i class="fa fa-pencil"></i></a>&nbsp;
+                        <a class="btn btn-primary btn-sm rounded-circle" (click)="Edit_Item(m)" title="Save"
+                            role="button" *ngIf="m.edit"><i class="fa fa-check"></i></a>&nbsp;
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

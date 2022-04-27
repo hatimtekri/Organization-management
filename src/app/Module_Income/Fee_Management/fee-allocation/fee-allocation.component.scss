@@ -1,0 +1,27 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.navbar-answer {
+    border       : 2px solid #153e71;
+    border-radius: 7px;
+
+    height: fit-content;
+}
+
+#stdphoto {
+
+
+    transition: transform .2s;
+    /* Animation */
+
+    margin: 0 auto;
+}
+
+#stdphoto:hover {
+    transform: scale(1.7);
+}
+
+.navbar-answer1 {
+    border-radius: 5px;
+    background: #eee;
+}

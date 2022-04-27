@@ -1,0 +1,218 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div class="row justify-content-center" *ngIf="!onOffModule">
+        <h2 class="text-danger">Budget Araz Module is CLOSE.</h2>
+    </div>
+    <div id="accordion" *ngIf="onOffModule" class="mb-2">
+        <div class="card">
+            <div class="card-header p-1" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                        <span class="pull-left">Estimate Budget Araz for Financial Year 2022-23:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="row align-items-center mb-2">
+                        <div class="col-lg-4 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Dept. Venue:</span>
+                            <ng-select class="col-lg-12 p-0" [items]="deptVenueNameDD"
+                                [(ngModel)]="bdgtAraz.deptVenueId" appearance="string" [searchable]="true"
+                                bindLabel="deptVenueName" bindValue="id" (change)="onchange_deptVenueId()"
+                                placeholder="Select" appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Base Item:</span>
+                            <ng-select class="col-lg-12 p-0" [items]="baseItemNameDD" appearance="string"
+                                [searchable]="true" bindLabel="name" bindValue="id" [(ngModel)]="bdgtAraz.baseItemId"
+                                (change)="onchange_baseItemId()" placeholder="Select" appendTo="body"
+                                [closeOnSelect]="true" [multiple]="false">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Item:</span>
+                            <ng-select class="col-lg-12 p-0" [items]="itemNameDD" appearance="string"
+                                [searchable]="true" bindLabel="name" bindValue="id" [(ngModel)]="bdgtAraz.itemId"
+                                placeholder="Select" appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Quantity:</span>
+                            <input matInput id="reasonText" [(ngModel)]="bdgtAraz.quantity" class="form-control"
+                                placeholder="Type" type="number">
+                        </div>
+                        <div class="col-lg-4 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Estimated Amount per Pc/Kg:</span>
+                            <input matInput id="reasonText" [(ngModel)]="bdgtAraz.amountPerUom" class="form-control"
+                                placeholder="Type" type="number">
+                        </div>
+                        <div class="col-lg-4 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Amount:</span>
+                            <h2 class="text-danger">{{(bdgtAraz.quantity != undefined ?
+                                bdgtAraz.quantity : 0) * (bdgtAraz.amountPerUom != undefined ?
+                                bdgtAraz.amountPerUom : 0)}}</h2>
+                        </div>
+                        <div class="col-lg-12 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Justification:</span>
+                            <textarea class="form-control" [(ngModel)]="bdgtAraz.justification"
+                                (change)="onchange_justification()" placeholder="Type" rows="1"></textarea>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 mt-4 text-center">
+                            <button mat-button mat-raised-button color="warn" class="col-lg-2"
+                                (click)="arazBudget()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="accordion1" *ngIf="onOffModule" class="mb-2">
+        <div class="card">
+            <div class="card-header p-1" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                        <span class="pull-left">Estimate Student Count for Financial Year 2022-23:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse hide" aria-labelledby="headingTwo" data-parent="#accordion1">
+                <div class="card-body">
+
+                    <div class="row justify-content-center align-items-center mb-2">
+                        <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+                            <table class="table table-bordered table-sm small medium">
+                                <tr class="text-center table-header">
+                                    <td class="align-middle">Sr No</td>
+                                    <td class="align-middle">Program</td>
+                                    <td class="align-middle">Fee Category</td>
+                                    <td class="align-middle">Fees Amount</td>
+                                    <td class="align-middle">Estimate Student Count per Month</td>
+                                    <td class="align-middle">Total Amount<br /><span
+                                            class="badge badge-danger">{{totalsum2 | currency:'INR'
+                                            :'': '1.0-0'}}</span></td>
+                                </tr>
+                                <tr *ngFor="let m1 of psetFcIddata; let i = index">
+                                    <td class="align-middle">{{i + 1}}</td>
+                                    <td class="align-middle">{{m1.psetName}}</td>
+                                    <td class="align-middle">{{m1.categoryName}}</td>
+                                    <td class="align-middle">{{m1.amount}}</td>
+                                    <td class="align-middle">
+                                        <input matInput id="reasonText" [(ngModel)]="m1.studentCount"
+                                            class="form-control" (change)="onchange_studentCount()" placeholder="Type"
+                                            type="number">
+                                    </td>
+                                    <td class="align-middle text-danger"><b>{{(m1.amount != undefined ?
+                                            m1.amount : 0) * (m1.studentCount != undefined ?
+                                            m1.studentCount : 0) | currency:'INR'
+                                            :'': '1.0-0'}}</b></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row justify-content-end mb-2">
+                        <button mat-button mat-raised-button color="warn" class="col-lg-2"
+                            (click)="submitStudentCount()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="accordion2" class="mb-2">
+        <div class="card">
+            <div class="card-header p-1" id="headingthree">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsethree"
+                        aria-expanded="false" aria-controls="collapsethree">
+                        <span class="pull-left">Filters:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapsethree" class="collapse hide" aria-labelledby="headingthree" data-parent="#accordion2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Dept. Venue:</span>
+                                <ng-select class="col-lg-12" [items]="filterdeptVenueNameDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.deptVenueName"
+                                    (change)="onchange_searchObject()" [closeOnSelect]="false" [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                        <div class="col-lg-4 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Base Item:</span>
+                                <ng-select class="col-lg-12" [items]="filterbaseItemNameDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.baseItemName"
+                                    (change)="onchange_searchObject()" [closeOnSelect]="false" [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                        <div class="col-lg-4 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Item:</span>
+                                <ng-select class="col-lg-12" [items]="filteritemNameDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.itemName"
+                                    (change)="onchange_searchObject()" [closeOnSelect]="false" [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+            <table class="table table-bordered table-sm small medium">
+                <tr class="text-center table-header">
+                    <td class="align-middle">Sr No</td>
+                    <td class="align-middle">Dept. Venue</td>
+                    <td class="align-middle">Base Item</td>
+                    <td class="align-middle">Item</td>
+                    <td class="align-middle">UOM</td>
+                    <td class="align-middle">Amount Per Pc/Kg</td>
+                    <td class="align-middle">Quantity</td>
+                    <td class="align-middle">Amount<br /><span class="badge badge-danger">{{totalsum | currency:'INR'
+                            :'': '1.0-0'}}</span></td>
+                    <td class="align-middle">Justification</td>
+                    <td class="align-middle">Action</td>
+                </tr>
+                <tr *ngFor="let m of bdgtArazFilteredList; let i = index">
+                    <td class="align-middle">{{i + 1}}</td>
+                    <td class="align-middle">{{m.deptVenueName}}</td>
+                    <td class="align-middle">{{m.baseItemName}}</td>
+                    <td class="align-middle">{{m.itemName}}</td>
+                    <td class="align-middle">{{m.uom}}</td>
+                    <td class="align-middle">{{m.amountPerUom}}</td>
+                    <td class="align-middle">{{m.quantity}}</td>
+                    <td class="align-middle text-danger"><b>{{(m.totalAmount) | currency:'INR'
+                            :'': '1.0-0'}}</b></td>
+                    <td class="align-middle">{{m.justification}}</td>
+                    <td class="align-middle">
+                        <a *ngIf="!m.adminWorkStatus" class="btn btn-danger btn-sm rounded-circle" title="Delete"
+                            (click)="deleteBudgetAraz(m.id!)" role="button"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

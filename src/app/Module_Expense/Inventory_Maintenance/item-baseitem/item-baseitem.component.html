@@ -1,0 +1,57 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div class="row justify-content-center align-items-center mb-4" *ngIf="add">
+        <nav class="navbar navbar-answer col-lg-6 p-2 align-middle text-center">
+            <ng-select class="col-lg-5 p-0" [items]="itemDD" appearance="string" [searchable]="true" bindLabel="name"
+                bindValue="id" [(ngModel)]="itemId" placeholder="Select Item" appendTo="body" [closeOnSelect]="true"
+                [multiple]="false">
+            </ng-select>
+            <ng-select class="col-lg-5 p-0" [items]="baseitemDD" appearance="string" [searchable]="true"
+                bindLabel="name" bindValue="id" [(ngModel)]="baseItemId" placeholder="Select Expense Head"
+                appendTo="body" [closeOnSelect]="true" [multiple]="false">
+            </ng-select>
+            <button mat-button mat-raised-button (click)="Add_Item()" color="primary">ADD</button>
+        </nav>
+    </div>
+    <div class="row justify-content-center">
+        <input [(ngModel)]="searchText" class="form-control justify-content-center col-lg-6" placeholder="Search" />
+    </div>
+    <div class="row justify-content-center">
+
+        <div class="text-center col-lg-6 col-sm-12 table-responsive p-0">
+            <table class="table table-bordered table-sm">
+                <tr class="table-header">
+                    <td class="align-middle p-2">Mapping ID</td>
+                    <td class="align-middle p-2">Item Name</td>
+                    <td class="align-middle p-2">Expense Head</td>
+                    <td class="align-middle p-2" *ngIf="delete">Action</td>
+                </tr>
+                <tr class="text-center" *ngFor="let m of itemBaseitems  | searchExpense: searchText">
+                    <td class="align-middle text-left p-2">
+                        <div>
+                            <h3 class="m-0">{{m.id}}</h3>
+                        </div>
+                    </td>
+                    <td class="align-middle text-left p-2">
+                        <div>
+                            <h3 class="m-0">{{m.itemName}}</h3>
+                        </div>
+                    </td>
+                    <td class="align-middle text-left p-2">
+                        <div>
+                            <h3 class="m-0">{{m.baseItemName}}</h3>
+                        </div>
+                    </td>
+                    <td class="align-middle p-2" *ngIf="delete">
+                        <a class="btn btn-danger btn-sm rounded-circle" (click)="delete_mapping(m.id)" title="Edit"
+                            role="button"><i class="fa fa-trash"></i></a>&nbsp;
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

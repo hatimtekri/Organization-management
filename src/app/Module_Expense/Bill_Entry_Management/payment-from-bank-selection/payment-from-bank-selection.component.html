@@ -1,0 +1,287 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div class="row align-items-center pr-5 pl-5 mb-2">
+        <div class="col-lg-6 p-2 text-center">
+            <div class="navbar navbar-answer col-lg-12 mb-1">
+                <div class="input-group">
+                    <ng-select class="col-lg-8 p-0" [items]="bankNameDD" appearance="string" *ngIf="!isShow"
+                        [searchable]="true" bindLabel="name" bindValue="name" [(ngModel)]="bank"
+                        placeholder="Select Bank" (keyup.enter)="loadData()" appendTo="body" [closeOnSelect]="true"
+                        [multiple]="false">
+                    </ng-select>&nbsp;&nbsp;
+                    <input placeholder="ITS No" class="form-control col-lg-8" type="text" *ngIf="isShow"
+                        [(ngModel)]="bank" readonly />&nbsp;&nbsp;
+                    <button mat-button mat-raised-button color="primary" *ngIf="!isShow"
+                        (click)="loadData()">Load</button>&nbsp;
+                    <button mat-button mat-raised-button color="warn" (click)="clear()">Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isShow">
+        <div class="row m-2 justify-content-start">
+            <div class="input-group">
+                <ng-select class="col-lg-4 p-0" [items]="paymentModeDD" appearance="string"
+                    [searchable]="true" bindLabel="name" bindValue="name" [(ngModel)]="paymentType" placeholder="Select Payment Type"
+                     appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                </ng-select>&nbsp;&nbsp;
+                <button mat-button mat-raised-button color="primary" class="item" (click)="submitToBePaidBills()">Submit
+                    Bills</button>
+            </div>
+
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                        <span>{{bank}} Vendors
+                        </span>
+                    </mat-toolbar>
+                    <div class="card-body p-1">
+                        <div class="row justify-content-center" *ngIf="selectedBankBills.length == 0">
+                            <h2 class="text-danger">NO ENTRIES FOUND</h2>
+                        </div>
+                        <div class="table table-responsive" *ngIf="selectedBankBills.length > 0">
+                            <table class="table table-bordered table-sm">
+                                <tr class="text-center table-header">
+                                    <td class="align-middle">
+                                        <input type="checkbox" (change)="selectSelectedBank()" [(ngModel)]="selectAll"
+                                            id="exampleCheck1">
+                                    </td>
+                                    <td class="align-middle">Sr No</td>
+                                    <td class="align-middle">Bill ID</td>
+                                    <td class="align-middle">Vendor</td>
+                                    <!-- <td class="align-middle">Payment Mode</td> -->
+                                    <td class="align-middle">Payment Details</td>
+                                    <td class="align-middle">Bill From</td>
+                                    <!-- <td class="align-middle">Expense Head</td> -->
+                                    <td class="align-middle">Bill No.</td>
+                                    <td class="align-middle">Bill Date</td>
+                                    <!-- <td class="align-middle">Entry Date</td>
+                                <td class="align-middle">Entry By</td>
+                                <td class="align-middle">File</td> -->
+                                    <td class="align-middle">Items</td>
+                                    <td class="align-middle">TDS</td>
+                                    <td class="align-middle">Bill Amount<br /><span
+                                            class="badge badge-danger">{{totalsum1 |
+                                            currency:'INR'
+                                            :'': '1.0-0'}}</span></td>
+                                    <!-- <td class="align-middle">GST Amount</td>
+                                <td class="align-middle">Conveyance</td>
+                                <td class="align-middle">Total Amount Amount</td> -->
+                                    <!-- <td class="align-middle">Status</td> -->
+                                </tr>
+                                <tr *ngFor="let m of selectedBankBills; let i = index">
+                                    <td class="align-middle">
+                                        <input type="checkbox" [(ngModel)]="m.select" id="exampleCheck1">
+                                    </td>
+                                    <td class="align-middle">{{ i + 1 }}</td>
+                                    <td class="align-middle">{{m.id}}</td>
+                                    <td class="align-middle">{{m.vendorName}}</td>
+                                    <!-- <td class="align-middle">{{m.paymentMode_User}}</td> -->
+                                    <td class="align-middle text-left">
+                                        {{m.paymentTo_AccNum}}<br />{{m.paymentTo_AccName}}<br />{{m.paymentTo_ifsc}}<br />{{m.paymentTo_BankName}}
+                                    </td>
+                                    <td class="align-middle">{{m.deptVenueName}} : {{m.baseItemName}}</td>
+                                    <!-- <td class="align-middle">{{m.baseItemName}}</td> -->
+                                    <td class="align-middle">{{m.billNumber}}</td>
+                                    <td class="align-middle">{{m.billDate | date: 'dd-MM-yyyy'}}</td>
+                                    <!-- <td class="align-middle">{{m.createdOn | date: 'd/M/yy, h:mm a'}}</td>
+                                <td class="align-middle">{{m.createdBy}}</td>
+                                <td class="align-middle  text-center">
+                                    <a class="btn btn-warning btn-sm rounded-circle" target="_blank"
+                                        href="https://mahadalzahra.org/uploads/billAttachmentsNew/{{m.id}}.pdf"
+                                        role="button"><i class="fa fa-file-pdf-o"></i></a>
+                                </td> -->
+                                    <td class="align-middle text-center">
+                                        <a class="btn btn-sm rounded-circle" data-toggle="modal"
+                                            data-target=".bd-example-modal-lg" (click)="getItemsForBill(m)"
+                                            role="button"><u>View</u></a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input id="reasonText" class="form-control max-content"
+                                            placeholder="Applicable Amount" [(ngModel)]="m.tdsApplicableAmount"
+                                            type="number">
+                                        <input id="reasonText" class="form-control max-content"
+                                            placeholder="Percentage" [(ngModel)]="m.tdsPercentage" type="number">
+                                        <b class="text-danger">Amount: {{(m.tdsApplicableAmount != undefined ?
+                                            m.tdsApplicableAmount : 0) * (m.tdsPercentage != undefined ?
+                                            m.tdsPercentage : 0) / 100 | number: '1.0-0'}}</b>
+                                    </td>
+                                    <td class="align-middle">
+                                        Gross: {{(m.totalAmount != undefined ?
+                                        m.totalAmount : 0) - (m.conveyanceAmount != undefined ?
+                                        m.conveyanceAmount : 0) - (m.gstAmount != undefined ?
+                                        m.gstAmount : 0)}}
+                                        <br />
+                                        GST: {{m.gstAmount != undefined ? m.gstAmount : 0}}
+                                        <br />
+                                        Conveyance: {{m.conveyanceAmount != undefined ? m.conveyanceAmount : 0}}
+                                        <br />
+                                        <b class="text-danger">Total: {{m.totalAmount != undefined ? m.totalAmount :
+                                            0}}</b>
+                                    </td>
+                                    <!-- <td class="align-middle">{{m.gstAmount}}</td>
+                                <td class="align-middle">{{m.conveyanceAmount}}</td>
+                                <td class="align-middle">{{m.totalAmount}}</td> -->
+                                    <!-- <td class="align-middle">{{m.status}}</td> -->
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                        <span>Other Bank Vendors
+                        </span>
+                    </mat-toolbar>
+                    <div class="card-body p-1">
+                        <div class="row justify-content-center" *ngIf="otherBankBills.length == 0">
+                            <h2 class="text-danger">NO ENTRIES FOUND</h2>
+                        </div>
+                        <div class="table table-responsive" *ngIf="otherBankBills.length > 0">
+                            <table class="table table-bordered table-sm">
+                                <tr class="text-center table-header">
+                                    <td class="align-middle">
+                                        <input type="checkbox" (change)="selectOtherBank()" [(ngModel)]="selectAll"
+                                            id="exampleCheck1">
+                                    </td>
+                                    <td class="align-middle">Sr No</td>
+                                    <td class="align-middle">Bill ID</td>
+                                    <td class="align-middle">Vendor</td>
+                                    <!-- <td class="align-middle">Payment Mode</td> -->
+                                    <td class="align-middle">Payment Details</td>
+                                    <td class="align-middle">Bill From</td>
+                                    <!-- <td class="align-middle">Expense Head</td> -->
+                                    <td class="align-middle">Bill No.</td>
+                                    <td class="align-middle">Bill Date</td>
+                                    <!-- <td class="align-middle">Entry Date</td>
+                                <td class="align-middle">Entry By</td>
+                                <td class="align-middle">File</td> -->
+                                    <td class="align-middle">Items</td>
+                                    <td class="align-middle">TDS</td>
+                                    <td class="align-middle">Bill Amount<br /><span
+                                            class="badge badge-danger">{{totalsum2 |
+                                            currency:'INR'
+                                            :'': '1.0-0'}}</span></td>
+                                    <!-- <td class="align-middle">GST Amount</td>
+                                <td class="align-middle">Conveyance</td>
+                                <td class="align-middle">Total Amount Amount</td> -->
+                                    <!-- <td class="align-middle">Status</td> -->
+                                </tr>
+                                <tr *ngFor="let m of otherBankBills; let i = index">
+                                    <td class="align-middle">
+                                        <input type="checkbox" [(ngModel)]="m.select" id="exampleCheck1">
+                                    </td>
+                                    <td class="align-middle">{{ i + 1 }}</td>
+                                    <td class="align-middle">{{m.id}}</td>
+                                    <td class="align-middle">{{m.vendorName}}</td>
+                                    <!-- <td class="align-middle">{{m.paymentMode_User}}</td> -->
+                                    <td class="align-middle text-left">
+                                        {{m.paymentTo_AccNum}}<br />{{m.paymentTo_AccName}}<br />{{m.paymentTo_ifsc}}<br />{{m.paymentTo_BankName}}
+                                    </td>
+                                    <td class="align-middle">{{m.deptVenueName}} : {{m.baseItemName}}</td>
+                                    <!-- <td class="align-middle">{{m.baseItemName}}</td> -->
+                                    <td class="align-middle">{{m.billNumber}}</td>
+                                    <td class="align-middle">{{m.billDate | date: 'dd-MM-yyyy'}}</td>
+                                    <!-- <td class="align-middle">{{m.createdOn | date: 'd/M/yy, h:mm a'}}</td>
+                                <td class="align-middle">{{m.createdBy}}</td>
+                                <td class="align-middle  text-center">
+                                    <a class="btn btn-warning btn-sm rounded-circle" target="_blank"
+                                        href="https://mahadalzahra.org/uploads/billAttachmentsNew/{{m.id}}.pdf"
+                                        role="button"><i class="fa fa-file-pdf-o"></i></a>
+                                </td> -->
+                                    <td class="align-middle text-center">
+                                        <a class="btn btn-sm rounded-circle" data-toggle="modal"
+                                            data-target=".bd-example-modal-lg" (click)="getItemsForBill(m)"
+                                            role="button"><u>View</u></a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input id="reasonText" class="form-control max-content"
+                                            placeholder="Applicable Amount" [(ngModel)]="m.tdsApplicableAmount"
+                                            type="number">
+                                        <input id="reasonText" class="form-control  max-content"
+                                            placeholder="Percentage" [(ngModel)]="m.tdsPercentage" type="number">
+                                        <b class="text-danger">Amount: {{(m.tdsApplicableAmount != undefined ?
+                                            m.tdsApplicableAmount : 0) * (m.tdsPercentage != undefined ?
+                                            m.tdsPercentage : 0) / 100 | number: '1.0-0'}}</b>
+                                    </td>
+                                    <td class="align-middle">
+                                        Gross: {{(m.totalAmount != undefined ?
+                                        m.totalAmount : 0) - (m.conveyanceAmount != undefined ?
+                                        m.conveyanceAmount : 0) - (m.gstAmount != undefined ?
+                                        m.gstAmount : 0)}}
+                                        <br />
+                                        GST: {{m.gstAmount != undefined ? m.gstAmount : 0}}
+                                        <br />
+                                        Conveyance: {{m.conveyanceAmount != undefined ? m.conveyanceAmount : 0}}
+                                        <br />
+                                        <b class="text-danger">Total: {{m.totalAmount != undefined ? m.totalAmount :
+                                            0}}</b>
+                                    </td>
+                                    <!-- <td class="align-middle">{{m.gstAmount}}</td>
+                                <td class="align-middle">{{m.conveyanceAmount}}</td>
+                                <td class="align-middle">{{m.totalAmount}}</td> -->
+                                    <!-- <td class="align-middle">{{m.status}}</td> -->
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span>Items ( Bill ID: {{billId}} || Vendor Name: {{vendorName}} )
+                    </span>
+                </mat-toolbar>
+                <div class="row align-items-center m-2">
+                    <div class="table table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <tr class="text-center table-header">
+                                <td class="align-middle">Sr No</td>
+                                <td class="align-middle">Item</td>
+                                <td class="align-middle">Quantity</td>
+                                <td class="align-middle">Amount per Unit</td>
+                                <!-- <td class="align-middle">GST %</td>
+                                <td class="align-middle">GST Amount</td> -->
+                                <td class="align-middle">Total Amount<br /><span class="badge badge-danger">{{totalsum3
+                                        |
+                                        currency:'INR'
+                                        :'': '1.0-0'}}</span></td>
+                                <td class="align-middle">Remarks</td>
+                            </tr>
+                            <tr *ngFor="let m of viewBillItems; let i = index">
+                                <td class="align-middle">{{ i + 1 }}</td>
+                                <td class="align-middle">{{m.itemName}}</td>
+                                <td class="align-middle">{{m.quantity}}</td>
+                                <td class="align-middle">{{m.amountPerUom |
+                                    currency:'INR'
+                                    :'': '1.2-2'}}</td>
+                                <!-- <td class="align-middle">{{m.itemGstPercentage}} %</td>
+                                <td class="align-middle">{{m.itemGstAmount}}</td> -->
+                                <td class="align-middle">{{(m.quantity != undefined ?
+                                    m.quantity : 0) * (m.amountPerUom != undefined ?
+                                    m.amountPerUom : 0) |
+                                    currency:'INR'
+                                    :'': '1.2-2'}}</td>
+                                <td class="align-middle">{{m.remarks}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

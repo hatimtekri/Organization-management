@@ -1,0 +1,29 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.badge {
+    font-size: 11pt;
+}
+
+.item.mat-toolbar {
+    background-color: #296E85;
+}
+
+.bg-rejected {
+    background: rgba(255, 99, 71, 0.7);
+}
+
+.bg-accepted {
+    background: rgba(0, 128, 0, 0.5);
+}
+
+.item.mat-button.mat-primary {
+    background-color: rgba(57, 87, 33, 255);
+}
+
+.navbar-answer {
+    border       : 2px solid #153e71;
+    border-radius: 7px;
+
+    height: fit-content;
+}

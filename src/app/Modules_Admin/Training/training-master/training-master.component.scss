@@ -1,0 +1,40 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+table td {
+    color: #f44336;
+}
+
+nav div a {
+    // width: 10%;
+    text-decoration: none;
+    font-size: 13px;
+    text-align: center;
+    background: #eee;
+    color: black;
+    font-weight: bold;
+}
+
+nav div a[aria-selected="true"] {
+	color: black;
+	background: #fff176;
+}
+
+@media (max-width: 768px){
+    nav div a {
+        //width: 10%;
+        text-decoration: none;
+        font-size: 13px;
+        text-align: center;
+        background: #eee;
+        color: black;
+        font-weight: bold;
+    }
+}
+
+
+.instrow
+{
+    text-align: left;
+    font-weight: bold;
+}

@@ -1,0 +1,37 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.pending {
+    color: red;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.received {
+    color: green;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.badge {
+    font-size: 11pt;
+}
+
+.navbar-part3 {
+    background: #00b050;
+    color: white;
+    //border-radius: 7px;
+    font-size: 12pt;
+}
+
+#kgphoto{
+
+
+    transition: transform .2s; /* Animation */
+  
+    margin: 0 auto;
+  }
+  
+  #kgphoto:hover{
+    transform: scale(1.7);
+  }

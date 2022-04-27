@@ -1,0 +1,830 @@
+<div *ngIf="!page">
+  <div class="row justify-content-center">
+    <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+  </div>
+</div>
+<div *ngIf="page">
+  <div class="mr-4 ml-4 mb-2">
+    <div class="row justify-content-center">
+      <div class="col-lg p-0">
+        <div class="navbar navbar-status bg-tayeen m-1 form-check">
+          <input class="form-check-input ml-1 mt-0" [(ngModel)]="searchObject.search_mahadkg" type="checkbox"
+            id="defaultCheck1" />
+          <label class="form-check-label ml-4" for="defaultCheck1">MZ KHDGZ (Tayeen)</label>
+        </div>
+      </div>
+
+      <div class="col-lg p-0">
+        <div class="navbar navbar-status bg-non-tayeen m-1 form-check">
+          <input class="form-check-input ml-1 mt-0" [(ngModel)]="searchObject.search_mahadwafd" type="checkbox"
+            id="defaultCheck2" />
+          <label class="form-check-label ml-4" for="defaultCheck2">MZ KHDGZ (Non Tayeen)</label>
+        </div>
+      </div>
+
+      <div class="col-lg p-0">
+        <div class="navbar navbar-status bg-recruited m-1 form-check">
+          <input class="form-check-input ml-1 mt-0" [(ngModel)]="searchObject.search_mahadrecruited" type="checkbox"
+            id="defaultCheck4" />
+          <label class="form-check-label ml-4" for="defaultCheck4">Recruited Muhaffiz</label>
+        </div>
+      </div>
+
+      <div class="col-lg p-0">
+        <div class="navbar navbar-status bg-teacher m-1 form-check">
+          <input class="form-check-input ml-1 mt-0" [(ngModel)]="searchObject.search_mahadrecruitedteacher"
+            type="checkbox" id="defaultCheck5" />
+          <label class="form-check-label ml-4" for="defaultCheck5">Recruited Teacher</label>
+        </div>
+      </div>
+
+      <div class="col-lg p-0">
+        <div class="navbar navbar-status bg-other-idara m-1 form-check">
+          <input class="form-check-input ml-1 mt-0" [(ngModel)]="searchObject.search_mahadother" type="checkbox"
+            id="defaultCheck3" />
+          <label class="form-check-label ml-4" for="defaultCheck3">Other Idara KG</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-sm-12">
+    <div class="row justify-content-center mb-2">
+      <div class="navbar navbar-category col-lg-3 form-check">
+        <input class="form-check-input ml-1 mt-0" [(ngModel)]="searchObject.search_Active" type="checkbox"
+          id="defaultCheck6" />
+        <label class="form-check-label ml-4" for="defaultCheck6">Active</label>
+      </div>
+      &nbsp;
+      <div class="navbar navbar-category col-lg-3 form-check">
+        <input class="form-check-input ml-1 mt-0" [(ngModel)]="searchObject.search_Inactive" type="checkbox"
+          id="defaultCheck7" />
+        <label class="form-check-label ml-4" for="defaultCheck7">In-Active</label>
+      </div>
+    </div>
+  </div>
+  <br />
+  <!-- <input
+  [(ngModel)]="searchObject.moze"
+  class="form-control justify-content-center col-lg-12"
+  placeholder="Search"
+/> -->
+  <div id="accordion1" class="mb-1">
+    <div class="card">
+      <div class="card-header p-1" id="headingtwo">
+        <h5 class="mb-0">
+          <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="false"
+            aria-controls="collapsetwo">
+            <span class="pull-left">Basic Search:</span>
+            <i class="fa fa-caret-down pull-right"></i>
+          </button>
+        </h5>
+      </div>
+      <div id="collapsetwo" class="collapse hide" aria-labelledby="headingtwo" data-parent="#accordion1">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">ITS ID:</span>
+                <div class="col-lg-10">
+                  <textarea id="reasonText" rows="1" [(ngModel)]="itsIdCsv" class="form-control" (change)="setItsIds()"
+                    placeholder="Type"></textarea>
+                </div>
+                <div class="col-lg-2 text-center">
+                  <button mat-button mat-raised-button color="primary" (click)="searchItsIds()">
+                  <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+                  Search
+                </button>
+                </div>
+                <!-- <ng-select class="col-lg-12" [items]="itsIdDD" appearance="string" [searchable]="true" bindLabel="name"
+                  bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false" [multiple]="true"
+                  [(ngModel)]="searchObject.search_itsIdDD">
+                </ng-select> -->
+              </nav>
+            </div>
+            <div class="col-lg-6 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Name:</span>
+                <ng-select class="col-lg-12" [items]="nameDD" appearance="string" [searchable]="true" bindLabel="name"
+                  bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false" [multiple]="true"
+                  [(ngModel)]="searchObject.search_nameDD">
+                </ng-select>
+              </nav>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Qism al-Tahfeez:</span>
+                <ng-select class="col-lg-12" [items]="qismTahfeezDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_qismTahfeezDD">
+                </ng-select>
+              </nav>
+            </div>
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Current Mauze:</span>
+                <ng-select class="col-lg-12" [items]="mozeDD" appearance="string" [searchable]="true" bindLabel="name"
+                  bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false" [multiple]="true"
+                  [(ngModel)]="searchObject.search_moze">
+                </ng-select>
+              </nav>
+            </div>
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Batch ID:</span>
+                <ng-select class="col-lg-12" [items]="batchIdDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_batchIdDD">
+                </ng-select>
+              </nav>
+            </div>
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Training Darajah:</span>
+                <ng-select class="col-lg-12" [items]="trainingDarajaDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_trainingDarajaDD">
+                </ng-select>
+              </nav>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Farig From:</span>
+                <ng-select class="col-lg-12" [items]="categoryDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_categoryDD">
+                </ng-select>
+              </nav>
+            </div>
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Farig Darajah:</span>
+                <ng-select class="col-lg-12" [items]="farigDarajDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_farigDarajah">
+                </ng-select>
+              </nav>
+            </div>
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Aljamea Degree:</span>
+                <ng-select class="col-lg-12" [items]="aljameaDegreeDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_aljameaDegreeDD">
+                </ng-select>
+              </nav>
+            </div>
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Nationality:</span>
+                <ng-select class="col-lg-12" [items]="nationalityDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_nationalityDD">
+                </ng-select>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="accordion">
+    <div class="card">
+      <div class="card-header p-1" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+            aria-controls="collapseOne">
+            <span class="pull-left">Advanced Search:</span>
+            <i class="fa fa-caret-down pull-right"></i>
+          </button>
+        </h5>
+      </div>
+      <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Age:</span>
+                <ng-select class="col-lg-12" [items]="ageDD" appearance="string" [searchable]="true" bindLabel="name"
+                  bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false" [multiple]="true"
+                  [(ngModel)]="searchObject.search_ageDD">
+                </ng-select>
+              </nav>
+            </div>
+
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Dawat Title:</span>
+                <ng-select class="col-lg-12" [items]="dawattileDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_dawatTitleDD">
+                </ng-select>
+              </nav>
+            </div>
+
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">House Status (Khidmat Mauze):</span>
+                <ng-select class="col-lg-12" [items]="houseStatusDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_houseStatusDD">
+                </ng-select>
+              </nav>
+            </div>
+
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">House Type (Khidmat Mauze):</span>
+                <ng-select class="col-lg-12" [items]="houseTypeDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_houseTypeDD">
+                </ng-select>
+              </nav>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">House Status (Personal):</span>
+                <ng-select class="col-lg-12" [items]="housestatusPersonalDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_housestatusPersonalDD">
+                </ng-select>
+              </nav>
+            </div>
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">House Type (Personal):</span>
+                <ng-select class="col-lg-12" [items]="houseTypePersonalDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_houseTypePersonalDD">
+                </ng-select>
+              </nav>
+            </div>
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Hifz Sanad Year:</span>
+                <ng-select class="col-lg-12" [items]="hifzSanadYearDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_hifzSanadYearDD">
+                </ng-select>
+              </nav>
+            </div>
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Khidmat Year:</span>
+                <ng-select class="col-lg-12" [items]="khidmatYearDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_khidmatYearDD">
+                </ng-select>
+              </nav>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Khidmat in Mahad al-Zahra:</span>
+                <ng-select class="col-lg-12" [items]="khidmatinmahadDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_khidmatinmahadDD">
+                </ng-select>
+              </nav>
+            </div>
+            <div class="col-lg-3 p-0">
+              <nav class="navbar navbar-answer m-1">
+                <span class="col-lg-12">Tayeen in Mahad al-Zahra:</span>
+                <ng-select class="col-lg-12" [items]="tayeeninmahadDD" appearance="string" [searchable]="true"
+                  bindLabel="name" bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false"
+                  [multiple]="true" [(ngModel)]="searchObject.search_tayeeninmahadDD">
+                </ng-select>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-start">
+    <div class="btn btn-group pb-2 pt-2">
+      <button mat-button mat-flat-button color="accent">
+        Total KGs&nbsp;&nbsp;
+        <span class="badge badge-info" [innerText]="filterMetadata.count"></span>
+      </button>
+      &nbsp;
+      <div class="btn-group">
+        <button class="dropdown-toggle" mat-button mat-raised-button color="warn" id="dropdownMenuButton1"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+          Update
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <a class="btn dropdown-item" (click)="updateFromIts()">ITS Data</a>
+          <a class="btn dropdown-item" (click)="updateacedemicDetails()">Academic Details</a>
+
+        </div>
+      </div>
+      &nbsp;
+      <div class="btn-group">
+        <button class="dropdown-toggle" mat-button mat-raised-button color="primary" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+          Export (Basic)
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="btn dropdown-item" (click)="exportBasic()">With photo</a>
+          <a class="btn dropdown-item" (click)="exportBasicWithoutPhoto()">Without photo</a>
+        </div>
+      </div>
+      &nbsp;
+      <button mat-button mat-raised-button color="primary" class="customized" data-toggle="modal"
+        data-target=".bd-example-modal-lg">
+        <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+        Export (Customized)
+      </button>
+      &nbsp;
+      <button mat-button mat-raised-button color="primary" class="section" data-toggle="modal"
+        data-target=".bd-example-modal-lg1">
+        <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+        Export (Section Wise)
+      </button>
+      &nbsp;
+      <button mat-button mat-raised-button color="primary" class="print" data-toggle="modal"
+        data-target=".bd-example-modal-lg2" (click)="setPrintBulkITS()">
+        <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+        Bulk Print Profile
+      </button>
+      <!-- &nbsp;
+    <button mat-button mat-raised-button color="warn" (click)="clearcheckboxes()">
+      
+      Clear Checkbox Selections
+    </button> -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="text-center col-lg-12 col-sm-12 table-responsive">
+      <table class="table table-bordered">
+        <tr class="table-header">
+          <td class="align-middle p-2">
+            <input type="checkbox" (click)="ListSelectAll()" [(ngModel)]="listselectAll" id="exampleCheck1" />
+          </td>
+          <td class="align-middle p-2">Sr No.</td>
+          <td class="align-middle p-2">Photo</td>
+          <td class="align-middle p-2">ITS No.</td>
+          <td class="align-middle p-2">Name</td>
+          <td class="align-middle p-2">Age</td>
+          <td class="align-middle p-2">Current<br />Mauze</td>
+          <td class="align-middle p-2">Mobile No.</td>
+          <td class="align-middle p-2">Whatsapp No.</td>
+          <td class="align-middle p-2">Primary Email ID</td>
+          <td class="align-middle p-2">Farig<br />Year</td>
+          <td class="align-middle p-2">Farig<br />Darajah</td>
+          <td class="align-middle p-2">Batch<br />ID</td>
+          <td class="align-middle p-2">Aljamea<br />Degree</td>
+          <td class="align-middle p-2">Hifz Sanad Year</td>
+          <td class="align-middle p-2">MZ<br />Category</td>
+          <td class="align-middle p-2" *ngIf="Editpage">Action</td>
+          <!-- <td class="align-middle p-2">Print Profile</td> -->
+        </tr>
+        <tr class="text-center" *ngFor="
+            let m of khidmatGuzaars
+              | multisearch
+                : {
+                    title: searchObject.search_dawatTitleDD,
+                    fullName: searchObject.search_nameDD,
+                    itsId: searchObject.search_itsIdDD,
+                    hifzSanadYear: searchObject.search_hifzSanadYearDD,
+                    khidmatYear: searchObject.search_khidmatYearDD,
+                    mahad_khidmatYear: searchObject.search_khidmatinmahadDD,
+                    tayeenYear: searchObject.search_tayeeninmahadDD,
+                    age: searchObject.search_ageDD,
+
+                    khidmatMauzeHouseStatus: searchObject.search_houseStatusDD,
+                    khdimatMauzeHouseType: searchObject.search_houseTypeDD,
+                    personalHouseStatus:
+                      searchObject.search_housestatusPersonalDD,
+                    personalHouseType: searchObject.search_houseTypePersonalDD,
+                    batchId: searchObject.search_batchIdDD,
+
+                    alJameaDegree: searchObject.search_aljameaDegreeDD,
+                    nationality: searchObject.search_nationalityDD,
+                    category: searchObject.search_categoryDD,
+                    qismTahfeez: searchObject.search_qismTahfeezDD,
+                    moze: searchObject.search_moze,
+                    farigDarajah: searchObject.search_farigDarajah,
+                    currentDarajah: searchObject.search_trainingDarajaDD,
+                    mz_idara: [
+                      searchObject.search_mahadwafd
+                        ? 'WafdAlHuffaz'
+                        : undefined,
+                      searchObject.search_mahadkg
+                        ? 'MAHADALZAHRA KHDGZ'
+                        : undefined,
+                      searchObject.search_mahadother
+                        ? 'Other Idara KG'
+                        : undefined,
+                      searchObject.search_mahadrecruitedteacher
+                        ? 'Recruited Teacher'
+                        : undefined,
+                      searchObject.search_mahadrecruited
+                        ? 'Recruited Muhaffiz'
+                        : undefined
+                    ],
+                    activeStatusString: [
+                      searchObject.search_Active ? '1' : undefined,
+                      searchObject.search_Inactive ? '0' : undefined
+                    ]
+                  }
+                : filterMetadata;
+            let i = index
+          " [class]="m.mz_idara_color">
+          <td class="align-middle p-2">
+            <input type="checkbox" [(ngModel)]="m.select" id="exampleCheck1" />
+          </td>
+          <td class="align-middle p-2">{{ i + 1 }}</td>
+          <td class="align-middle p-2">
+            <div id="kgphoto">
+              <img src="https://www.mahadalzahra.org/uploads/Huffaz_images/{{m.itsId}}.jpeg"
+                onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" alt="{{ m.itsId }}"
+                width="60" height="60" class="img-responsive rounded-circle" />
+            </div>
+          </td>
+          <td class="align-middle p-2">{{ m.itsId }}</td>
+          <td class="align-middle text-left text-wrap p-2">{{ m.fullName }}</td>
+          <td class="align-middle p-2">{{ m.age }}</td>
+          <td class="align-middle p-2">{{ m.moze }}</td>
+          <td class="align-middle p-2">
+            <a href="tel:{{m.mobileNo}}"><u>{{ m.mobileNo }}</u></a>
+          </td>
+          <td class="align-middle p-2">
+            <a class="d-block d-sm-none" href="https://wa.me/{{m.whatsappNo}}"><u>{{ m.c_codeWhatsapp }}{{ m.whatsappNo
+                }}</u></a>
+            <a class="d-none d-sm-block"
+              href="https://web.whatsapp.com/send?phone={{ m.whatsappNo }}&text=Salaam {{m.fullName}}"
+              target="_blank"><u>{{ m.c_codeWhatsapp }}{{ m.whatsappNo }}</u></a>
+          </td>
+          <td class="align-middle text-left text-wrap p-2">
+            <div *ngIf="m.officialEmailAddress">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ m.officialEmailAddress }}" target="_blank">
+                <u>{{ m.officialEmailAddress }}</u></a>
+            </div>
+            <div *ngIf="!m.officialEmailAddress">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ m.emailAddress }}" target="_blank"><u>{{
+                  m.emailAddress }}</u></a>
+            </div>
+          </td>
+          <td class="align-middle p-2">{{ m.fariqYear }}</td>
+          <td class="align-middle p-2">{{ m.farigDarajah }}</td>
+          <td class="align-middle p-2">{{ m.batchId }}</td>
+          <td class="align-middle text-left text-wrap p-2">
+            {{ m.alJameaDegree }}
+          </td>
+          <td class="align-middle text-wrap p-2">
+            {{ m.hifzSanadYear }}
+          </td>
+          <td class="align-middle text-left text-wrap p-2">
+            <div *ngIf="m.mz_idara === 'MAHADALZAHRA KHDGZ'">
+              MZ KHDGZ (Tayeen)
+            </div>
+            <div *ngIf="m.mz_idara === 'WafdAlHuffaz'">
+              MZ KHDGZ (Non Tayeen)
+            </div>
+            <div *ngIf="m.mz_idara === 'Other Idara KG'">Other Idara KG</div>
+            <div *ngIf="m.mz_idara === 'Recruited Muhaffiz'">
+              Recruited Muhaffiz
+            </div>
+          </td>
+          <!-- <td class="align-middle p-2" *ngIf="Editpage">
+            <a type="button" title="Active/In-active" class="btn p-1" (click)="changestatus(m.itsId)"><img
+                src="./assets/decision.png" width="27" height="28" /></a>
+            <a type="button" title="View Profile" target="_blank" (click)="view(m.itsId, m.fullName)"
+              class="btn p-1"><img src="./assets/resume.png" width="27" height="28" /></a>
+            <a type="button" title="Print Profile" data-toggle="modal" data-target=".bd-example-modal-lg2"
+              (click)="setPrintIts(m.itsId)" class="btn p-1"><img src="./assets/printProfile.png" width="36"
+                height="36" /></a>
+          </td> -->
+          <td class="align-middle p-2" *ngIf="Editpage">
+            <a type="button" *ngIf="m.activeStatus" title="Active/In-active" class="btn p-1 view-attachment"
+              (click)="changestatus(m.itsId)"><u>Inactive_KG</u></a>
+            <a type="button" *ngIf="!m.activeStatus" title="Active/In-active" class="btn p-1 view-attachment"
+              (click)="changestatus(m.itsId)"><u>Active_KG</u></a>
+            <br />
+            <a type="button" title="View Profile" target="_blank" (click)="view(m.itsId, m.fullName)"
+              class="btn p-1 view-attachment"><u>View_Profile</u></a>
+            <br />
+            <a type="button" title="Print Profile" data-toggle="modal" data-target=".bd-example-modal-lg2"
+              (click)="setPrintIts(m.itsId)" class="btn p-1 view-attachment"><u>Print_Profile</u></a>
+          </td>
+          <!-- <td class="align-middle p-2">
+            <a type="button" title="Print Profile" data-toggle="modal" data-target=".bd-example-modal-lg2"
+              (click)="setPrintIts(m.itsId)" class="btn p-1"><img src="./assets/printProfile.png" width="36"
+                height="36" /></a>
+          </td> -->
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <input type="hidden" readonly [(ngModel)]="filterMetadata.count" />
+
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content p-1">
+        <mat-toolbar class="page-subheader-toolbar modal-toolbar justify-content-center">
+          <span>Export (Customized)</span>
+        </mat-toolbar>
+
+        <div class="btn-group pull-left pb-2 pt-2">
+          <button mat-button mat-raised-button color="primary" (click)="Export()">
+            <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+            Export
+          </button>
+          &nbsp;
+          <button mat-button mat-raised-button color="warn" (click)="clearselections()">
+            <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+            Clear Selections
+          </button>
+        </div>
+
+        <div id="accordion1">
+          <div *ngFor="let cat of ExportCategory" class="card mb-1">
+            <div class="card-header p-1" id="h{{ cat.categoryId }}">
+              <h5 class="mb-0">
+                <button class="btn btn-instruction" data-toggle="collapse" [attr.data-target]="'#c' + cat.categoryId"
+                  aria-expanded="false" [attr.aria-controls]="'c' + cat.categoryId">
+                  <span class="pull-left">{{ cat.categoryName }}</span>
+                  <i class="fa fa-caret-down pull-right"></i>
+                </button>
+              </h5>
+            </div>
+            <div id="c{{ cat.categoryId }}" class="collapse hide" [attr.aria-labelledby]="'h' + cat.categoryId"
+              data-parent="#accordion1">
+              <div class="navbar navbar-header col-lg-12 form-check">
+                <input class="form-check-input ml-1 mt-0" [(ngModel)]="cat.status" (click)="selectall(cat.categoryName)"
+                  type="checkbox" id="{{ cat.categoryId }}" />
+                <label class="form-check-label ml-4" for="{{ cat.categoryId }}">Select All</label>
+              </div>
+              <br />
+              <div class="row justify-content-center mb-2 m-2">
+                <div *ngFor="let c of cat.toRemove" class="col-lg-3 p-0">
+                  <div class="navbar navbar-header form-check m-1">
+                    <input class="form-check-input ml-1 mt-0" [(ngModel)]="c.status" type="checkbox"
+                      id="check{{ c.id }}" />
+                    <label class="form-check-label ml-4" for="check{{ c.id }}">{{ c.propertyDisplayName }}</label>
+                  </div>
+                </div>
+                &nbsp;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content p-1">
+        <mat-toolbar class="page-subheader-toolbar modal-toolbar justify-content-center">
+          <span>Export (Section Wise)</span>
+        </mat-toolbar>
+
+        <div class="btn-group pull-left pb-2 pt-2">
+          <button mat-button mat-raised-button color="primary" (click)="ExportSection()">
+            <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+            Export
+          </button>
+        </div>
+
+        <div class="row mb-2 m-2">
+          <div class="col-lg-3 p-0">
+            <div class="navbar navbar-header1 form-check p-1 m-1">
+              <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId" name="flexRadioDefault"
+                value="4" id="check1" />
+              <label class="form-check-label ml-4" for="check1">Qualification</label>
+            </div>
+          </div>
+          <div class="col-lg-3 p-0">
+            <div class="navbar navbar-header1 form-check p-1 m-1">
+              <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId" name="flexRadioDefault"
+                value="5" id="check2" />
+              <label class="form-check-label ml-4" for="check2">Courses/Workshops</label>
+            </div>
+          </div>
+          <div class="col-lg-3 p-0">
+            <div class="navbar navbar-header1 form-check p-1 m-1">
+              <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId" name="flexRadioDefault"
+                value="6" id="check3" />
+              <label class="form-check-label ml-4" for="check3">Language Proficiency</label>
+            </div>
+          </div>
+          <div class="col-lg-3 p-0">
+            <div class="navbar navbar-header1 form-check p-1 m-1">
+              <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId" name="flexRadioDefault"
+                value="7" id="check5" />
+              <label class="form-check-label ml-4" for="check5">Field of Interest</label>
+            </div>
+          </div>
+          <div class="col-lg-3 p-0">
+            <div class="navbar navbar-header1 form-check p-1 m-1">
+              <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId" name="flexRadioDefault"
+                value="8" id="check6" />
+              <label class="form-check-label ml-4" for="check6">Physical Fitness/Sports</label>
+            </div>
+          </div>
+          <div class="col-lg-3 p-0">
+            <div class="navbar navbar-header1 form-check p-1 m-1">
+              <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId" name="flexRadioDefault"
+                value="9" id="check7" />
+              <label class="form-check-label ml-4" for="check7">Past MZ Mawaze</label>
+            </div>
+          </div>
+          <div class="col-lg-3 p-0">
+            <div class="navbar navbar-header1 form-check p-1 m-1">
+              <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId" name="flexRadioDefault"
+                value="10" id="check8" />
+              <label class="form-check-label ml-4" for="check8">Other Idara Mawaaze</label>
+            </div>
+          </div>
+          <div class="col-lg-3 p-0">
+            <div class="navbar navbar-header1 form-check p-1 m-1">
+              <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId" name="flexRadioDefault"
+                value="11" id="check9" />
+              <label class="form-check-label ml-4" for="check9">Mawaaze History</label>
+            </div>
+          </div>
+          <div class="col-lg-3 p-0">
+            <div class="navbar navbar-header1 form-check p-1 m-1">
+              <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId" name="flexRadioDefault"
+                value="12" id="check10" />
+              <label class="form-check-label ml-4" for="check10">Identity Cards</label>
+            </div>
+          </div>
+          <div class="col-lg-3 p-0">
+            <div class="navbar navbar-header1 form-check p-1 m-1">
+              <input class="form-check-input ml-1 mt-0" type="radio" [(ngModel)]="sectionId" name="flexRadioDefault"
+                value="3" id="check11" />
+              <label class="form-check-label ml-4" for="check11">Family Details</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Print Profile -->
+  <div class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content p-1">
+        <mat-toolbar class="page-subheader-toolbar modal-toolbar justify-content-center">
+          <span>Print Profile</span>
+        </mat-toolbar>
+
+        <div class="btn-group pull-left pb-2 pt-2">
+          <button mat-button mat-raised-button color="primary" (click)="printProfile()">
+            <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+            Print
+          </button>
+        </div>
+
+
+
+
+        <div class="navbar navbar-header col-lg-12 form-check">
+          <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppressSelectall" (click)="selectall_suppress()"
+            type="checkbox" id="selectall" />
+          <label class="form-check-label ml-4" for="selectall">Select All</label>
+        </div>
+        <br />
+        <div class="row justify-content-center mb-2 m-2">
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.basic" type="checkbox" id="basic" />
+              <label class="form-check-label ml-4" for="basic">Basic Details</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.contact" type="checkbox" id="contact" />
+              <label class="form-check-label ml-4" for="contact">Contact Details</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.academic" type="checkbox" id="academic" />
+              <label class="form-check-label ml-4" for="academic">Academic Details</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.khidmat" type="checkbox" id="khidmat" />
+              <label class="form-check-label ml-4" for="khidmat">Khidmat Details</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.house" type="checkbox" id="house" />
+              <label class="form-check-label ml-4" for="house">House Details</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.family" type="checkbox" id="family" />
+              <label class="form-check-label ml-4" for="family">Family Details</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.qualification" type="checkbox"
+                id="qualification" />
+              <label class="form-check-label ml-4" for="qualification">Qualification</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.cw" type="checkbox" id="cw" />
+              <label class="form-check-label ml-4" for="cw">Courses & Workshop</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.lp" type="checkbox" id="lp" />
+              <label class="form-check-label ml-4" for="lp">Language Proficiency</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.foi" type="checkbox" id="foi" />
+              <label class="form-check-label ml-4" for="foi">Field of Interest</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.personality" type="checkbox"
+                id="personality" />
+              <label class="form-check-label ml-4" for="personality">Personality</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.aboutyourself" type="checkbox"
+                id="aboutyourself" />
+              <label class="form-check-label ml-4" for="aboutyourself">About Yourself</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.pastmm" type="checkbox" id="pastmm" />
+              <label class="form-check-label ml-4" for="pastmm">Past MZ Mawaze</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.otheridara" type="checkbox"
+                id="otheridara" />
+              <label class="form-check-label ml-4" for="otheridara">Other Idara Mawaze</label>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.khidmatm" type="checkbox" id="khidmatm" />
+              <label class="form-check-label ml-4" for="khidmatm">Khidmat Mawaze</label>
+            </div>
+          </div>
+
+          <div *ngIf="SalaryPage" class="col-lg-4 p-0">
+            <div class="navbar navbar-header form-check m-1">
+              <input class="form-check-input ml-1 mt-0" [(ngModel)]="suppress.salary" type="checkbox" id="khidmatm" />
+              <label class="form-check-label ml-4" for="khidmatm">Salary Details</label>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

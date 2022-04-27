@@ -1,0 +1,22 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.navbar-answer {
+    border       : 2px solid #153e71;
+    border-radius: 7px;
+    font-size    : 11pt;
+    height       : fit-content;
+}
+
+.badge {
+    font-size: 11pt;
+}
+
+.btn-light {
+    background: #eee;
+}
+
+.complete
+{
+    background: rgba(0,128,0,0.4); 
+}

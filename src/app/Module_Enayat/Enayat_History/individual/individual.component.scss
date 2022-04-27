@@ -1,0 +1,15 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+td {
+    width: 25%;
+}
+
+.table-font-yellow {
+    color: #fff176;
+}
+
+.table-header-yellow {
+    background: #fff176;
+    color: black;
+}

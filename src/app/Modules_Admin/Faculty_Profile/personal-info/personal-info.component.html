@@ -1,0 +1,342 @@
+<div class="row">
+    <div class="text-center align-middle p-lg-1 mb-lg-3 bg-white rounded col-lg-12 col-sm-12">
+      <span>
+        <!-- <img src="./assets/uploads/Huffaz_images/50419363.jpeg" alt="No Image!" width="100" height="100" class="img-responsive img-thumbnail"> -->
+        <img src="https://www.mahadalzahra.org/uploads/Huffaz_images/{{profileData.itsId}}.jpeg"
+          onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" width="95" height="110"
+          class="img-responsive img-thumbnail" />
+      </span>
+      <br /><br />
+      <strong class="textArALKANZ text-wrap text-danger">
+        {{ profileData.fullNameArabic }}
+      </strong>
+      <br />
+      <br />
+      <strong class="text-wrap text-danger">
+        {{ profileData.fullName }}
+      </strong>
+      <!-- <br />
+      <br />
+      <span>
+        <a (click)="updateFromIts()" class="btn btn-yellow">
+          <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;
+          <button class="btn btn-yellow p-0" type="button">
+            Update From ITS
+          </button>
+        </a>
+      </span> -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="btn btn-group pull-right">
+        <button mat-button mat-raised-button color="primary" (click)="edit = !edit" *ngIf="!edit">
+          Edit
+        </button>
+        <button mat-button mat-raised-button color="primary" (click)="submitdata()" *ngIf="edit">
+          Save
+        </button>
+        &nbsp;
+        <button (click)="updateFromIts(profileData.itsId)" mat-button mat-raised-button color="warn">
+          <!-- <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; -->
+          Refresh ITS Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center scrollable-div-x">
+    <div class="text-center col-lg-9 col-sm-12 scrollable-table-x">
+      <table class="table table-bordered table-hover">
+        <tr>
+          <th class="align-middle text-wrap text-left" class="align-middle text-wrap text-left">ITS No.</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.itsId }}</td>
+          <th class="align-middle text-wrap text-left">Age</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.age }}</td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">DOB (Gregorian)</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.dob }}</td>
+          <th class="align-middle text-wrap text-left">DOB (Hijri)</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.dobArabic }}</td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">Blood Group</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.bloodGroup }}</td>
+          <th class="align-middle text-wrap text-left">Marital Status</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.maritalStatus }}</td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">Idara</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.its_preferredIdara }}</td>
+          <th class="align-middle text-wrap text-left" >MZ Category</th>
+          <td class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.mz_idara }}</div>
+            <ng-select [items]="mz_idaraDD" *ngIf="edit" [searchable]="true" bindLabel="name" bindValue="name"
+              placeholder="Select" appendTo="body" [multiple]="false" [(ngModel)]="profileData.mz_idara">
+            </ng-select>
+          </td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">Nationality</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.nationality }}</td>
+          <th class="align-middle text-wrap text-left">Dawat Title</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.title }}</td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">Jamaat</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.jamaat }}</td>
+          <th class="align-middle text-wrap text-left">Jamiat</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.jamiat }}</td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">Mafsuhiyat Year</th>
+          <td class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.mafsuhiyatYear }}</div>
+
+            <!-- <ng-select [items]="mafsuyatDD" *ngIf="edit" [searchable]="true" bindLabel="name" bindValue="name"
+              placeholder="Select" appendTo="body" [multiple]="false" [(ngModel)]="profileData.mafsuhiyatYear">
+            </ng-select> -->
+          </td>
+          <th class="align-middle text-wrap text-left">Haddiyat Year</th>
+          <td class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.haddiyatYear }}</div>
+            <!-- <ng-select [items]="mafsuyatDD" *ngIf="edit" [searchable]="true" bindLabel="name" bindValue="name"
+              placeholder="Select" appendTo="body" [multiple]="false" [(ngModel)]="profileData.haddiyatYear">
+            </ng-select> -->
+          </td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">Mahad al-Zahra Email ID</th>
+          <td class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.officialEmailAddress }}</div>
+            <input matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.officialEmailAddress"
+              placeholder="Type" type="text" />
+          </td>
+          <th class="align-middle text-wrap text-left">Personal Email ID</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.emailAddress }}</td>
+        </tr>
+
+        <tr>
+          <th class="align-middle text-wrap text-left">Mobile No.</th>
+          <td class="align-middle text-wrap text-left">{{ profileData.mobileNo }}</td>
+          <th class="align-middle text-wrap text-left">WhatsApp No.</th>
+          <td class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{profileData.c_codeWhatsapp}} {{ profileData.whatsappNo }}</div>
+            <div>
+              <ng-select class="col-lg-6 p-0" [items]="countryCode" *ngIf="edit" [searchable]="true" bindLabel="name"
+                bindValue="name" placeholder="country code" appendTo="body" [multiple]="false"
+                [(ngModel)]="profileData.c_codeWhatsapp">
+              </ng-select>
+              <input matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.whatsappNo"
+                placeholder="whatsapp number" type="number" />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">
+            <div class="row col-lg-12 p-0 m-0 align-items-center">
+              <div class="col-lg-9 p-0">
+                House Status<br />(Khidmat Mauze)
+              </div>
+              <div class="col-lg-2">
+                <a class="btn rounded-circle btn-sm p-0" title="Header" data-container="body" data-toggle="popover"
+                  data-placement="top" data-trigger="focus" tabindex="0" data-content="">
+                  <img src="./assets/information-black.png" alt="" height="20" width="20">
+                </a>
+              </div>
+            </div>
+          </th>
+          <td colspan="3" class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.khidmatMauzeHouseStatus }}</div>
+
+            <ng-select [items]="housestatusDD" *ngIf="edit" [searchable]="true" bindLabel="name" bindValue="name"
+              placeholder="Select" appendTo="body" [multiple]="false" [(ngModel)]="profileData.khidmatMauzeHouseStatus">
+            </ng-select>
+          </td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">House Type<br />(Khidmat Mauze)</th>
+          <td colspan="3" class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.khdimatMauzeHouseType }}</div>
+
+            <ng-select [items]="houseType" *ngIf="edit" [searchable]="true" bindLabel="name" bindValue="name"
+              placeholder="Select" appendTo="body" [multiple]="false" [(ngModel)]="profileData.khdimatMauzeHouseType">
+            </ng-select>
+          </td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">
+            <div class="row col-lg-12 p-0 m-0 align-items-center">
+              <div class="col-lg-9 p-0">
+                Khidmat Mauze Address
+              </div>
+              <div class="col-lg-2">
+                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                  data-placement="top" data-trigger="focus" tabindex="0" data-content="Address Format:
+                  House/Flat No.,
+                  Floor,
+                  Wing (If applicable),
+                  Bldg name/Bldg no.,
+                  Landmark (if applicable),
+                  Street name/no.,
+                  Area/Block no.,
+                  City,
+                  Pin code">
+                  <img src="./assets/information-black.png" alt="" height="20" width="20">
+                </a>
+              </div>
+            </div>
+          </th>
+          <td colspan="3" class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.khidmatMauzeAddress }}</div>
+            <textarea matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.khidmatMauzeAddress"
+              placeholder="Type" type="text"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">
+            <div class="row col-lg-12 p-0 m-0 align-items-center">
+              <div class="col-lg-9 p-0">
+                House Status (Personal)
+              </div>
+              <div class="col-lg-2">
+                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover" data-placement="top"
+                  data-trigger="focus" tabindex="0" data-content="Do you have a house registered on your
+                      name?">
+                  <img src="./assets/information-black.png" alt="" height="20" width="20">
+                </a>
+              </div>
+            </div>
+          </th>
+          <td colspan="3" class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.personalHouseStatus }}</div>
+
+            <ng-select [items]="housestatuspDD" *ngIf="edit" [searchable]="true" bindLabel="name" bindValue="name"
+              placeholder="Select" appendTo="body" [multiple]="false" [(ngModel)]="profileData.personalHouseStatus">
+            </ng-select>
+          </td>
+        </tr>
+        <tr *ngIf="profileData.personalHouseStatus === 'Yes'">
+          <th class="align-middle text-wrap text-left">House Type (Personal)</th>
+          <td class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.personalHouseType }}</div>
+
+            <ng-select [items]="houseType" *ngIf="edit" [searchable]="true" bindLabel="name" bindValue="name"
+              placeholder="Select" appendTo="body" [multiple]="false" [(ngModel)]="profileData.personalHouseType">
+            </ng-select>
+          </td>
+          <th class="align-middle text-wrap text-left">House Area - Sq ft (Personal)</th>
+          <td class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.personalHouseArea }}</div>
+
+            <ng-select [items]="houseArea" *ngIf="edit" [searchable]="true" bindLabel="name" bindValue="name"
+              placeholder="Select" appendTo="body" [multiple]="false" [(ngModel)]="profileData.personalHouseArea">
+            </ng-select>
+          </td>
+        </tr>
+        <tr *ngIf="profileData.personalHouseStatus === 'Yes'">
+          <th class="align-middle text-wrap text-left">
+            <div class="row col-lg-12 p-0 m-0 align-items-center">
+              <div class="col-lg-9 p-0">
+                Personal House Address
+              </div>
+              <div class="col-lg-2">
+                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover" data-placement="top"
+                  data-trigger="focus" tabindex="0" data-content="Address Format:
+                House/Flat No.,
+                Floor,
+                Wing (If applicable),
+                Bldg name/Bldg no.,
+                Landmark (if applicable),
+                Street name/no.,
+                Area/Block no.,
+                City,
+                Pin code">
+                  <img src="./assets/information-black.png" alt="" height="20" width="20">
+                </a>
+              </div>
+            </div>
+          </th>
+          <td colspan="3" class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.personalHouseAddress }}</div>
+            <textarea matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.personalHouseAddress"
+              placeholder="Type" type="text"></textarea>
+
+          </td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">Watan</th>
+          <td colspan="3" class="align-middle text-wrap text-left">{{ profileData.watan }}</td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">
+            <div class="row col-lg-12 p-0 m-0 align-items-center">
+              <div class="col-lg-9 p-0">
+                Watan Address
+              </div>
+              <div class="col-lg-2">
+                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover" data-placement="top"
+                  data-trigger="focus" tabindex="0" data-content="Address Format:
+                House/Flat No.,
+                Floor,
+                Wing (If applicable),
+                Bldg name/Bldg no.,
+                Landmark (if applicable),
+                Street name/no.,
+                Area/Block no.,
+                City,
+                Pin code">
+                  <img src="./assets/information-black.png" alt="" height="20" width="20">
+                </a>
+              </div>
+            </div>
+          </th>
+          <td colspan="3" class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.watanAddress }}</div>
+            <textarea matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.watanAddress" placeholder="Type"
+              type="text"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">Domicile (Parent)</th>
+          <td colspan="3" class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.domacileParents }}</div>
+            <ng-select [items]="domacileDD" *ngIf="edit" [searchable]="true" bindLabel="name" bindValue="name"
+              placeholder="Select" appendTo="body" [multiple]="false" [(ngModel)]="profileData.domacileParents">
+            </ng-select>
+          </td>
+        </tr>
+        <tr>
+          <th class="align-middle text-wrap text-left">
+            <div class="row col-lg-12 p-0 m-0 align-items-center">
+              <div class="col-lg-9 p-0">
+                Domicile (Parent) Address
+              </div>
+              <div class="col-lg-2">
+                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover" data-placement="top"
+                  data-trigger="focus" tabindex="0" data-content="Address Format:
+                House/Flat No.,
+                Floor,
+                Wing (If applicable),
+                Bldg name/Bldg no.,
+                Landmark (if applicable),
+                Street name/no.,
+                Area/Block no.,
+                City,
+                Pin code">
+                  <img src="./assets/information-black.png" alt="" height="20" width="20">
+                </a>
+              </div>
+            </div>
+          </th>
+          <td colspan="3" class="align-middle text-wrap text-left">
+            <div *ngIf="!edit">{{ profileData.domacileParentsAddress }}</div>
+            <textarea matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.domacileParentsAddress"
+              placeholder="Type" type="text"></textarea>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>

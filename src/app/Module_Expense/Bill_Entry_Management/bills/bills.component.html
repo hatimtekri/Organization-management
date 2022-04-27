@@ -1,0 +1,232 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+
+    <div id="accordion2" class="mb-2">
+        <div class="card">
+            <div class="card-header p-1" id="headingthree">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsethree"
+                        aria-expanded="false" aria-controls="collapsethree">
+                        <span class="pull-left">Filters:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapsethree" class="collapse show" aria-labelledby="headingthree" data-parent="#accordion2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Dept. Venue:</span>
+                                <ng-select class="col-lg-12" [items]="filterdeptVenueNameDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.deptVenueName"
+                                    (change)="onchange_searchObject()" [closeOnSelect]="false" [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                        <div class="col-lg-4 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Base Item:</span>
+                                <ng-select class="col-lg-12" [items]="filterbaseItemNameDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.baseItemName"
+                                    (change)="onchange_searchObject()" [closeOnSelect]="false" [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                        <div class="col-lg-4 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Payment Mode:</span>
+                                <ng-select class="col-lg-12" [items]="filterpaymentModeDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.paymentMode"
+                                    (change)="onchange_searchObject()" [closeOnSelect]="false" [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                        <div class="col-lg-4 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Vendor:</span>
+                                <ng-select class="col-lg-12" [items]="filterVendorNameDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.search_vendorNameDD"
+                                    (change)="onchange_searchObject()" [closeOnSelect]="false" [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="filteredBills.length == 0">
+        <h2 class="text-danger">NO ENTRIES FOUND</h2>
+    </div>
+    <button class="col-lg-5" mat-button mat-raised-button color="warn" (click)="exportExcel(filteredBills)" >Export</button>&nbsp;
+
+    <div class="row justify-content-center mb-2" *ngIf="filteredBills.length > 0">
+        <div class="col-lg-12">
+            <div class="table table-responsive">
+                <table class="table table-bordered table-sm">
+                    <tr class="text-center table-header">
+                        <td class="align-middle">Sr No</td>
+                        <td class="align-middle">Bill ID</td>
+                        <td class="align-middle">Vendor</td>
+                        <td class="align-middle">Payment Mode</td>
+                        <td class="align-middle">Payment Details</td>
+                        <td class="align-middle">Dept_Venue</td>
+                        <td class="align-middle">Expense Head</td>
+                        <td class="align-middle">Bill No.</td>
+                        <td class="align-middle">Bill Date</td>
+                        <td class="align-middle">Entry Date</td>
+                        <td class="align-middle">Entry By</td>
+                        <td class="align-middle">File</td>
+                        <td class="align-middle">Print Details</td>
+                        <td class="align-middle">View</td>
+                        <!-- <td class="align-middle">GST %</td>
+                        <td class="align-middle">GST Amount</td>
+                        <td class="align-middle">Conveyance</td> -->
+                        <td class="align-middle">Bill Amount<br /><span class="badge badge-danger">{{totalsum2 |
+                                currency:'INR'
+                                :'': '1.0-0'}}</span></td>
+                        <td class="align-middle">Status</td>
+                    </tr>
+                    <tr *ngFor="let m of filteredBills; let i = index" [class]="m.isWaived ? 'bg-rejected' : 'XYZ'">
+                        <td class="align-middle">{{ i + 1 }}</td>
+                        <td class="align-middle">{{m.id}}</td>
+                        <td class="align-middle">{{m.vendorName}}</td>
+                        <td class="align-middle">{{m.paymentMode_User}}</td>
+                        <td class="align-middle text-left">
+                            {{m.paymentTo_AccNum}}<br />{{m.paymentTo_AccName}}<br />{{m.paymentTo_ifsc}}<br />{{m.paymentTo_BankName}}
+                        </td>
+                        <td class="align-middle">{{m.deptVenueName}}</td>
+                        <td class="align-middle">{{m.baseItemName}}</td>
+                        <td class="align-middle">{{m.billNumber}}</td>
+                        <td class="align-middle">{{m.billDate | date: 'dd-MM-yyyy'}}</td>
+                        <td class="align-middle">{{m.createdOn | date: 'd/M/yy, h:mm a'}}</td>
+                        <td class="align-middle">{{m.createdBy}}</td>
+                        <td class="align-middle  text-center">
+                            <a class="btn btn-warning btn-sm rounded-circle" target="_blank"
+                                href="https://mahadalzahra.org/uploads/billAttachmentsNew/{{m.id}}.pdf" role="button"><i
+                                    class="fa fa-file-pdf-o"></i></a>
+                        </td>
+                        <td class="align-middle text-center">
+                            <a class="btn btn-sm rounded-circle view-attachment" data-toggle="modal" data-target=".bd-example-modal-lg"
+                                (click)="printDetails(m.id)" role="button"><u>Print Details</u></a>
+                               
+                        </td>
+                        <td class="align-middle text-center">
+                            <a class="btn btn-sm rounded-circle view-attachment" data-toggle="modal" data-target=".bd-example-modal-lg"
+                                (click)="getItemsForBill(m)" role="button"><u>Items</u></a>
+                                <br/>
+                                <a class="btn btn-sm rounded-circle view-attachment" data-toggle="modal" data-target=".bd-example-modal-lg1"
+                                (click)="getLogsForBill(m)" role="button"><u>Bill_Logs</u></a>
+                        </td>
+                        <!-- <td class="align-middle">{{m.gstPercentage}} %</td>
+                        <td class="align-middle">{{m.gstAmount}}</td>
+                        <td class="align-middle">{{m.conveyanceAmount}}</td> -->
+                        <td class="align-middle">
+                            Gross: {{(m.totalAmount != undefined ?
+                            m.totalAmount : 0) - (m.conveyanceAmount != undefined ?
+                            m.conveyanceAmount : 0) - (m.gstAmount != undefined ?
+                            m.gstAmount : 0)}}
+                            <br />
+                            GST: {{m.gstAmount != undefined ? m.gstAmount : 0}}
+                            <br />
+                            Conveyance: {{m.conveyanceAmount != undefined ? m.conveyanceAmount : 0}}
+                            <br />
+                            <b class="text-danger">Total: {{m.totalAmount != undefined ? m.totalAmount :
+                                0}}</b>
+                        </td>
+                        <td class="align-middle">{{m.status}}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- bill items modal -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center item row">
+                    <span class="col-lg-12 text-center">Items <br /> Bill ID: {{billId}} <br /> Vendor Name:
+                        {{vendorName}}
+                    </span>
+                </mat-toolbar>
+                <div class="row align-items-center m-2">
+                    <div class="table table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <tr class="text-center table-header">
+                                <td class="align-middle">Sr No</td>
+                                <td class="align-middle">Item</td>
+                                <td class="align-middle">Quantity</td>
+                                <td class="align-middle">Amount per Unit</td>
+                                <td class="align-middle">Total Amount<br /><span class="badge badge-danger">{{totalsum3
+                                        |
+                                        currency:'INR'
+                                        :'': '1.0-0'}}</span></td>
+                                <td class="align-middle">Remarks</td>
+                            </tr>
+                            <tr *ngFor="let m of viewBillItems; let i = index">
+                                <td class="align-middle">{{ i + 1 }}</td>
+                                <td class="align-middle">{{m.itemName}}</td>
+                                <td class="align-middle">{{m.quantity}}</td>
+                                <td class="align-middle">{{m.amountPerUom |
+                                    currency:'INR'
+                                    :'': '1.2-2'}}</td>
+                                <td class="align-middle">{{(m.quantity != undefined ?
+                                    m.quantity : 0) * (m.amountPerUom != undefined ?
+                                    m.amountPerUom : 0) |
+                                    currency:'INR'
+                                    :'': '1.2-2'}}</td>
+                                <td class="align-middle">{{m.remarks}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- bill logs modal -->
+    <div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center item row">
+                    <span class="col-lg-12 text-center">Bill Logs <br /> Bill ID: {{billId}} <br /> Vendor Name:
+                        {{vendorName}}
+                    </span>
+                </mat-toolbar>
+                <div class="row align-items-center m-2">
+                    <div class="table table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <tr class="text-center table-header">
+                                <td class="align-middle">Sr No</td>
+                                <td class="align-middle">Status</td>
+                                <td class="align-middle">Description</td>
+                                <td class="align-middle">Created On</td>
+                                <td class="align-middle">Created By</td>
+                            </tr>
+                            <tr *ngFor="let m of billLogs; let i = index">
+                                <td class="align-middle">{{ i + 1 }}</td>
+                                <td class="align-middle">{{m.status }}</td>
+                                <td class="align-middle">{{m.description }}</td>
+                                <td class="align-middle">{{m.createdOn | date: 'd/M/yy, h:mm a'}}</td>
+                                <td class="align-middle">{{m.createdBy }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

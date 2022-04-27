@@ -1,0 +1,608 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="btn btn-group pull-right">
+            <button mat-button mat-raised-button color="primary" (click)="edit = !edit" *ngIf="!edit">
+                Edit
+            </button>
+            <button mat-button mat-raised-button color="primary" (click)="submitdata()" *ngIf="edit">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="table-responsive-sm table-responsive col-lg-12 col-sm-12">
+            <table class="table table-bordered table-style table-sm">
+                <tr>
+                    <th class="text-left align-middle">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Farig From
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="text-left align-middle">
+                        <div *ngIf="!edit">{{profileData.category}}</div>
+                        <ng-select [items]="categoryDD" *ngIf="edit" [searchable]="true" bindLabel="name"
+                            bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                            [(ngModel)]="profileData.category">
+                        </ng-select>
+                    </td>
+                    <th class="text-left align-middle">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Farig Darajah
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="text-left align-middle">
+                        <div *ngIf="!edit">{{profileData.farigDarajah}}</div>
+                        <ng-select [items]="farighDarajahDD" *ngIf="edit" [searchable]="true" bindLabel="name"
+                            bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                            [(ngModel)]="profileData.farigDarajah">
+                        </ng-select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-left align-middle">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Farig Year
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="text-left align-middle">
+                        <div *ngIf="!edit">{{profileData.fariqYear}}</div>
+                        <ng-select [items]="farigYearDD" *ngIf="edit" [searchable]="true" bindLabel="name"
+                            bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                            [(ngModel)]="profileData.fariqYear">
+                        </ng-select>
+
+                    </td>
+                    <th class="text-left align-middle">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                TR No.
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="text-left align-middle">
+                        <div *ngIf="!edit">{{profileData.trNo}}</div>
+                        <input matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.trNo"
+                            placeholder="Type" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-left align-middle">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Aljamea Degree
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="text-left align-middle">
+                        <div *ngIf="!edit">{{profileData.alJameaDegree}}</div>
+                        <ng-select [items]="alJameaDegreeDD" *ngIf="edit" [searchable]="true" bindLabel="name"
+                            bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                            [(ngModel)]="profileData.alJameaDegree">
+                        </ng-select>
+                    </td>
+                    <th class="text-left align-middle">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Hifz Sanad Year
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="text-left align-middle">
+                        <div *ngIf="!edit">{{profileData.hifzSanadYear}}</div>
+                        <ng-select [items]="farigYearDD" *ngIf="edit" [searchable]="true" bindLabel="name"
+                            bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                            [(ngModel)]="profileData.hifzSanadYear">
+                        </ng-select>
+                        <!-- <ng-select [items]="players" *ngIf="edit" [searchable]="true" bindLabel="name" bindValue="name"
+                            placeholder="Select" appendTo="body" [multiple]="false">
+                        </ng-select> -->
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-left align-middle">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Training Darajah
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="text-left align-middle">
+                        <div *ngIf="!edit">{{profileData.currentDarajah}}</div>
+
+                    </td>
+                    <th class="text-left align-middle">
+                        <div class="row col-lg-12 p-0 m-0 align-items-center">
+                            <div class="col-lg-9 p-0">
+                                Batch Id
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                                    data-placement="top" data-trigger="focus" tabindex="0"
+                                    data-content="To change, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                                    <img src="./assets/information-black.png" alt="" height="20" width="20">
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="text-left align-middle">
+                        <div *ngIf="!edit">{{profileData.batchId}}</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-6 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span>Qualification &nbsp;
+                        <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                            data-placement="top" data-trigger="focus" tabindex="0"
+                            data-content="If any field is not in the list, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                            <img src="./assets/information.png" alt="" height="20" width="20">
+                        </a>
+                    </span>
+                </mat-toolbar>
+                <br />
+                <!-- <div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong
+                                class="text-center align-middle">Country</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="countryDD" appearance="string" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="qualificationData.country">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Medium of
+                                Education</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="mediumDD" appearance="string" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="qualificationData.mediumOfEducation">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Stage</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="stageDD" appearance="string" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select" (change)="setDegree()" appendTo="body"
+                                [multiple]="false" [(ngModel)]="qualificationData.stage">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12" *ngIf="qualificationData.stage != null">
+                            <strong
+                                class="text-center align-middle">Standard/Degree</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="degreeDD" [searchable]="true" bindLabel="degree" bindValue="degree"
+                                placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="qualificationData.degree">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Institute Name (School/College)</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput id="reasonText" class="form-control"
+                                [(ngModel)]="qualificationData.institutionName" placeholder="Type" type="text">
+                        </div>
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Status</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="statusDD" appearance="string" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="qualificationData.status">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group"
+                        *ngIf="(qualificationData.status != null && qualificationData.status != 'Completed') && (qualificationData.stage != 'Secondary' && qualificationData.stage != 'Higher Secondary')">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Pursuing/Dropout
+                                Year</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="pursuingDD" appearance="string" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="qualificationData.pursuingYear">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Year</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="yearsDD" appearance="string" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="qualificationData.year">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group" *ngIf="qualificationData.status == 'Completed'">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Upload PDF</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br />
+                            <div class="input-group align-middle">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary p-1">
+                                        <img src="./assets/attached.png" width="24" height="25" />
+                                        <input type="file" accept="application/pdf" (change)="onFileSelected($event)"
+                                            style="display: none;">
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control" [ngModel]="filename" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="text-center">
+                        <button mat-button mat-raised-button (click)="addQuali()" color="warn">Add</button>
+                    </div>
+                </div> -->
+                <div class="btn btn-group pull-right p-0">
+                    <button type="button" class="btn p-0" title="Expand Table" data-toggle="modal"
+                        data-target=".bd-example-modal-lg"><img src="./assets/expand.png" width="24"
+                            height="25" /></button>
+                </div>
+                <div class="justify-content-center scrollable-div-x">
+                    <div class="text-center scrollable-table-x">
+                        <table class="table text-center table-bordered table-sm">
+                            <tr class="table-header">
+                                <td class="align-middle">Sr No.</td>
+                                <td class="align-middle">Year</td>
+                                <td class="align-middle">Status</td>
+                                <td class="align-middle">Stage</td>
+                                <td class="align-middle">Standard/Degree</td>
+                                <td class="align-middle">Action</td>
+                            </tr>
+                            <tr *ngFor="let m of qualificationList; let i = index ">
+                                <td class="align-middle">{{i+1}}</td>
+                                <td class="align-middle">{{m.year}}</td>
+                                <td class="align-middle">{{m.status}}</td>
+                                <td class="align-middle">{{m.stage}}</td>
+                                <td class="align-middle">{{m.degree}}</td>
+                                <td class="align-middle">
+                                    <a class="btn btn-danger btn-sm rounded-circle" title="Delete"
+                                        (click)="delete(m.id!)" role="button"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-6 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span>Courses/Workshops &nbsp;
+                        <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                            data-placement="top" data-trigger="focus" tabindex="0"
+                            data-content="If any field is not in the list, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                            <img src="./assets/information.png" alt="" height="20" width="20">
+                        </a>
+                    </span>
+                </mat-toolbar>
+                <br />
+                <!-- <div>
+
+
+
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Year</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="yearsDD" appearance="string" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="workshopData.year">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Type</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="typeDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select" appendTo="body" [multiple]="false" [(ngModel)]="workshopData.type">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Mode</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="modeDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select" appendTo="body" [multiple]="false" [(ngModel)]="workshopData.mode">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong
+                                class="text-center align-middle">Category</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="catDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select" (change)="setSubcat()" appendTo="body" [multiple]="false"
+                                [(ngModel)]="workshopData.category">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12" *ngIf="workshopData.category != null">
+                            <strong class="text-center align-middle">Sub
+                                Category</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="subcatDD" [searchable]="true" bindLabel="subCategory"
+                                bindValue="subCategory" placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="workshopData.subCategory">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Course Name/Topic</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput id="reasonText" class="form-control" placeholder="Type" type="text"
+                                [(ngModel)]="workshopData.courseName">
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Key Points</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <textarea matInput id="reasonText" class="form-control" placeholder="Type"
+                                [(ngModel)]="workshopData.keypoints" type="text"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Cetificate Credentials</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input matInput id="reasonText" [(ngModel)]="workshopData.cetificateCredentials"
+                                class="form-control" placeholder="Type" type="text">
+                        </div>
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong>Upload Certificate</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br />
+                            <div class="input-group align-middle">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary p-1">
+                                        <img src="./assets/attached.png" width="24" height="25" />
+                                        <input type="file" accept="application/pdf" (change)="onFileSelected2($event)"
+                                            style="display: none;">
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control" [ngModel]="filename2" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="text-center">
+
+                        <button mat-button mat-raised-button (click)="addWork()" color="warn">Add</button>
+                    </div>
+                </div> -->
+                <div class="btn btn-group pull-right p-0">
+                    <button type="button" class="btn p-0" title="Expand Table" data-toggle="modal"
+                        data-target=".bd-example-modal-lg1"><img src="./assets/expand.png" width="24"
+                            height="25" /></button>
+                </div>
+                <div class="justify-content-center scrollable-div-x">
+                    <div class="text-center scrollable-table-x">
+                        <table class="table text-center table-bordered table-sm">
+                            <tr class="table-header">
+                                <td>Sr No.</td>
+                                <td>Year</td>
+                                <td>Type</td>
+                                <td>Category</td>
+                                <td>Sub Category</td>
+                                <td>Action</td>
+                            </tr>
+                            <tr *ngFor="let m1 of workshopList; let i = index ">
+                                <td class="align-middle">{{i+1}}</td>
+                                <td class="align-middle">{{m1.completionDate}}</td>
+                                <td class="align-middle">{{m1.type}}</td>
+                                <td class="align-middle">{{m1.category}}</td>
+                                <td class="align-middle">{{m1.subCategory}}</td>
+                                <td class="align-middle">
+                                    <a class="btn btn-danger btn-sm rounded-circle" title="Delete"
+                                        (click)="delete2(m1.id!)" role="button"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Qualification Modal -->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <mat-toolbar class="page-subheader-toolbar modal-toolbar justify-content-center">
+                <span>Qualification</span>
+            </mat-toolbar>
+            <br />
+            <div class="justify-content-center">
+                <div class="align-middle table-responsive-lg">
+                    <table class="table text-center table-bordered table-sm">
+                        <tr class="table-header">
+                            <td class="align-middle">Sr No.</td>
+                            <td class="align-middle">Year</td>
+                            <td class="align-middle">Status</td>
+                            <td class="align-middle">Stage</td>
+                            <td class="align-middle">Standard/Degree</td>
+                            <td class="align-middle">Institution</td>
+                            <td class="align-middle">Country</td>
+                            <td class="align-middle">Medium</td>
+                            <td class="align-middle">Certificate</td>
+                            <td class="align-middle">Action</td>
+                        </tr>
+                        <tr *ngFor="let m of qualificationList; let i = index ">
+                            <td class="align-middle">{{i+1}}</td>
+                            <td class="align-middle">{{m.year}}</td>
+                            <td class="align-middle">{{m.status}}</td>
+                            <td class="align-middle">{{m.stage}}</td>
+                            <td class="align-middle">{{m.degree}}</td>
+                            <td class="align-middle">{{m.institutionName}}</td>
+                            <td class="align-middle">{{m.country}}</td>
+                            <td class="align-middle">{{m.mediumOfEducation}}</td>
+                            <td class="align-middle">
+                                <a *ngIf="m.attachment" class="btn btn-warning btn-sm rounded-circle"
+                                    href="https://www.mahadalzahra.org{{m.attachment}}" target="_blank"
+                                    title="View Attachment" role="button"><i class="fa fa-file-pdf-o"></i></a>
+                                <strong class="text-danger" *ngIf="!m.attachment">Not
+                                    Found</strong>
+                            </td>
+                            <td class="align-middle">
+                                <a class="btn btn-danger btn-sm rounded-circle" title="Delete" (click)="delete(m.id!)"
+                                    role="button"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Workshop Modal -->
+
+<div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <mat-toolbar class="page-subheader-toolbar modal-toolbar justify-content-center">
+                <span>Courses/Workshops</span>
+            </mat-toolbar>
+            <br />
+            <div class="justify-content-center">
+                <div class="align-middle table-responsive-lg">
+                    <table class="table text-center table-bordered table-sm">
+                        <tr class="table-header">
+                            <td class="align-middle">Sr No.</td>
+                            <td class="align-middle">Year</td>
+                            <td class="align-middle">Type</td>
+                            <td class="align-middle">Mode</td>
+                            <td class="align-middle">Category</td>
+                            <td class="align-middle">Sub Category</td>
+                            <td class="align-middle">Topic</td>
+                            <td class="align-middle">Key Points</td>
+                            <td class="align-middle">Certificate<br />Credentials</td>
+                            <td class="align-middle">Certificate</td>
+                            <td class="align-middle">Action</td>
+                        </tr>
+                        <tr *ngFor="let m1 of workshopList; let i = index ">
+                            <td class="align-middle">{{i+1}}</td>
+                            <td class="align-middle">{{m1.year}}</td>
+                            <td class="align-middle">{{m1.type}}</td>
+                            <td class="align-middle">{{m1.mode}}</td>
+                            <td class="align-middle">{{m1.category}}</td>
+                            <td class="align-middle">{{m1.subCategory}}</td>
+                            <td class="align-middle text-left text-wrap">{{m1.courseName}}</td>
+                            <td class="align-middle text-left text-wrap">{{m1.keypoints}}</td>
+                            <td class="align-middle">{{m1.cetificateCredentials}}</td>
+                            <td class="align-middle">
+                                <a *ngIf="m1.attachment" class="btn btn-warning btn-sm rounded-circle"
+                                    href="https://www.mahadalzahra.org{{m1.attachment}}" target="_blank"
+                                    title="View Attachment" role="button"><i class="fa fa-file-pdf-o"></i></a>
+                                <strong class="text-danger" *ngIf="!m1.attachment">Not
+                                    Found</strong>
+                            </td>
+                            <td class="align-middle">
+
+                                <a class="btn btn-danger btn-sm rounded-circle" title="Delete" (click)="delete2(m1.id!)"
+                                    role="button"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

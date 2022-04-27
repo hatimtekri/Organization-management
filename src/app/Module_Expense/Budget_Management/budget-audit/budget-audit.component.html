@@ -1,0 +1,159 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div id="accordion2" class="mb-2">
+        <div class="card">
+            <div class="card-header p-1" id="headingthree">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsethree"
+                        aria-expanded="false" aria-controls="collapsethree">
+                        <span class="pull-left">Filters:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapsethree" class="collapse show" aria-labelledby="headingthree" data-parent="#accordion2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Dept. Venue:</span>
+                                <ng-select class="col-lg-12" [items]="filterdeptVenueNameDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.search_deptVenueNameDD"
+                                    (change)="onchange_searchObject()" [closeOnSelect]="false" [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Base Item:</span>
+                                <ng-select class="col-lg-12" [items]="filterbaseItemNameDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.search_baseItemNameDD"
+                                    (change)="onchange_searchObject()" [closeOnSelect]="false" [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Item:</span>
+                                <ng-select class="col-lg-12" [items]="filteritemNameDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.search_itemNameDD"
+                                    (change)="onchange_searchObject()" [closeOnSelect]="false" [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Work Status:</span>
+                                <ng-select class="col-lg-12" [items]="filterWorkStatusDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.search_workStatusNameDD"
+                                    (change)="onchange_searchObject()" [closeOnSelect]="false" [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center" *ngIf="bdgtArazFilteredList.length == 0">
+        <h2 class="text-danger">No Record Found</h2>
+    </div>
+
+    <div class="row align-middle mb-2 ml-1" *ngIf="bdgtArazFilteredList.length > 0">
+        <div class="btn-group">
+            <button mat-button mat-raised-button color="primary" (click)="submit()" class="customized">
+                Submit
+            </button>
+            <!-- &nbsp;
+            <div class="btn-group">
+                <button class="dropdown-toggle" mat-button mat-raised-button color="primary" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    
+                    Export
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="btn dropdown-item" (click)="Export_fortakhmin()">Excel</a>
+                    <a class="btn dropdown-item" (click)="setPrintBulkITS()">PDF</a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="row justify-content-center" *ngIf="bdgtArazFilteredList.length > 0">
+        <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+            <table class="table table-bordered table-sm small medium">
+                <tr class="text-center table-header">
+                    <td class="align-middle">
+                        <input type="checkbox" (click)="ListSelectAll()" [(ngModel)]="listselectAll" id="exampleCheck1">
+                    </td>
+                    <td class="align-middle">Sr No</td>
+                    <td class="align-middle">Dept. Venue</td>
+                    <td class="align-middle">Base Item</td>
+                    <td class="align-middle">Item</td>
+                    <td class="align-middle">UOM</td>
+                    <td class="align-middle">Amount Per Pc/Kg (User)</td>
+                    <td class="align-middle">Quantity (User)</td>
+                    <td class="align-middle">Amount By User<br /><span class="badge badge-danger">{{totalsum |
+                            currency:'INR'
+                            :'': '1.0-0'}}</span></td>
+                    <td class="align-middle">Amount Per Pc/Kg (Admin)</td>
+                    <td class="align-middle">Quantity (Admin)</td>
+                    <td class="align-middle">Amount By Admin<br /><span class="badge badge-warning">{{totalsumAdmin |
+                            currency:'INR'
+                            :'': '1.0-0'}}</span></td>
+                    <td class="align-middle">Justification</td>
+                    <td class="align-middle">Remarks</td>
+                    <td class="align-middle">Work Status</td>
+                </tr>
+                <tr *ngFor="let m of bdgtArazFilteredList; let i = index">
+                    <td class="align-middle">
+                        <input type="checkbox" [(ngModel)]="m.select" id="exampleCheck1">
+                    </td>
+                    <td class="align-middle">{{i + 1}}</td>
+                    <td class="align-middle">{{m.deptVenueName}}</td>
+                    <td class="align-middle">{{m.baseItemName}}</td>
+                    <td class="align-middle">{{m.itemName}}</td>
+                    <td class="align-middle">{{m.uom}}</td>
+                    <td class="align-middle">{{m.amountPerUom}}</td>
+                    <td class="align-middle">{{m.quantity}}</td>
+                    <td class="align-middle text-danger"><b>{{(m.amountPerUom != undefined ?
+                            m.amountPerUom : 0) * (m.quantity != undefined ?
+                            m.quantity : 0) | currency:'INR'
+                            :'': '1.0-0'}}</b></td>
+                    <td class="align-middle">
+                        <input matInput id="reasonText" [(ngModel)]="m.amountPerUom_admin" class="form-control"
+                            placeholder="Type" type="number">
+                    </td>
+                    <td class="align-middle">
+                        <input matInput id="reasonText" [(ngModel)]="m.quantity_admin" class="form-control"
+                            placeholder="Type" type="number">
+                    </td>
+                    <td class="align-middle"><b class="bg-warning">{{(m.amountPerUom_admin != undefined ?
+                            m.amountPerUom_admin : 0) * (m.quantity_admin != undefined ?
+                            m.quantity_admin : 0) | currency:'INR'
+                            :'': '1.0-0'}}</b></td>
+                    <td class="align-middle">{{m.justification}}</td>
+                    <td class="align-middle">
+                        <textarea matInput id="reasonText" rows="1" [(ngModel)]="m.remarks_admin" class="form-control"
+                            placeholder="Type"></textarea>
+                    </td>
+                    <td class="align-middle" *ngIf="m.adminWorkStatusString == 'Not Done'" class="text-danger">
+                        <b>{{m.adminWorkStatusString}}</b>
+                    </td>
+                    <td class="align-middle" *ngIf="m.adminWorkStatusString == 'Done'" class="text-success">
+                        <b>{{m.adminWorkStatusString}}</b>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

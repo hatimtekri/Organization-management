@@ -1,0 +1,25 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.navbar-answer {
+    border       : 2px solid #153e71;
+    border-radius: 7px;
+    font-size    : 11pt;
+    height       : fit-content;
+}
+
+.badge {
+    font-size: 11pt;
+}
+
+.btn-light {
+    background: #eee;
+}
+
+.customized.mat-button.mat-primary {
+    background-color: rgba(57, 87, 33, 255);
+}
+
+.section.mat-button.mat-primary {
+    background-color: #296E85;
+}

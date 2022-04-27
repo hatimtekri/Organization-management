@@ -1,0 +1,44 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+table {
+    font-size: 10pt;
+}
+
+.navbar-header {
+    background: #eee;
+    border-radius: 7px;
+    font-size: 11pt;
+}
+
+.card {
+    background: #eee;
+}
+
+.hcard {
+    background: white;
+}
+
+.navbar-answer {
+    border       : 2px solid #153e71;
+    border-radius: 7px;
+
+    height: 60px;
+}
+
+span.btn {
+    border-radius: 5px 0px 0px 5px;
+}
+
+.badge {
+    font-size: 11pt;
+}
+
+hr {
+    background-color: black;
+}
+
+// img
+// {
+// background-image:url("30402940.jpeg");
+// }

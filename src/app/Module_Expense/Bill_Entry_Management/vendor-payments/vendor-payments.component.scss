@@ -1,0 +1,32 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.navbar-answer {
+    border       : 2px solid #153e71;
+    border-radius: 7px;
+    font-size    : 11pt;
+    height       : fit-content;
+}
+
+.badge {
+    font-size: 11pt;
+}
+
+@media only screen and (min-width: 992px) {
+    .sticky-header {
+      position: sticky;
+      top: 63px;
+    }
+  }
+
+.customized.mat-button.mat-primary {
+    background-color: rgba(57, 87, 33, 255);
+}
+
+.section.mat-button.mat-primary {
+    background-color: #296E85;
+}
+.InActive {
+    background: rgba(255, 99, 71, 0.7);
+}
+

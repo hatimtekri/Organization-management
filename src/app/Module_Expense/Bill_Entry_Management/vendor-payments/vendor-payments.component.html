@@ -1,0 +1,174 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div class="row align-items-center p-2 mb-2">
+        <div class="col-lg-12 p-2 text-center">
+            <div class="navbar navbar-answer col-lg-12 mb-1">
+                <div class="col-lg-4">
+                    <mat-form-field class="col-12 p-0">
+                        <mat-label>Select Date Range</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input [(ngModel)]="searchObject.fromDate1" readonly matStartDate placeholder="From Date">
+                            <input [(ngModel)]="searchObject.toDate1" readonly matEndDate placeholder="To Date">
+                        </mat-date-range-input>
+
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 p-0">
+                    <ng-select class="col-lg-12 p-0" [items]="vendorDetails" appearance="string" [searchable]="true"
+                        bindLabel="name" bindValue="id" [(ngModel)]="vendorIds" placeholder="Select Vendors"
+                        appendTo="body" (change)="selectedVendors()" [closeOnSelect]="false" [multiple]="true">
+                    </ng-select>
+                </div>
+                <div class="col-lg-2">
+                    <button class="col-lg-5" mat-button mat-raised-button color="warn"
+                        (click)="search()">Search</button>&nbsp;
+                    <button class="col-lg-5" mat-button mat-raised-button color="primary"
+                        (click)="clear()">Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center" *ngIf="reciepts.length == 0">
+        <h2 class="text-danger">NO ENTRIES FOUND</h2>
+    </div>
+    <div *ngIf="reciepts.length != 0">
+
+        <div class="row justify-content-end mb-2">
+            <button mat-button mat-raised-button class="btn btn-light" color="primary">
+                Total Receipts&nbsp;&nbsp;
+                <span class="badge badge-primary" [innerText]="filterMetadata.count"></span>
+
+            </button>&nbsp;
+            <button mat-button mat-raised-button class="customized" color="primary" (click)="ExportPaymentStatement()">
+                Export
+            </button>
+            <!-- <div class="btn-group">
+        <button class="btn btn-primary" (click)="print_original()" [printStyle]="{table : {'padding': '10px'}}" printSectionId="printOriginalTable"
+            ngxPrint>Print
+            Original</button>&nbsp;
+        <button class="btn btn-yellow" (click)="print_dublicate()" [printStyle]="{table : {'padding': '10px'}}" printSectionId="printDuplicateTable"
+            ngxPrint>Print
+            Duplicate</button>
+        </div> -->
+        </div>
+
+        <br />
+        <div id="accordion1" class="mb-1">
+            <div class="card">
+                <div class="card-header p-1" id="headingtwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsetwo"
+                            aria-expanded="false" aria-controls="collapsetwo">
+                            <span class="pull-left">Basic Filters:</span>
+                            <i class="fa fa-caret-down pull-right"></i>
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapsetwo" class="collapse show" aria-labelledby="headingtwo" data-parent="#accordion1">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <nav class="navbar navbar-answer m-1">
+                                    <span class="col-lg-12">Payment Mode:</span>
+                                    <ng-select class="col-lg-12" [items]="paymentModeDD" appearance="string"
+                                        [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                        appendTo="body" [closeOnSelect]="false"
+                                        [(ngModel)]="searchObject.searchObject_paymentMode" [multiple]="true">
+                                    </ng-select>
+                                </nav>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <nav class="navbar navbar-answer m-1">
+                                    <span class="col-lg-12">Status:</span>
+                                    <ng-select class="col-lg-12" [items]="statusDD" appearance="string"
+                                        [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                        appendTo="body" [closeOnSelect]="false"
+                                        [(ngModel)]="searchObject.searchObject_status" [multiple]="true">
+                                    </ng-select>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <img *ngIf="loader" height="150" width="300" style="border-radius: 100px;"
+                src='https://www.mahadalzahra.org/uploads/cash.gif' />
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-12 col-sm-12">
+                <div class="text-center table table-responsive">
+                    <table class="table-bordered table-sm">
+                        <tr class="table-header">
+                            <td class="align-middle p-2">
+                                <input type="checkbox" id="exampleCheck1" [(ngModel)]="selectAll"
+                                    (change)="setSelectAll()" />
+                            </td>
+                            <td class="align-middle p-2">Sr No.</td>
+                            <td class="align-middle p-2">Payment Unique ID</td>
+                            <td class="align-middle p-2">Vendor ID</td>
+                            <td class="align-middle p-2">Name</td>
+                            <td class="align-middle p-2">Date</td>
+                            <td class="align-middle p-2">Payment Mode</td>
+                            <td class="align-middle p-2">Txn Id</td>
+                            <td class="align-middle p-2">Bill Amount<br /><span
+                                    class="badge badge-primary">{{totalAmount1 |
+                                    currency:'INR'
+                                    :'': '1.0-0'}}</span></td>
+                            <td class="align-middle p-2">TDS Amount<br /><span class="badge badge-dark">{{totalAmount2 |
+                                    currency:'INR'
+                                    :'': '1.0-0'}}</span></td>
+                            <td class="align-middle p-2">Paid Amount<br /><span
+                                    class="badge badge-danger">{{totalAmount3 |
+                                    currency:'INR'
+                                    :'': '1.0-0'}}</span></td>
+                            <td class="align-middle p-2">Created By</td>
+                            <td class="align-middle p-2">Account</td>
+                            <td class="align-middle p-2">Status</td>
+                            <td class="align-middle p-2">Action</td>
+                        </tr>
+                        <tr class="text-center" *ngFor="let m of reciepts | multiSearchExpense : {
+                    paymentMode: searchObject.searchObject_paymentMode,
+                    status: searchObject.searchObject_status                   
+                  }
+                : filterMetadata ; let i = index" [class]="m.status">
+                            <td class="align-middle p-2">
+                                <input type="checkbox" [(ngModel)]="m.select" id="exampleCheck1" />
+                            </td>
+                            <td class="align-middle p-2">{{i+1}}</td>
+                            <td class="align-middle p-2">{{m.id}}</td>
+                            <td class="align-middle p-2">{{m.itsId}}</td>
+                            <td class="align-middle text-left p-2">{{m.name}}</td>
+                            <td class="align-middle p-2">{{m.recieptDate | date}} </td>
+                            <td class="align-middle p-2">{{m.paymentMode}}</td>
+                            <td class="align-middle p-2">{{m.chequeNo}}</td>
+                            <td class="align-middle p-2"><b class="text-primary">{{m.feePaidAmount}}</b></td>
+                            <td class="align-middle p-2"><b class="text-dark">{{m.tdsAmount}}</b></td>
+                            <td class="align-middle p-2"><b class="text-danger">{{m.payableAmount}}</b></td>
+                            <td class="align-middle text-left p-2">{{m.createdBy}}</td>
+                            <td class="align-middle p-2">{{m.account}}</td>
+                            <td class="align-middle p-2">{{m.status}}</td>
+                            <td class="align-middle p-2">
+                                <a type="button" (click)="ReversePayment(m.id)"
+                                    *ngIf="reverse && m.status == 'Active' && m.paymentMode != 'Cash'"
+                                    title="Reverse & Waive" class="btn p-1"><img src="./assets/reverse.png" width="35"
+                                        height="36" /></a>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" readonly [(ngModel)]="filterMetadata.count" />
+    </div>
+</div>

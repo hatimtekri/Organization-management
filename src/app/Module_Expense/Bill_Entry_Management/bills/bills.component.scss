@@ -1,0 +1,25 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.badge {
+    font-size: 11pt;
+}
+
+.item.mat-toolbar {
+    background-color: #296E85;
+}
+
+.bg-rejected {
+    background: rgba(255, 99, 71, 0.7);
+}
+
+.bg-accepted {
+    background: rgba(0,128,0,0.5);
+}
+
+.view-attachment {
+    cursor: pointer;
+    color: #800000;
+    font-weight: bolder;
+    font-size: 10pt;
+  }

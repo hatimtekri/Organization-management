@@ -1,0 +1,173 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header p-1" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                        <span class="pull-left">Add Fee Category:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="row justify-content-center align-items-center mb-2">
+                        <nav class="navbar navbar-answer col-lg-4 p-2 align-middle text-center">
+                            <input placeholder="Type" [(ngModel)]="category" class="form-control col-lg-9 col-sm-7"
+                                type="text" />
+                            <button mat-button mat-raised-button color="primary" (click)="AddFeeCategory()">ADD</button>
+                        </nav>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="text-center col-lg-6 col-sm-12 table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <tr class="table-header">
+                                    <td class="align-middle p-2">Fee Category</td>
+                                    <td class="align-middle p-2">Action</td>
+                                </tr>
+                                <tr class="text-center" *ngFor="let m of feeCategoryDD">
+                                    <td class="align-middle text-left p-2">
+                                        <div *ngIf="!edit">
+                                            <h3 class="m-0">{{m.categoryName}}</h3>
+                                        </div>
+                                        <input *ngIf="edit" [(ngModel)]="m.categoryName" placeholder="Type Amount"
+                                            class="form-control" type="text" />
+
+                                    </td>
+                                    <td class="align-middle p-2">
+                                        <a class="btn btn-primary btn-sm rounded-circle" (click)="edit = !edit"
+                                            title="Edit" role="button" *ngIf="!edit"><i
+                                                class="fa fa-pencil"></i></a>&nbsp;
+                                        <a class="btn btn-primary btn-sm rounded-circle"
+                                            (click)="Edit_FeeCategory(m.categoryId!,m.categoryName!)" title="Save"
+                                            role="button" *ngIf="edit"><i class="fa fa-check"></i></a>&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row justify-content-center align-items-center mb-2 p-3">
+        <nav class="navbar navbar-answer col-lg-12 p-2 text-center">
+            <div class="col-lg-3 p-1">
+                <ng-select [items]="feeCategoryDD" appearance="string" [searchable]="true" bindLabel="categoryName"
+                    bindValue="categoryId" [(ngModel)]="binding.categoryId" placeholder="Select Fee Category"
+                    appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="col-lg-5 p-1">
+                <ng-select [items]="programDD" appearance="string" [searchable]="true" bindLabel="reportName"
+                    bindValue="rId" [(ngModel)]="binding.psetId" placeholder="Select Program" appendTo="body"
+                    [closeOnSelect]="true" [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="col-lg-2 p-1">
+                <input placeholder="Type Amount" [(ngModel)]="binding.amount" class="form-control" type="number" />
+            </div>
+            <div class="col-lg-2 p-1">
+                <button mat-button mat-raised-button color="primary" (click)="AddFeeCategory_Pset()"
+                    class="col-lg-9">Bind</button>
+            </div>
+
+        </nav>
+    </div>
+
+    <div id="accordion1" class="mb-1">
+        <div class="card">
+            <div class="card-header p-1" id="headingtwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsetwo"
+                        aria-expanded="false" aria-controls="collapsetwo">
+                        <span class="pull-left">Filters:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapsetwo" class="collapse hide" aria-labelledby="headingtwo" data-parent="#accordion1">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Fee Category:</span>
+                                <ng-select class="col-lg-12" [items]="bindCategoryDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.categoryName" [closeOnSelect]="false"
+                                    [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                        <div class="col-lg-4 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Program:</span>
+                                <ng-select class="col-lg-12" [items]="bindProgramDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.psetName" [closeOnSelect]="false"
+                                    [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                        <div class="col-lg-4 p-0">
+                            <nav class="navbar navbar-answer1 m-1">
+                                <span class="col-lg-12">Amount:</span>
+                                <ng-select class="col-lg-12" [items]="bindAmountDD" appearance="string"
+                                    [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                    appendTo="body" [(ngModel)]="searchObject.amount" [closeOnSelect]="false"
+                                    [multiple]="true">
+                                </ng-select>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="text-center col-lg-12 col-sm-12 table-responsive">
+            <table class="table table-bordered table-sm">
+                <tr class="table-header">
+                    <td class="align-middle p-2">Fee Category</td>
+                    <td class="align-middle p-2">Program</td>
+                    <td class="align-middle p-2">Amount</td>
+                    <td class="align-middle p-2">Action</td>
+                </tr>
+                <tr class="text-center" *ngFor="let m of data | multiSearchIncome : {
+                categoryName: searchObject.categoryName,
+                psetName: searchObject.psetName,
+                amount: searchObject.amount                           
+                
+              }
+            : filterMetadata;
+        let i = index
+      ">
+                    <td class="align-middle p-2">{{m.categoryName}}</td>
+                    <td class="align-middle p-2">{{m.psetName}}</td>
+                    <td class="align-middle p-2">
+                        <div *ngIf="!edit">{{m.amount}}</div>
+                        <input *ngIf="edit" [(ngModel)]="m.amount" placeholder="Type Amount" class="form-control"
+                            type="number" />
+                    </td>
+                    <td class="align-middle p-2">
+                        <a class="btn btn-primary btn-sm rounded-circle" (click)="edit = !edit" title="Edit"
+                            role="button" *ngIf="!edit"><i class="fa fa-pencil"></i></a>&nbsp;
+                        <a class="btn btn-primary btn-sm rounded-circle" (click)="Edit_FeeCategory_Pset(m.id,m.amount)"
+                            title="Save" role="button" *ngIf="edit"><i class="fa fa-check"></i></a>&nbsp;
+                        <a class="btn btn-danger btn-sm rounded-circle" (click)="Delete_FeeCategory_Pset(m.id)"
+                            title="Delete" role="button"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

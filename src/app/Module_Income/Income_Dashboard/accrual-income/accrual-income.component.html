@@ -1,0 +1,82 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div class="row justify-content-center align-items-center mb-2 p-3">
+        <nav class="navbar navbar-answer col-lg-8 p-2 text-center">
+            <!-- <div class="col-lg-5 p-1">
+                <ng-select [items]="allocateMonthDD" appearance="string" [searchable]="true" bindLabel="name"
+                    bindValue="id" placeholder="Select Month (Multiple Selection)" appendTo="body"
+                    [(ngModel)]="loadData1.monthList" [closeOnSelect]="true" [multiple]="true">
+                </ng-select>
+            </div>
+            <div class="col-lg-5 p-1">
+                <ng-select [items]="allocateYearDD" appearance="string" [searchable]="true" bindLabel="name"
+                    [(ngModel)]="loadData1.hijriYear" bindValue="name" placeholder="Select Year" appendTo="body"
+                    [closeOnSelect]="true" [multiple]="false">
+                </ng-select>
+            </div> 
+            <div class="col-lg-2 p-1">
+                <button mat-button mat-raised-button color="primary" (click)="loadData()" class="col-lg-9">Load
+                    Data</button>
+            </div>-->
+        </nav>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                        <span>
+                            <h1>Total Income: {{gTotal |currency:'INR' }}</h1>
+                        </span>
+                    </mat-toolbar>
+                    <br />
+                    <canvas height="100" baseChart [datasets]="mainChartData" [labels]="mainChartLabels"
+                        [options]="mainChartOptions" [plugins]="mainChartPlugins" [legend]="mainChartLegend"
+                        [chartType]="mainChartType">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-lg-4 mb-2" *ngFor="let n of psetIncomes">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-info">{{n.psetName}}
+                    </h2>
+
+                    <div class="row align-content-center justify-content-center">
+                        <div class="col-lg-3">
+                            <h1 class="card-subtitle text-danger">{{n.totalIncome |currency:'INR' }} INR</h1>
+                            <h3 class="card-subtitle text-danger">{{n.incomePercentage}} % of total income</h3>
+                        </div>
+                        <div class="col-lg-9 align-self-center">
+                            <div class="text-center table-responsive">
+                                <table class="table table-bordered">
+                                    <tr class="table-header">
+                                        <td class="align-middle p-2">Category</td>
+                                        <td class="align-middle p-2">Fee</td>
+                                        <td class="align-middle p-2">Students</td>
+                                        <td class="align-middle p-2">Total</td>
+                                    </tr>
+                                    <tr class="text-center" *ngFor="let m of n.data" >
+                                        <td class="align-middle p-2">{{m.fc_Name}}</td>
+                                        <td class="align-middle p-2">{{m.feeAlloted}}</td>
+                                        <td class="align-middle p-2">{{m.reason}}</td>
+                                        <td class="align-middle text-danger p-2"><b>{{m.remarks}}</b></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

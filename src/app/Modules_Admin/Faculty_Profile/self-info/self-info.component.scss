@@ -1,0 +1,14 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.card {
+    background: #eee;
+}
+
+textarea {
+    height: 180px;
+}
+
+span.btn {
+    border-radius: 5px 0px 0px 5px;
+}

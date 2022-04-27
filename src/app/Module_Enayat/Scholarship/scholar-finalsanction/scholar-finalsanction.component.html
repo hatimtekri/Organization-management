@@ -1,0 +1,203 @@
+<div *ngIf="page">
+  <div class="btn-group pull-left">
+    <a (click)="backtoPending()"><button mat-button mat-raised-button color="warn">Back to pending</button></a>
+    &nbsp;
+    <a (click)="sanction()"><button class="btn btn-success">Sanctioned</button></a>
+    &nbsp;
+    <a (click)="printSummaryIndian()"><button mat-button mat-raised-button color="primary">Print Bill
+        Summary</button></a>
+    &nbsp;
+    <a (click)="printNEFT()"><button mat-button mat-raised-button color="primary">Export NEFT Details</button></a>
+  </div>
+
+  <div class="btn-group pull-right">
+    <button mat-button mat-flat-button color="accent">Pending&nbsp;&nbsp;
+      <span class="badge badge-danger">{{pending}}</span>
+    </button>
+    &nbsp;
+    <button mat-button mat-flat-button color="accent">Sanctioned&nbsp;&nbsp;
+      <span class="badge badge-success">{{sanctioned}}</span>
+    </button>
+  </div>
+  <br />
+  <br />
+  <br />
+  <div>
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-light btn-instruction" data-toggle="collapse" data-target="#collapseOne"
+              aria-expanded="false" aria-controls="collapseOne">
+              <span class="pull-left">Instructions:</span>
+              <i class="fa fa-caret-down pull-right"></i>
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+            <h3>
+              <ol>
+                <li> If any entry (s) is/are required to be revisited, tick the checkbox given besides each entry and
+                  click on <b>‘Back to pending’</b> button.
+                </li>
+
+                <li>After the verification and auditing process of all the bills, <span class="text-danger">print the
+                    bill
+                    summary</span> from the print
+                  option provided on the module to do araz in Maktab Sadaat DM for approval.
+                </li>
+
+                <li> Once the bills are approved, you will need to <span class="text-danger">export the NEFT
+                    details</span> from the export option provided
+                  on the module to submit to the Accounts Dept. along with all the required documents.
+                </li>
+
+                <li> After submitting all the required documents, wait for the NEFT confirmation from the Accounts
+                  department. After confirmation, tick the checkbox given besides the entry you wish to lock and click
+                  on
+                  <b>‘Sanctioned’</b> button.
+                </li>
+
+                <li> Once the entries are ‘Sanctioned’ from the module, it will not be editable further. A separate
+                  table
+                  for the sanctioned bills will be created at the bottom of this page.
+                </li>
+
+              </ol>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <input [(ngModel)]="searchText" class="form-control justify-content-center col-lg-12" placeholder="Search" />
+    </div>
+    <br />
+    <div class="row">
+
+      <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+        <table class="table table-bordered table-sm">
+          <tr class="table-header">
+            <td class="align-middle">Sr No.</td>
+            <td class="align-middle">
+              <input type="checkbox" (change)="select()" [(ngModel)]="selectAll" id="exampleCheck1">
+            </td>
+            <td class="align-middle">Photo</td>
+            <td class="align-middle">ITS</td>
+            <td class="align-middle">Name</td>
+            <td class="align-middle">Khidmat Mauze</td>
+            <td class="align-middle">Year & Term</td>
+            <td class="align-middle">Currency</td>
+            <td class="align-middle">Relation</td>
+            <td class="align-middle">Araz Amount</td>
+            <td class="align-middle">Surat Audit</td>
+            <td class="align-middle">Mumbai Audit</td>
+            <td class="align-middle">Enayat Nizam</td>
+            <td class="align-middle">Total Enayat <br /><span class="badge badge-danger">{{totalsum}}</span></td>
+            <td class="align-middle">Remarks<br />(For Araz)</td>
+            <td class="align-middle">Remarks<br />(For Office use)</td>
+          </tr>
+
+          <tr *ngFor="let m of ScholarshipEntriesStatusList | searchnew : searchText">
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.srNo}}</td>
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+              <input type="checkbox" [(ngModel)]="m.selected" id="exampleCheck1">
+            </td>
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+              <div id="kgphoto">
+                <img src="https://mahadalzahra.org{{ m.photo }}"
+                  onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" alt="{{ m.itsId }}"
+                  width="60" height="60" class="img-responsive rounded-circle" />
+              </div>
+
+            </td>
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.userItsId}}</td>
+            <td *ngIf="m.display" class="align-middle text-left" [attr.rowspan]="m.rowSpan">{{m.userName}}</td>
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.moze}}</td>
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.year}} <br /> {{m.term}}</td>
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.currencySymbolString}}</td>
+            <td class="align-middle">{{m.billRelationName}}</td>
+            <td class="align-middle">{{m.totalBillAmount}}</td>
+            <td class="align-middle">{{m.level1Amount}}</td>
+            <td class="align-middle">{{m.level1_1Amount}}</td>
+            <td class="align-middle">{{m.level2Amount}}</td>
+            <td *ngIf="m.display" class="align-middle pending" [attr.rowspan]="m.rowSpan">{{m.sum}}</td>
+            <td *ngIf="m.display" class="align-middle text-left" [attr.rowspan]="m.rowSpan">{{m.mumbaiAudit_Remarks}}
+            </td>
+            <td *ngIf="m.display" class="align-middle text-left" [attr.rowspan]="m.rowSpan">{{m.remarks_forofficeuse}}
+            </td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <input [(ngModel)]="searchText2" class="form-control justify-content-center col-lg-12" placeholder="Search" />
+    </div>
+    <br />
+    <div class="row justify-content-center mb-2">
+      <nav class="navbar navbar-part3 col-lg-12">
+        <span class="col-lg-12 text-center">Sanctioned</span>
+      </nav>
+    </div>
+
+    <div class="row">
+
+      <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+        <table class="table table-bordered table-sm">
+          <tr class="table-header">
+            <td class="align-middle">Sr No.</td>
+
+            <td class="align-middle">Photo</td>
+            <td class="align-middle">ITS</td>
+            <td class="align-middle">Name</td>
+            <td class="align-middle">Khidmat Mauze</td>
+            <td class="align-middle">Year & Term</td>
+            <td class="align-middle">Currency</td>
+            <td class="align-middle">Relation</td>
+            <td class="align-middle">Araz Amount</td>
+            <td class="align-middle">Surat Audit</td>
+            <td class="align-middle">Mumbai Audit</td>
+            <td class="align-middle">Enayat Nizam</td>
+            <td class="align-middle">Total Enayat <br /><span class="badge badge-success">{{totalsum2}}</span></td>
+            <td class="align-middle">Remarks<br />(For Araz)</td>
+            <td class="align-middle">Remarks<br />(For Office use)</td>
+          </tr>
+
+          <tr *ngFor="let m of ScholarshipAfterFinalSanction | searchnew : searchText2">
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.srNo}}</td>
+
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+              <div id="kgphoto">
+                <img src="https://mahadalzahra.org{{ m.photo }}"
+                  onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" alt="{{ m.itsId }}"
+                  width="60" height="60" class="img-responsive rounded-circle" />
+              </div>
+
+            </td>
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.userItsId}}</td>
+            <td *ngIf="m.display" class="align-middle text-left" [attr.rowspan]="m.rowSpan">{{m.userName}}</td>
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.moze}}</td>
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.year}} <br /> {{m.term}}</td>
+            <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.currencySymbolString}}</td>
+            <td class="align-middle">{{m.billRelationName}}</td>
+            <td class="align-middle">{{m.totalBillAmount}}</td>
+            <td class="align-middle">{{m.level1Amount}}</td>
+            <td class="align-middle">{{m.level1_1Amount}}</td>
+            <td class="align-middle">{{m.level2Amount}}</td>
+            <td *ngIf="m.display" class="align-middle pending" [attr.rowspan]="m.rowSpan">{{m.sum}}</td>
+            <td *ngIf="m.display" class="align-middle text-left" [attr.rowspan]="m.rowSpan">{{m.mumbaiAudit_Remarks}}
+            </td>
+            <td *ngIf="m.display" class="align-middle text-left" [attr.rowspan]="m.rowSpan">{{m.remarks_forofficeuse}}
+            </td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

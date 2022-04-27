@@ -1,0 +1,187 @@
+<div id="accordion">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-light btn-instruction" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="false" aria-controls="collapseOne">
+                    <span class="pull-left">Instructions:</span>
+                    <i class="fa fa-caret-down pull-right"></i>
+                </button>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <h3>
+                    <ol>
+                        <li> To start the bills clearance and audit process, you need to <span
+                                class="text-danger">confirm the status of the
+                                original bills</span>. Click on <b>'Change bill status'</b> button to update the status
+                            from
+                            <span class="text-danger">pending</span> to <span class="text-success">received</span> and
+                            vice versa.
+                        </li>
+
+                        <li> On clicking submit, <b>‘Load bills’</b> option will be activated in the Surat audit column.
+                            Click
+                            and proceed to <span class="text-danger">verify individual bill entries</span>.</li>
+
+                        <li> On the page that opens, you will see a list of bill entries. <b
+                                class="text-success">Accept</b> or <b class="text-danger">Reject</b> multiple
+                            entries by ticking on the checkboxes before every bill.</li>
+
+                        <li> Remember to <span class="text-danger">apply the changes/edits on the hard copy</span> of
+                            the scholarship <b><u>cover page</u></b> and <b><u>bill
+                                    summary page</u></b> attached with the original bills. Strikethrough the rejected
+                            bills from the
+                            bill
+                            summary page</li>
+
+                        <li> When all the bills are verified as per the nizaam, click on the <b>‘Submit’</b> button next
+                            to the
+                            total araz amount column in the upper table. Recheck the amounts in each category (i.e.
+                            self,
+                            spouse & children) before clicking on submit, as you will not be able to further edit the
+                            entry
+                            once submitted.</li>
+
+                        <li> On submitting, the entry will move from pending to audited list and same will reflect in
+                            Admin_Mumbai’s portal.</li>
+                    </ol>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="btn-group pull-right">
+    <button mat-button mat-flat-button color="accent">Total Applicants&nbsp;&nbsp;
+        <span class="badge badge-info">{{total}}</span>
+    </button>
+    &nbsp;
+    <button mat-button mat-flat-button color="accent">Original Bills Received&nbsp;&nbsp;
+        <span class="badge badge-info">{{originalBills}}</span>
+    </button>
+    &nbsp;
+    <button mat-button mat-flat-button color="accent">Audited&nbsp;&nbsp;
+        <span class="badge badge-success">{{audited}}</span>
+    </button>
+    &nbsp;
+    <button mat-button mat-flat-button color="accent">Pending&nbsp;&nbsp;
+        <span class="badge badge-danger">{{pending}}</span>
+    </button>
+</div>
+<br />
+<br />
+<input [(ngModel)]="searchText" class="form-control justify-content-center col-lg-12"
+    placeholder="Search anything about the KG you want" />
+
+<br />
+<div class="row justify-content-center">
+    <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+        <table class="table table-bordered table-sm">
+            <tr class="table-header">
+                <td class="align-middle">Sr No.</td>
+                <td class="align-middle">Photo</td>
+                <td class="align-middle">ITS</td>
+                <td class="align-middle">Name</td>
+                <td class="align-middle">Khidmat Mauze</td>
+                <td class="align-middle">Year & Term</td>
+                <td class="align-middle">Currency</td>
+                <td class="align-middle">Cover<br />Page</td>
+                <td class="align-middle">Bill<br />Summary</td>
+                <td class="align-middle">Original<br />Bills</td>
+                <td class="align-middle">Original bill status</td>
+                <td class="align-middle">Action</td>
+                <td class="align-middle">Surat Audit</td>
+            </tr>
+            <tr *ngFor="let m of ScholarshipPendingList | searchnew : searchText "
+                [class.foreigner]="m.currencySymbolString !== 'INR' ">
+                <td class="align-middle">{{m.srNo}}</td>
+                <td class="align-middle">
+                    <div id="kgphoto">
+                        <img src="https://mahadalzahra.org{{ m.photo }}"
+                            onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" width="60"
+                            height="60" class="img-responsive rounded-circle" />
+                    </div>
+                <td class="align-middle">{{m.applicantItsId}}</td>
+                <td class="align-middle text-left">{{m.applicantName}}</td>
+                <td class="align-middle">{{m.moze}}</td>
+                <td class="align-middle">{{m.year}}<br />{{m.term}}</td>
+                <td class="align-middle">{{m.currencySymbolString}}</td>
+                <td class="align-middle">
+                    <a class="btn btn-warning btn-sm rounded-circle"
+                        (click)="printBills(m.applicantItsId!,m.currencySymbolString!)"><i
+                            class="fa fa-file-pdf-o"></i></a>
+                </td>
+                <td class="align-middle">
+                    <a class="btn btn-warning btn-sm rounded-circle" (click)="printBillSummary(m.applicantItsId!)"><i
+                            class="fa fa-file-pdf-o"></i></a>
+                </td>
+                <td class="align-middle">
+                    <a class="btn btn-warning btn-sm rounded-circle" (click)="openBulk(m.applicantItsId!)"><i
+                            class="fa fa-file-pdf-o"></i></a>
+                </td>
+                <td class="align-middle" [class]="m.originalBillStatusCss">
+                    {{m.originalBillStatus}}
+                </td>
+                <td class="align-middle">
+                    <button mat-button mat-raised-button *ngIf="m.ischangeoriginalBillStatus" color="primary"
+                        (click)="changeoriginalbillstatus(m)">Change bill status</button>
+                </td>
+                <td class="align-middle">
+                    <button mat-button mat-raised-button color="warn" *ngIf="m.originalBillStatus == 'Received'"
+                        (click)="loadBills(m.applicantItsId!)">Load
+                        Bills</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<div class="row justify-content-center mb-2">
+    <nav class="navbar navbar-part3 col-lg-12">
+        <span class="col-lg-12 text-center">Audited</span>
+    </nav>
+</div>
+
+<div class="row justify-content-center">
+    <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+        <table class="table table-bordered table-sm">
+            <tr class="table-header">
+                <td class="align-middle">Sr No.</td>
+                <td class="align-middle">Photo</td>
+                <td class="align-middle">ITS</td>
+                <td class="align-middle">Name</td>
+                <td class="align-middle">Khidmat Mauze</td>
+                <td class="align-middle">Year & Term</td>
+                <td class="align-middle">Currency</td>
+                <td class="align-middle">Relation</td>
+                <td class="align-middle">Araz Amount</td>
+                <td class="align-middle">Surat Audit</td>
+            </tr>
+            <tr *ngFor="let m of ScholashipsuratAuditList" [class.foreigner]="m.currencySymbolString !== 'INR' ">
+                <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.srNo}}</td>
+                <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+                    <div id="kgphoto">
+                        <img src="https://mahadalzahra.org{{ m.photo }}"
+                            onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" width="60"
+                            height="60" class="img-responsive rounded-circle" />
+                    </div>
+                </td>
+                <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.userItsId}}</td>
+                <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.userName}}</td>
+                <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.moze}}</td>
+                <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.year}}<br />{{m.term}}</td>
+                <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.currencySymbolString}}</td>
+
+
+                <td class="align-middle">{{m.billRelationName}}</td>
+                <td class="align-middle">{{m.totalBillAmount}}</td>
+                <td class="align-middle">{{m.billClearanceAmount}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

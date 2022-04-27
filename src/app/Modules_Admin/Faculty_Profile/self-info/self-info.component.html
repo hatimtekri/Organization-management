@@ -1,0 +1,353 @@
+<div class="row">
+    <div class="col-lg-6 col-sm-12 pb-lg-2 pb-sm-2">
+        <div class="card">
+            <div class="card-body">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span>Language Proficiency&nbsp;
+                        <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                            data-placement="top" data-trigger="focus" tabindex="0"
+                            data-content="If any language is not in the list, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                            <img src="./assets/information.png" alt="" height="20" width="20">
+                        </a></span>
+                </mat-toolbar>
+                <br />
+                <!-- <div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Language</strong>&nbsp;
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="languageDD" appearance="string" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select Language" appendTo="body" [multiple]="false"
+                                [(ngModel)]="languageproficiciencyData.language">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Speaking</strong>
+                            <a class="btn rounded-circle btn-sm" data-container="body" data-toggle="popover"
+                                data-placement="top" data-trigger="focus" tabindex="0"
+                                data-content="1 refers to lowest, 5 refers to highest">
+                                <img src="./assets/information-black.png" alt="" height="20" width="20">
+                            </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="selfRankingDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select self ranking" appendTo="body" [multiple]="false"
+                                [(ngModel)]="languageproficiciencyData.speaking">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Reading</strong>
+                            <a class="btn rounded-circle btn-sm" data-container="body" data-toggle="popover"
+                                data-placement="top" data-trigger="focus" tabindex="0"
+                                data-content="1 refers to lowest, 5 refers to highest">
+                                <img src="./assets/information-black.png" alt="" height="20" width="20">
+                            </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="selfRankingDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select self ranking" appendTo="body" [multiple]="false"
+                                [(ngModel)]="languageproficiciencyData.reading">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Writing</strong>
+                            <a class="btn rounded-circle btn-sm" data-container="body" data-toggle="popover"
+                                data-placement="top" data-trigger="focus" tabindex="0"
+                                data-content="1 refers to lowest, 5 refers to highest">
+                                <img src="./assets/information-black.png" alt="" height="20" width="20">
+                            </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="selfRankingDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select self ranking" appendTo="body" [multiple]="false"
+                                [(ngModel)]="languageproficiciencyData.writing">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Listening</strong>
+                            <a class="btn rounded-circle btn-sm" data-container="body" data-toggle="popover"
+                                data-placement="top" data-trigger="focus" tabindex="0"
+                                data-content="1 refers to lowest, 5 refers to highest">
+                                <img src="./assets/information-black.png" alt="" height="20" width="20">
+                            </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="selfRankingDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select self ranking" appendTo="body" [multiple]="false"
+                                [(ngModel)]="languageproficiciencyData.listening">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button mat-button mat-raised-button color="warn"
+                            (click)="submitLanguageProficiency()">Add</button>
+                    </div>
+                </div>
+                <br /> -->
+                <div class="table-responsive-lg table-responsive-sm text-center">
+                    <table class="table table-bordered table-sm">
+                        <tr class="table-header">
+                            <td class="align-middle">Language</td>
+                            <td class="align-middle">Speaking</td>
+                            <td class="align-middle">Reading</td>
+                            <td class="align-middle">Writing</td>
+                            <td class="align-middle">Listening</td>
+                            <td class="align-middle">Action</td>
+                        </tr>
+                        <tr *ngFor="let m1 of languageproficiciencyDetails">
+                            <td class="align-middle">{{m1.language}}</td>
+                            <td class="align-middle">{{m1.speaking}}</td>
+                            <td class="align-middle">{{m1.reading}}</td>
+                            <td class="align-middle">{{m1.writing}}</td>
+                            <td class="align-middle">{{m1.listening}}</td>
+                            <td class="align-middle">
+                                <a class="btn btn-danger btn-sm rounded-circle" title="Delete"
+                                    (click)="deleteLanguageProficiency(m1.id!)" role="button"><i
+                                        class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-lg-6 col-sm-12 pb-lg-2 pb-sm-2">
+        <div class="card">
+            <div class="card-body">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span>Field of Interest&nbsp;
+                        <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                            data-placement="top" data-trigger="focus" tabindex="0"
+                            data-content="If any field is not in the list, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                            <img src="./assets/information.png" alt="" height="20" width="20">
+                        </a></span>
+                </mat-toolbar>
+                <br />
+                <!-- <div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Field of
+                                interest</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="fieldOfInterestDD" appearance="string" [searchable]="true"
+                                bindLabel="name" bindValue="name" placeholder="Select" appendTo="body"
+                                [multiple]="false" [(ngModel)]="fieldofinterestData.fieldofInterest">
+                            </ng-select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Self
+                                Ranking</strong>
+                            <a class="btn rounded-circle btn-sm" data-container="body" data-toggle="popover"
+                                data-placement="top" data-trigger="focus" tabindex="0"
+                                data-content="1 refers to lowest, 5 refers to highest">
+                                <img src="./assets/information-black.png" alt="" height="20" width="20">
+                            </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="selfRankingDD" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="fieldofinterestData.selfRanking">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button mat-button mat-raised-button color="warn" (click)="SubmitFieldOfInterest()">Add</button>
+                    </div>
+                </div>
+                <br /> -->
+                <div class="table-responsive-lg table-responsive-sm text-center">
+                    <table class="table table-bordered table-sm">
+
+                        <tr *ngFor="let m5 of fieldofinterestDetails">
+                            <td class="align-middle">{{m5.fieldofInterest}}</td>
+                            <td class="align-middle">{{m5.selfRanking}}</td>
+                            <td class="align-middle">
+                                <a class="btn btn-danger btn-sm rounded-circle" title="Delete"
+                                    (click)="deleteFieldOfInterest(m5.id!)" role="button"><i
+                                        class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <br />
+        <div class="card">
+            <div class="card-body">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span>Personality Test&nbsp;
+                        <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                            data-placement="top" data-trigger="focus" tabindex="0"
+                            data-content="Please click on the link, and take this test, after completing the test,  upload the screenshot of your result, select the personality type and save.">
+                            <img src="./assets/information.png" alt="" height="20" width="20">
+                        </a></span>
+                </mat-toolbar>
+                <br />
+                <div>
+                    <div class="row mb-4 form-group" *ngIf="edit">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Test
+                                Link</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a class="view-attachment" href="https://www.16personalities.com/free-personality-test"
+                                target="_blank"><b>Click Here</b></a>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Upload result's screenshot</strong>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="input-group" *ngIf="edit">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary p-1">
+                                        <img src="./assets/attached.png" width="24" height="25" />
+                                        <input type="file" accept="image/png, image/jpeg"
+                                            (change)="onFileSelected($event)" style="display: none" />
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control" [ngModel]="filename" readonly />
+                            </div>
+                            <a class="view-attachment" *ngIf="!edit && profileData.personalityReport"
+                                href="https://www.mahadalzahra.org{{ profileData.personalityReport }}" target="_blank"><b>View
+                                    Report</b></a>
+                            <strong class="text-danger" *ngIf="!edit && !profileData.personalityReport">Not
+                                Found</strong>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4 form-group">
+                        <div class="col-lg-12 col-sm-12">
+                            <strong class="text-center align-middle">Personality Type</strong>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-select [items]="personalityTypeDD" *ngIf="edit" [searchable]="true" bindLabel="name"
+                                bindValue="name" placeholder="Select" appendTo="body" [multiple]="false"
+                                [(ngModel)]="profileData.personalityType">
+                            </ng-select>
+                            <input matInput class="form-control" [ngModel]="profileData.personalityType" *ngIf="!edit"
+                                type="text" readonly />
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button mat-button mat-raised-button color="warn" *ngIf="edit"
+                            (click)="submitdata_forpersonality()">Save</button>
+                        <button mat-button mat-raised-button color="primary" *ngIf="!edit"
+                            (click)="edit = !edit">Edit</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row pt-2">
+
+    <div class="col-lg-6 col-sm-12 pb-lg-2 pb-sm-2">
+        <div class="card">
+            <div class="card-body">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span>Fitness Activity&nbsp;
+                        <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                            data-placement="top" data-trigger="focus" tabindex="0"
+                            data-content="If any field is not in the list, please email at itsupport@mahadalzahra.com and cc admin@mahadalzahra.com">
+                            <img src="./assets/information.png" alt="" height="20" width="20">
+                        </a></span>
+                </mat-toolbar>
+                <br />
+                
+                <div class="table-responsive-lg table-responsive-sm text-center">
+                    <table class="table table-bordered table-sm">
+                        <tr class="table-header">
+                            <td>Activity</td>
+                            <td>Routine</td>
+                            <td>Hours/Day</td>
+                            <td>Action</td>
+                        </tr>
+                        <tr *ngFor="let m of fitnessActivityDetails">
+                            <td class="align-middle">{{m.activityName}}</td>
+                            <td class="align-middle">{{m.routine}}</td>
+                            <td class="align-middle">{{m.hours}}:{{m.minutes}}</td>
+                            <td class="align-middle">
+                                <a class="btn btn-danger btn-sm rounded-circle" title="Delete"
+                                    (click)="deleteFitnessActivity(m.id!)" role="button"><i
+                                        class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-lg-6 col-sm-12 pb-lg-2 pb-sm-2">
+        <div class="card">
+            <div class="card-body">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span>About Yourself&nbsp;
+                        <a class="btn rounded-circle btn-sm p-0" data-container="body" data-toggle="popover"
+                            data-placement="top" data-trigger="focus" tabindex="0"
+                            data-content="Describe yourself in 300 characters">
+                            <img src="./assets/information.png" alt="" height="20" width="20">
+                        </a></span>
+                </mat-toolbar>
+                <br />
+                <div>
+                    <textarea id="reasonText" [(ngModel)]="profileData.aboutYourSelf" class="form-control"
+                        placeholder="Type"></textarea>
+                </div>
+                <br />
+                <div class="text-center">
+                    <button mat-button mat-raised-button (click)="submitdata()" color="warn">Save</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row pt-2">
+    <div class="col-lg-6 col-sm-12 pb-lg-2 pb-sm-2">
+        <div class="card">
+            <div class="card-body">
+                <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                    <span>BMI Calculator</span>
+                </mat-toolbar>
+                <br />
+                
+                <div class="table-responsive-lg table-responsive-sm text-center">
+                    <table class="table table-bordered table-sm">
+                        <tr class="table-header">
+                            <td>SR No.</td>
+                            <td>Calculated On</td>
+                            <td>Height (centimeter)</td>
+                            <td>Weight (kilogram)</td>
+                            <td>Result</td>
+                            <td>Remarks</td>
+                        </tr>
+                        <tr *ngFor="let m of BMIDetails">
+                            <td class="align-middle">{{m.srNo}}</td>
+                            <td class="align-middle">{{m.createdOn | date:"medium"}}</td>
+                            <td class="align-middle">{{m.height_in_Centimeter}}</td>
+                            <td class="align-middle">{{m.weight_in_kilogram}}</td>
+                            <td class="align-middle">{{m.result}}</td>
+                            <td class="align-middle">{{m.remarks}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.card {
+    background: #eee;
+}
+
+// input.form-control {
+//     border: 1px solid black;
+// }
+
+// ng-select {
+//     border: 1px solid black;
+// }
+
+// input[type="file"] {
+//     display: none;
+// }
+// .custom-file-upload {
+//     border: 1px solid #ccc;
+//     display: inline-block;
+//     padding: 6px 12px;
+//     cursor: pointer;
+// }
+span.btn {
+    border-radius: 5px 0px 0px 5px;
+}

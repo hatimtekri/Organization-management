@@ -1,0 +1,32 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.card {
+  border    : none;
+  background: none;
+
+}
+
+@media only screen and (min-width: 992px) {
+  .row {
+    height: 100%;
+  }
+}
+
+.page-subheader-toolbar {
+  background : none;
+  height     : fit-content;
+  font-size  : 15pt;
+  color      : #153e71;
+  font-weight: bold;
+}
+
+.container-fluid {
+  background: #eee;
+  height    : 100%;
+}
+
+.login-btn {
+  //border: black 1px 1px 1px 1px;
+  border-radius: 20px;
+}

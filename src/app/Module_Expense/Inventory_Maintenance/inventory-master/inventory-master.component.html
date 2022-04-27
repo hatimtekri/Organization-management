@@ -1,0 +1,42 @@
+<div class="col-sm-12 col-lg-12 p-1">
+    <mat-toolbar class="mat-elevation-z6 page-header-toolbar">
+        <span>Inventory Maintenance</span>
+    </mat-toolbar>
+    <br />
+    <div class="justify-content-center">
+        <nav>
+            <div class="nav col-lg-12 m-auto" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/inventory-maintenance/baseitem']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 1" (click)="selectedvalue = 1">
+                    Expense Heads
+                </a>
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/inventory-maintenance/item']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 2" (click)="selectedvalue = 2">
+                    Items
+                </a>
+                <!-- <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/inventory-maintenance/dept-venue']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 3" (click)="selectedvalue = 3">
+                    Dept_Venue
+                </a> -->
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/inventory-maintenance/item-baseitem']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 4" (click)="selectedvalue = 4">
+                    Item_Expense Head
+                </a>
+            </div>
+        </nav>
+    </div>
+    <br />
+    <div class="col-lg-12 col-sm-12">
+
+        <div class="tab-content" id="nav-tabContent">
+
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>
+

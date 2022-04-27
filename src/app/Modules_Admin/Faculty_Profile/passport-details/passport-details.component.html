@@ -1,0 +1,270 @@
+<div class="row justify-content-center">
+  <div class="col-lg-6 col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <mat-toolbar class="page-subheader-toolbar justify-content-center">
+          <span>Passport Details</span>
+        </mat-toolbar>
+        <br />
+        <div>
+          <div class="row mb-4 form-group">
+            <div class="col-lg-12 col-sm-12">
+              <strong>Passport Name</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+              <input matInput class="form-control" *ngIf="!edit" [ngModel]="profileData.passportName" type="text"
+                readonly />
+              <input matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.passportName"
+                placeholder="Type" type="text" />
+            </div>
+          </div>
+          <div class="row mb-4 form-group">
+            <div class="col-lg-12 col-sm-12">
+              <strong>Passport Number</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input matInput class="form-control" *ngIf="!edit" [ngModel]="profileData.passportNumber" type="text"
+                readonly />
+              <input matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.passportNumber"
+                placeholder="Type" type="text" />
+            </div>
+          </div>
+          <div class="row mb-4 form-group">
+            <div class="col-lg-12 col-sm-12">
+              <strong>Date of Birth</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input matInput class="form-control" *ngIf="!edit" [ngModel]="profileData.dobPassport" type="text"
+                readonly />
+              <input matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.dobPassport" placeholder="Type"
+                type="text" />
+            </div>
+          </div>
+          <div class="row mb-4 form-group">
+            <div class="col-lg-12 col-sm-12">
+              <strong>Place of Birth</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input matInput class="form-control" *ngIf="!edit" type="text" readonly />
+              <input matInput class="form-control" *ngIf="edit" placeholder="Type" type="text" />
+            </div>
+          </div>
+          <div class="row mb-4 form-group">
+            <div class="col-lg-12 col-sm-12">
+              <strong>Date of Issue</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input matInput class="form-control" *ngIf="!edit" [ngModel]="profileData.dateOfIssue" type="text"
+                readonly />
+              <input matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.dateOfIssue" placeholder="Type"
+                type="text" />
+            </div>
+          </div>
+          <div class="row mb-4 form-group">
+            <div class="col-lg-12 col-sm-12">
+              <strong>Place of Issue</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input matInput class="form-control" *ngIf="!edit" [ngModel]="profileData.placeOfIssue" type="text"
+                readonly />
+              <input matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.placeOfIssue"
+                placeholder="Type" type="text" />
+            </div>
+          </div>
+          <div class="row mb-4 form-group">
+            <div class="col-lg-12 col-sm-12">
+              <strong>Date of Expiry</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input matInput class="form-control" *ngIf="!edit" [ngModel]="profileData.dateOfExpiry" type="text"
+                readonly />
+              <input matInput class="form-control" *ngIf="edit" [(ngModel)]="profileData.dateOfExpiry"
+                placeholder="Type" type="text" />
+            </div>
+          </div>
+          <div class="row mb-4 form-group">
+            <div class="col-lg-12 col-sm-12">
+              <strong>Upload Passport Copy</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <!-- <input matInput  class="form-control" [ngModel]="profileData.bankAccountName"   type="text" readonly> -->
+              <!-- <label for="file-upload" class="custom-file-upload">
+                                  <i class="fa fa-cloud-upload"></i>Upload
+                              </label>
+                              <input id="file-upload" type="file" class="form-control-file"> -->
+              <br />
+              <div class="input-group" *ngIf="edit">
+                <label class="input-group-btn">
+                  <span class="btn btn-primary p-1">
+                    <img src="./assets/attached.png" width="24" height="25" />
+                    <input type="file" accept="application/pdf" (change)="onFileSelected1($event)"
+                      style="display: none" />
+                  </span>
+                </label>
+                <input type="text" class="form-control" [ngModel]="filename1" readonly />
+              </div>
+              <br />
+              <a class="view-attachment" *ngIf="!edit" href="https://www.mahadalzahra.org{{ profileData.passportcopy }}"
+                target="_blank">[View]</a>
+              <strong class="text-danger" *ngIf="!edit && !profileData.passportcopy">Not
+                Found</strong>
+            </div>
+          </div>
+          <div class="text-center">
+            <button mat-button mat-raised-button color="primary" (click)="edit = !edit" *ngIf="!edit">
+              Edit
+            </button>
+            <button mat-button mat-raised-button color="primary" (click)="submitdata()" *ngIf="edit">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <mat-toolbar class="page-subheader-toolbar justify-content-center">
+          <span>Identity Cards</span>
+        </mat-toolbar>
+        <br />
+        <!-- <div>
+            <div class="row mb-4 form-group">
+              <div class="col-lg-12 col-sm-12">
+                <strong>Card Type</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <ng-select
+                  [items]="cardTypeDD"
+                  appearance="string"
+                  [searchable]="true"
+                  bindLabel="name"
+                  bindValue="name"
+                  placeholder="Select "
+                  [(ngModel)]="card.cardType"
+                  (change)="cardTypeChanged()"
+                  appendTo="body"
+                  [multiple]="false"
+                >
+                </ng-select>
+              </div>
+            </div>
+            <div class="row mb-4 form-group">
+              <div
+                class="col-lg-12 col-sm-12"
+                *ngIf="
+                  card.cardType !== 'Aadhaar Card' &&
+                  card.cardType !== 'Pan Card' &&
+                  card.cardType !== 'Green Card'
+                "
+              >
+                <strong>Country</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <ng-select
+                  [items]="countryDD"
+                  appearance="string"
+                  [searchable]="true"
+                  bindLabel="name"
+                  bindValue="name"
+                  placeholder="Select "
+                  [(ngModel)]="card.country"
+                  appendTo="body"
+                  [multiple]="false"
+                >
+                </ng-select>
+              </div>
+              <div
+                class="col-lg-12 col-sm-12"
+                *ngIf="
+                  card.cardType == 'Aadhaar Card' ||
+                  card.cardType == 'Pan Card' ||
+                  card.cardType == 'Green Card'
+                "
+              >
+                <strong>Country</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+                <input
+                  matInput
+                  class="form-control"
+                  [ngModel]="card.country"
+                  type="text"
+                  readonly
+                />
+              </div>
+            </div>
+  
+            <div class="row mb-4 form-group">
+              <div class="col-lg-12 col-sm-12">
+                <strong>Name on Card</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input
+                  matInput
+                  class="form-control"
+                  [(ngModel)]="card.nameOnCard"
+                  placeholder="Type"
+                  type="text"
+                />
+              </div>
+            </div>
+            <div class="row mb-4 form-group">
+              <div class="col-lg-12 col-sm-12">
+                <strong>Card No.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input
+                  matInput
+                  class="form-control"
+                  [(ngModel)]="card.cardNumber"
+                  placeholder="Type"
+                  type="text"
+                />
+              </div>
+            </div>
+            <div class="row mb-4 form-group">
+              <div class="col-lg-12 col-sm-12">
+                <strong>Upload Card</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <br />
+                <div class="input-group align-middle">
+                  <label class="input-group-btn">
+                    <span class="btn btn-primary p-1">
+                      <img src="./assets/attached.png" width="24" height="25" />
+                      <input
+                        type="file"
+                        accept="application/pdf"
+                        (change)="onFileSelected($event)"
+                        style="display: none"
+                      />
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [ngModel]="filename"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <button
+                mat-button
+                mat-raised-button
+                color="warn"
+                (click)="submitcard()"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+          <br /> -->
+        <div class="table-responsive-lg table-responsive-sm text-center">
+          <table class="table table-bordered table-sm">
+            <tr class="table-header">
+              <td class="align-middle">Card Type</td>
+              <td class="align-middle">Country</td>
+              <td class="align-middle">Name on Card</td>
+              <td class="align-middle">Card No.</td>
+              <td class="align-middle">Action</td>
+            </tr>
+            <tr *ngFor="let m of cards">
+              <td class="align-middle">{{ m.cardType }}</td>
+              <td class="align-middle">{{ m.country }}</td>
+              <td class="align-middle">{{ m.nameOnCard }}</td>
+              <td class="align-middle">{{ m.cardNumber }}</td>
+              <td class="align-middle">
+                <a class="btn btn-warning btn-sm rounded-circle" *ngIf="m.attachment"
+                  href="https://www.mahadalzahra.org{{ m.attachment }}" target="_blank" title="View Attachment"
+                  role="button"><i class="fa fa-file-pdf-o"></i></a>
+                <strong class="text-danger" *ngIf="!m.attachment">Not
+                  Found</strong>&nbsp;
+                <a class="btn btn-danger btn-sm rounded-circle" (click)="Deletecard(m.id)" title="Delete"
+                  role="button"><i class="fa fa-trash-o"></i></a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.navbar-part3 {
+    background     : #7f7f7f;
+    color          : white;
+    //border-radius: 7px;
+    font-size      : 12pt;
+}
+
+.bg-rejected {
+    background: rgba(255, 99, 71, 0.7);
+}
+
+.bg-accepted {
+    background: rgba(0, 128, 0, 0.5);
+}
+
+
+.badge {
+    font-size: 11pt;
+}
+
+#kgphoto {
+
+
+    transition: transform .2s;
+    /* Animation */
+
+    margin: 0 auto;
+}
+
+#kgphoto:hover {
+    transform: scale(1.7);
+}

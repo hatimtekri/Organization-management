@@ -1,0 +1,38 @@
+
+ <div class="row justify-content-center mb-2" >
+    <div class="col-lg-12">
+        <div class="table table-responsive">
+            <table class="table table-bordered table-sm">
+                <tr class="text-center">
+                    
+                    <td class="align-middle">Bill ID</td>
+                    <td class="align-middle">Payment Mode</td>
+                    <td class="align-middle">Payment Details</td>
+                    <td class="align-middle">Dept_Venue</td>
+                    <td class="align-middle">Expense Head</td>                    
+                    <td class="align-middle">Entry Date</td>
+                    
+                    
+                    
+                    
+                </tr>
+                <tr >
+                    
+                    <td class="align-middle">{{bankDetails.id}}</td>                   
+                    <td class="align-middle">{{bankDetails.paymentMode_User}}</td>
+                    <td class="align-middle text-left">
+                        {{bankDetails.paymentTo_AccNum}}<br />{{bankDetails.paymentTo_AccName}}<br />{{bankDetails.paymentTo_ifsc}}<br />{{bankDetails.paymentTo_BankName}}
+                    </td>
+                    <td class="align-middle">{{bankDetails.deptVenueName}}</td>
+                    <td class="align-middle">{{bankDetails.baseItemName}}</td>                   
+                    <td class="align-middle">{{bankDetails.createdOn | date: 'd/M/yy, h:mm a'}}</td>
+                    
+                   
+                    
+                    
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>

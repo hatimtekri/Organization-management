@@ -1,0 +1,539 @@
+<div *ngIf="notpage">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div *ngIf="isaddOnlineUser" id="accordion2" class="mb-1">
+        <div class="card">
+            <div class="card-header p-1" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                        <span class="pull-left">Add Online Payment User:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse hide" aria-labelledby="headingTwo" data-parent="#accordion2">
+                <div class="card-body">
+                    <div class="row align-items-center mb-3">
+                        <div class="col-lg-6 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Vendor Name <b class="text-danger">*</b>:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.name"
+                                (change)="onchange_vendorName()" class="form-control" placeholder="Type" type="text">
+                        </div>
+                        <div class="col-lg-2 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">IFSC Code <b class="text-danger">*</b>:</span>
+                            <input matInput id="reasonText" (change)="ifscChange()" (change)="onchange_ifsc()"
+                                [(ngModel)]="vendor.ifscCode" class="form-control" placeholder="Type" type="text">
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Bank Name:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.bankName" class="form-control"
+                                placeholder="Type" type="text" readonly>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Account No <b class="text-danger">*</b>:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.accountNo" class="form-control"
+                                placeholder="Type" type="text">
+                        </div>
+                        <div class="col-lg-6 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Account Name <b class="text-danger">*</b>:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.accountName"
+                                (change)="onchange_accName()" class="form-control" placeholder="Type" type="text">
+                        </div>
+                        <div class="col-lg-12 col-sm-12 mt-4 text-center">
+                            <button mat-button mat-raised-button color="warn" class="col-lg-2"
+                                (click)="addOnlineUser()">Submit</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row align-items-center justify-content-center mb-2">
+                        <div class="text-center col-lg-8 col-sm-12" *ngIf="onlineUserDetails.length == 0">
+                            <h2 class="text-danger">No Users Found</h2>
+                        </div>
+                        <div class="text-center col-lg-8 col-sm-12 table table-responsive" *ngIf="onlineUserDetails.length > 0">
+                            <table class="table table-bordered table-sm small medium">
+                                <tr class="text-center table-header">
+                                    <td class="align-middle" *ngIf="columndisplay.show_srNo">Sr No</td>
+                                    <td class="align-middle" *ngIf="columndisplay.show_vendorName">Name</td>
+                                    <td class="align-middle" *ngIf="columndisplay.show_accountDetails">Account Details
+                                    </td>
+                                    <td class="align-middle">Action</td>
+                                </tr>
+                                <tr *ngFor="let m of onlineUserDetails; let i = index">
+                                    <td class="align-middle" *ngIf="columndisplay.show_srNo">{{i + 1}}</td>
+                                    <td class="align-middle text-left" *ngIf="columndisplay.show_vendorName">{{m.name}}
+                                    </td>
+                                    <td class="align-middle text-left" *ngIf="columndisplay.show_accountDetails">
+                                        {{m.accountNo}}<br />{{m.accountName}}<br />{{m.ifscCode}}<br />{{m.bankName}}
+                                    </td>
+                                    <td class="align-middle">
+                                        <button mat-button mat-raised-button color="warn"
+                                            (click)="deleteOnlineUser(m.id!, m.name!)">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="addVendorR" id="accordion" class="mb-1">
+        <div class="card">
+            <div class="card-header p-1" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                        <span class="pull-left">Add Vendor:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="row align-items-center mb-2">
+                        <!-- <div class="col-lg-6 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Vendor Type:</span>
+                            <ng-select class="col-lg-12 p-0" [items]="vendorTypes" [(ngModel)]="vendor.type"
+                                appearance="string" [searchable]="true" bindLabel="name" bindValue="name"
+                                placeholder="Select" appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                            </ng-select>
+                        </div> -->
+                        <div class="col-lg-12 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Vendor Name <b class="text-danger">*</b>:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.name" (change)="onchange_vendorName()"
+                                class="form-control" placeholder="Type" type="text">
+                        </div>
+                        <div class="col-lg-4 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Phone No:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.phoneNo" class="form-control"
+                                placeholder="Type" type="text">
+                        </div>
+                        <div class="col-lg-4 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Mobile No <b class="text-danger">*</b>:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.mobileNo" (change)="onchange_mobile()"
+                                class="form-control" placeholder="Type" type="text">
+                        </div>
+                        <div class="col-lg-4 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Whatsapp No:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.whatsappNo" class="form-control"
+                                placeholder="Type" type="text">
+                        </div>
+                        <div class="col-lg-12 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Address:</span>
+                            <textarea class="form-control" [(ngModel)]="vendor.address" (change)="onchange_address()"
+                                placeholder="Type" rows="1"></textarea>
+                        </div>
+                        <div class="col-lg-3 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">State <b class="text-danger">*</b>:</span>
+                            <ng-select class="col-lg-12 p-0" [items]="stateDD" appearance="string" [searchable]="true"
+                                bindLabel="state_name" bindValue="state_name" [(ngModel)]="vendor.state"
+                                (change)="stateChange()" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                                [multiple]="false">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-3 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">City <b class="text-danger">*</b>:</span>
+                            <ng-select class="col-lg-12 p-0" [items]="cityDD" appearance="string" [searchable]="true"
+                                bindLabel="city_name" bindValue="city_name" [(ngModel)]="vendor.city"
+                                placeholder="Select" appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                            </ng-select>
+                        </div>
+
+
+                        <div class="col-lg-2 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">IFSC Code <b class="text-danger">*</b>:</span>
+                            <input matInput id="reasonText" (change)="ifscChange()" (change)="onchange_ifsc()"
+                                [(ngModel)]="vendor.ifscCode" class="form-control" placeholder="Type" type="text">
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Bank Name:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.bankName" class="form-control"
+                                placeholder="Type" type="text" readonly>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Account No <b class="text-danger">*</b>:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.accountNo" class="form-control"
+                                placeholder="Type" type="text">
+                        </div>
+                        <div class="col-lg-6 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Account Name <b class="text-danger">*</b>:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.accountName"
+                                (change)="onchange_accName()" class="form-control" placeholder="Type" type="text">
+                        </div>
+                        <div class="col-lg-6 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Pan Card No:</span>
+                            <input matInput id="reasonText" [(ngModel)]="vendor.panCardNo"
+                                (change)="onchange_pancardNo()" class="form-control" placeholder="Type" type="text">
+                        </div>
+                        <div class="col-lg-6 col-sm-12 mb-2">
+                            <span class="col-lg-12 pl-1">Upload Pancard (JPEG):</span>
+                            <div class="input-group">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary p-1">
+                                        <img src="./assets/attached.png" width="24" height="25" />
+                                        <input type="file" accept="image/jpeg" (change)="onFileSelected($event)"
+                                            style="display: none;">
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control" [ngModel]="filename" readonly>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12 col-sm-12 mt-4 text-center">
+                            <button mat-button mat-raised-button color="warn" class="col-lg-2"
+                                (click)="addVendor()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="accordion3" class="mb-1">
+        <div class="card hcard">
+            <div class="card-header p-1" id="headingthree">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsethree"
+                        aria-expanded="false" aria-controls="collapsethree">
+                        <span class="pull-left">Hide/Unhide columns:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapsethree" class="collapse hide" aria-labelledby="headingthree" data-parent="#accordion3">
+                <div class="card-body p-2">
+                    <div class="navbar navbar-header col-lg-12 form-check">
+                        <input class="form-check-input ml-1 mt-0" type="checkbox" id="exampleCheck2"
+                            (click)="selectAll_vcolumns()" [(ngModel)]="selectall_vcolumns" />
+                        <label class="form-check-label ml-4" for="exampleCheck2">Select All</label>
+                    </div>
+                    <div class="row mb-2 m-2">
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="1"
+                                    [(ngModel)]="columndisplay.show_srNo" />
+                                <label class="form-check-label ml-4" for="1">Sr No</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="2"
+                                    [(ngModel)]="columndisplay.show_vendorId" />
+                                <label class="form-check-label ml-4" for="2">Vendor ID</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="12"
+                                    [(ngModel)]="columndisplay.show_vendorType" />
+                                <label class="form-check-label ml-4" for="12">Vendor Type</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="3"
+                                    [(ngModel)]="columndisplay.show_vendorName" />
+                                <label class="form-check-label ml-4" for="3">Vendor Name</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="4"
+                                    [(ngModel)]="columndisplay.show_phone" />
+                                <label class="form-check-label ml-4" for="4">Phone No</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="5"
+                                    [(ngModel)]="columndisplay.show_mobile" />
+                                <label class="form-check-label ml-4" for="5">Mobile No</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="6"
+                                    [(ngModel)]="columndisplay.show_whatsapp" />
+                                <label class="form-check-label ml-4" for="6">Whatsapp No</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="7"
+                                    [(ngModel)]="columndisplay.show_state" />
+                                <label class="form-check-label ml-4" for="7">State</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="8"
+                                    [(ngModel)]="columndisplay.show_city" />
+                                <label class="form-check-label ml-4" for="8">City</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="9"
+                                    [(ngModel)]="columndisplay.show_panNo" />
+                                <label class="form-check-label ml-4" for="9">Pan Card No</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="10"
+                                    [(ngModel)]="columndisplay.show_accountDetails" />
+                                <label class="form-check-label ml-4" for="10">Account Details</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 p-0">
+                            <div class="navbar navbar-header form-check m-1">
+                                <input class="form-check-input ml-1 mt-0" type="checkbox" id="11"
+                                    [(ngModel)]="columndisplay.show_address" />
+                                <label class="form-check-label ml-4" for="11">Address</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div class="row justify-content-center">
+        <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+            <table class="table table-bordered table-sm small medium">
+                <tr class="text-center table-header">
+                    <td class="align-middle" *ngIf="columndisplay.show_srNo">Sr No</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_vendorId">Vendor ID</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_vendorType">Vendor Type</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_vendorName">Vendor Name</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_phone">Phone No</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_mobile">Mobile No</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_whatsapp">Whatsapp No</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_state">State</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_city">City</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_panNo">Pan Card No</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_accountDetails">Account Details</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_address">Address</td>
+                    <td class="align-middle">Action</td>
+                </tr>
+                <tr *ngFor="let m of vendorDetails ; let i = index">
+                    <td class="align-middle" *ngIf="columndisplay.show_srNo">{{i + 1}}</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_vendorId">{{m.id}}</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_vendorType">{{m.type}}</td>
+                    <td class="align-middle text-left" *ngIf="columndisplay.show_vendorName">{{m.name}}</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_phone">{{m.phoneNo}}</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_mobile">{{m.mobileNo}}</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_whatsapp">{{m.whatsappNo}}</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_state">{{m.state}}</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_city">{{m.city}}</td>
+                    <td class="align-middle" *ngIf="columndisplay.show_panNo">{{m.panCardNo}}
+                        <a *ngIf="m.panCardNo" type="button"
+                            href="https://mahadalzahra.org/uploads/VendorPancard/{{m.id}}.jpeg" class="btn p-0"
+                            target="_blank"><img src="./assets/gallery.png" width="24" height="25" /></a>
+                    </td>
+                    <td class="align-middle text-left" *ngIf="columndisplay.show_accountDetails">
+                        {{m.accountNo}}<br />{{m.accountName}}<br />{{m.ifscCode}}<br />{{m.bankName}}</td>
+                    <td class="align-middle text-left" *ngIf="columndisplay.show_address">{{m.address}}</td>
+                    <td class="align-middle">
+                        <a type="button" *ngIf="activeInactiveVendorR" title="Active/In-active" class="btn p-1"><img
+                                src="./assets/decision.png" width="27" height="28" /></a>
+                        <a type="button" *ngIf="editVendorR" (click)="editClick(m)" title="Edit Vendor"
+                            data-toggle="modal" data-target=".bd-example-modal-lg1" class="btn p-1"><img
+                                src="./assets/edit.png" width="27" height="28" /></a>
+                        <a type="button" title="View Fee Ledger" data-toggle="modal" data-target=".bd-example-modal-lg"
+                            class="btn p-1"><img src="./assets/ledger.png" width="27" height="28" /></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Edit Vendor Modal -->
+    <div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content p-1">
+                <div class="row align-items-center mb-2">
+                    <div class="col-lg-6 col-sm-12 mb-2">
+                        <span class="col-lg-12 pl-1">Vendor Type:</span>
+
+                        <input matInput id="reasonText" [(ngModel)]="editVendor.type" class="form-control"
+                            placeholder="Type" type="text" readonly>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-2">
+                        <span class="col-lg-12 pl-1">Vendor Name:</span>
+                        <input matInput id="reasonText" [(ngModel)]="editVendor.name" (change)="onchange_vendorName()"
+                            class="form-control" placeholder="Type" type="text">
+                    </div>
+                    <div class="col-lg-4 col-sm-12 mb-2">
+                        <span class="col-lg-12 pl-1">Phone No:</span>
+                        <input matInput id="reasonText" [(ngModel)]="editVendor.phoneNo" class="form-control"
+                            placeholder="Type" type="text">
+                    </div>
+                    <div class="col-lg-4 col-sm-12 mb-2">
+                        <span class="col-lg-12 pl-1">Mobile No:</span>
+                        <input matInput id="reasonText" [(ngModel)]="editVendor.mobileNo" class="form-control"
+                            placeholder="Type" type="text">
+                    </div>
+                    <div class="col-lg-4 col-sm-12 mb-2">
+                        <span class="col-lg-12 pl-1">Whatsapp No:</span>
+                        <input matInput id="reasonText" [(ngModel)]="editVendor.whatsappNo" class="form-control"
+                            placeholder="Type" type="text">
+                    </div>
+                    <div class="col-lg-12 col-sm-12 mb-2">
+                        <span class="col-lg-12 pl-1">Address:</span>
+                        <textarea class="form-control" [(ngModel)]="editVendor.address" placeholder="Type"
+                            rows="1"></textarea>
+                    </div>
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        <span class="col-lg-12 pl-1">State:</span>
+                        <ng-select class="col-lg-12 p-0" [items]="stateDD" appearance="string" [searchable]="true"
+                            bindLabel="state_name" bindValue="state_name" [(ngModel)]="editVendor.state"
+                            (change)="stateChange()" placeholder="Select" appendTo="body" [closeOnSelect]="true"
+                            [multiple]="false">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-3 col-sm-12 mb-2">
+                        <span class="col-lg-12 pl-1">City:</span>
+                        <ng-select class="col-lg-12 p-0" [items]="cityDD" appearance="string" [searchable]="true"
+                            bindLabel="city_name" bindValue="city_name" [(ngModel)]="editVendor.city"
+                            placeholder="Select" appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                        </ng-select>
+                    </div>
+
+
+                    <div class="col-lg-2 col-sm-12 mb-2" >
+                        <span class="col-lg-12 pl-1">IFSC Code:</span>
+                        <input matInput id="reasonText" (change)="ifscChange()" (change)="onchange_ifsc()"
+                            [(ngModel)]="editVendor.ifscCode" class="form-control" placeholder="Type" type="text">
+
+                    </div>
+                    <div class="col-lg-4 col-sm-12 mb-2" >
+                        <span class="col-lg-12 pl-1">Bank Name:</span>
+                        <input matInput id="reasonText" [(ngModel)]="editVendor.bankName" class="form-control"
+                            placeholder="Type" type="text" readonly>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-2" >
+                        <span class="col-lg-12 pl-1">Account No:</span>
+                        <input matInput id="reasonText" [(ngModel)]="editVendor.accountNo" class="form-control"
+                            placeholder="Type" type="text">
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-2" >
+                        <span class="col-lg-12 pl-1">Account Name:</span>
+                        <input matInput id="reasonText" [(ngModel)]="editVendor.accountName"
+                            (change)="onchange_accName()" class="form-control" placeholder="Type" type="text">
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-2" >
+                        <span class="col-lg-12 pl-1">Pan Card No:</span>
+                        <input matInput id="reasonText" [(ngModel)]="editVendor.panCardNo"
+                            (change)="onchange_pancardNo()" class="form-control" placeholder="Type" type="text">
+                    </div>
+                    <div class="col-lg-6 col-sm-12 mb-2" >
+                        <span class="col-lg-12 pl-1">Upload Pancard (JPEG):</span>
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                                <span class="btn btn-primary p-1">
+                                    <img src="./assets/attached.png" width="24" height="25" />
+                                    <input type="file" accept="image/jpeg" (change)="onFileSelected($event)"
+                                        style="display: none;">
+                                </span>
+                            </label>
+                            <input type="text" class="form-control" [ngModel]="filename" readonly>
+                        </div>
+
+
+                    </div>
+
+                    <!-- <img id="imageid" src="https://mahadalzahra.org/uploads/VendorPancard/1.jpeg"
+                        width="100" height="100"> -->
+                    <div class="col-lg-12 col-sm-12 mt-4 text-center">
+                        <button mat-button mat-raised-button color="warn" class="col-lg-2"
+                            (click)="EditVendor()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vendor Ledger Modal-->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content p-1">
+                <div class="btn-group pb-2 pt-2">
+                    <div class="row justify-content-start p-3">
+
+                        <div class="col-lg col-sm-6 p-1">
+                            <button mat-button mat-flat-button color="accent">
+                                Alloted&nbsp;&nbsp;
+                                <span class="badge badge-primary" [innerText]="40000"></span>
+                            </button>
+                        </div>
+                        <div class="col-lg col-sm-6 p-1">
+                            <button mat-button mat-flat-button color="accent">
+                                Paid&nbsp;&nbsp;
+                                <span class="badge badge-success" [innerText]="250000"></span>
+                            </button>
+                        </div>
+                        <div class="col-lg col-sm-6 p-1">
+                            <button mat-button mat-flat-button color="accent">
+                                Waived&nbsp;&nbsp;
+                                <span class="badge badge-info" [innerText]="5000"></span>
+                            </button>
+                        </div>
+                        <div class="col-lg col-sm-6 p-1">
+                            <button mat-button mat-flat-button color="accent">
+                                Reversed&nbsp;&nbsp;
+                                <span class="badge badge-info" [innerText]="5000"></span>
+                            </button>
+                        </div>
+                        <div class="col-lg col-sm-6 p-1">
+                            <button mat-button mat-flat-button color="accent">
+                                Due&nbsp;&nbsp;
+                                <span class="badge badge-danger" [innerText]="10000"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="text-center col-lg-12 col-sm-12 table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <tr class="table-header">
+                                <td class="align-middle p-2">ID</td>
+                                <td class="align-middle p-2">Date & Time</td>
+                                <td class="align-middle p-2">Hub Allocated</td>
+                                <td class="align-middle p-2">Hub Paid</td>
+                                <td class="align-middle p-2">Balance</td>
+                                <td class="align-middle p-2">Payment Type</td>
+                                <td class="align-middle p-2">Note</td>
+                            </tr>
+                            <tr class="text-center">
+                                <td class="align-middle p-2">ID</td>
+                                <td class="align-middle p-2">Date & Time</td>
+                                <td class="align-middle p-2">Hub Allocated</td>
+                                <td class="align-middle p-2">Hub Paid</td>
+                                <td class="align-middle p-2">Balance</td>
+                                <td class="align-middle p-2">Payment Type</td>
+                                <td class="align-middle p-2">Note</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

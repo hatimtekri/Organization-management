@@ -1,0 +1,108 @@
+//@import "/src/custom-theme.scss";
+@import "/src/styles.scss";
+
+.navbar-header {
+    background: #eee;
+    border-radius: 7px;
+    font-size: 11pt;
+}
+
+.navbar-header1 {
+  background: #eee;
+  border-radius: 7px;
+  font-size: 10.5pt;
+}
+
+.navbar-category {
+  background: rgba(128,128,128,1);
+  color: white;
+  border-radius: 7px;
+  font-size: 11pt;
+}
+
+.navbar-status {
+  background: rgba(0,128,0,0.3);
+  border-radius: 7px;
+  font-size: 11pt;
+}
+
+.customized.mat-button.mat-primary{
+  background-color: rgba(57,87,33,255);
+}
+
+.section.mat-button.mat-primary{
+  background-color: #296E85;
+}
+
+.print.mat-button.mat-primary{
+  background-color: #964B00;
+}
+
+.navbar-answer {
+    //border: 1px solid #fff176;
+    border-radius: 5px;
+    background: #eee;
+    //height: 60px;
+}
+
+.badge {
+  font-size: 11pt;
+}
+
+// @media only screen and (min-width: 992px) {
+//   .table-header {
+//     position: sticky;
+//     top: 63px;
+//   }
+// }
+
+
+
+.bg-tayeen {
+  background: ghostwhite;
+}
+
+.bg-non-tayeen {
+  background: rgba(173,216,230,0.3);
+}
+
+.bg-recruited {
+  background: rgba(254,216,177,0.4);
+}
+
+.bg-teacher {
+  background: rgba(255, 255, 0,0.3);
+}
+
+.bg-other-idara {
+  background: rgba(0,128,0,0.2);
+}
+
+.modal-toolbar {
+  height: 50px;
+  background: #eee;
+  color: #153e71;
+  font-weight: bold;
+}
+
+#kgphoto{
+
+
+  transition: transform .2s; /* Animation */
+
+  margin: 0 auto;
+}
+
+#kgphoto:hover{
+  transform: scale(1.7);
+}
+
+.view-attachment {
+  cursor: pointer;
+  color: #800000;
+  font-weight: bolder;
+  font-size: 8pt;
+}
+
+
+

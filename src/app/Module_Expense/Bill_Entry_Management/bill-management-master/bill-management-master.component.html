@@ -1,0 +1,61 @@
+<div class="col-sm-12 col-lg-12 p-1">
+    <mat-toolbar class="mat-elevation-z6 page-header-toolbar">
+        <span>Bill Management</span>
+    </mat-toolbar>
+    <br />
+    <div class="justify-content-center">
+        <nav>
+            <div class="nav col-lg-12 m-auto" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/bill-entry-management/vendor-details']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 1" (click)="selectedvalue = 1">
+                    Vendor Details
+                </a>
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/bill-entry-management/vendor-ledger']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 5" (click)="selectedvalue = 5">
+                    Vendor Ledger
+                </a>
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/bill-entry-management/bill-entry']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 2" (click)="selectedvalue = 2">
+                    Bill Entry
+                </a>
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/bill-entry-management/bills']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 3" (click)="selectedvalue = 3">
+                    Bills
+                </a>
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/bill-entry-management/approve-reject-bill']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 4" (click)="selectedvalue = 4">
+                    Approve/Reject Bill
+                </a>
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/bill-entry-management/payment-from-bank-selection']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 6" (click)="selectedvalue = 6">
+                    Bank Selection
+                </a>
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/bill-entry-management/tobepaid-bills']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 7" (click)="selectedvalue = 7">
+                    ToBePaid Bills
+                </a>
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/expense/bill-entry-management/vendor-payments']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 8" (click)="selectedvalue = 8">
+                    Vendor Payments
+                </a>
+            </div>
+        </nav>
+    </div>
+    <br />
+    <div class="col-lg-12 col-sm-12">
+
+        <div class="tab-content" id="nav-tabContent">
+
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>

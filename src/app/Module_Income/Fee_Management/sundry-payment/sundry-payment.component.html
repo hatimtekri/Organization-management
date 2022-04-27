@@ -1,0 +1,104 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div class="table table-responsive" style="font-family: Garamond" id="printTable" class="d-none m-3">
+        <div style="margin-left: 30px;" id="printOriginalTable">
+            <div style="page-break-after: always;">
+                <div style="height: 100px; "></div>
+                <table style="width: 100%; height: 150px; font-size: 16px;">
+                    <thead>
+                        <th colspan="4" style="text-align: center; font-size: 18px;">{{recieptPrint.paymentMode |
+                            uppercase }} RECEIPT</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="rcpt" style="width: 30%;padding-top: 1em; padding-bottom: 1em;">Receipt No :
+                                <strong>{{recieptPrint.receiptNo}}</strong>
+                            </td>
+                            <td class="rcpt" style="width: 45%;padding-top: 1em; padding-bottom: 1em;"></td>
+                            <td class="rcpt" style="width: 25%;padding-top: 1em; padding-bottom: 1em;">Date : <strong>
+                                    <span>{{recieptPrint.printDate | date:'dd/MM/yyyy' }}</span>
+
+                                </strong></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3" class="rcpt" style="padding-top: 1em; padding-bottom: 1em;">Name :
+                                <strong>{{recieptPrint.name}} ({{recieptPrint.itsId}})</strong>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="rcpt" style="width: 30%;padding-top: 1em; padding-bottom: 1em;">Amount (INR) :
+                                <strong>{{recieptPrint.feePaidAmount |currency:'INR' }} </strong>
+                            </td>
+                            <td class="rcpt" style="padding-top: 1em; padding-bottom: 1em;" colspan="2">Amount in words
+                                :
+                                <strong>{{recieptPrint.amountInWord}}</strong>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="rcpt" style="padding-top: 1em; padding-bottom: 1em;" colspan="2">Prepared By :
+                                {{recieptPrint.createdBy}}
+                            </td>
+                            <td class="rcpt" style="padding-top: 1em; padding-bottom: 1em;" colspan="1">Signature :
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row align-items-center pr-5 pl-5 mb-2">
+        <div class="col-lg-6 p-2 text-center">
+            <div class="navbar navbar-answer col-lg-12 mb-1">
+                <div class="input-group">
+                    <input placeholder="ITS No" class="form-control" *ngIf="!isShow" type="number"
+                        (keyup.enter)="loadData(itsId)" [(ngModel)]="itsId" />
+                    <input placeholder="ITS No" class="form-control" type="number" *ngIf="isShow"
+                        (keyup.enter)="loadData(itsId)" [(ngModel)]="itsId" readonly />
+                    &nbsp;&nbsp;
+                    <button mat-button mat-raised-button color="primary" (click)="loadData(itsId)">Search</button>&nbsp;
+                    <button mat-button mat-raised-button color="warn" (click)="clear()">Clear</button>
+                </div>
+            </div>
+            <div *ngIf="isShow" class=" navbar navbar-answer col-lg-12 mb-1">
+                <span><b>Name:</b>&nbsp;&nbsp;{{name}}</span>
+            </div>
+        </div>
+        <div *ngIf="isShow" class="navbar col-lg-1 p-0 justify-content-center">
+            <img src="https://www.mahadalzahra.org/uploads/Its_Photos/{{itsId}}.jpeg"
+                onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" width="85" height="100"
+                class="img-responsive img-thumbnail" />
+        </div>
+        <div *ngIf="isShow" class="col-lg-5 p-0 pt-lg-1">
+
+            <div class=" navbar navbar-answer col-lg-12 mb-1">
+
+                <input placeholder="Type Amount" class="form-control" type="number" [(ngModel)]="totalAmount" />
+
+            </div>
+            <div class=" navbar navbar-answer col-lg-12 mb-1">
+                <textarea class="form-control" [(ngModel)]="reciept.note" placeholder="Note"></textarea>
+            </div>
+            <div class=" navbar navbar-answer justify-content-center col-lg-12 mb-1">
+                <span>
+                    <button mat-button mat-raised-button color="warn" (click)="submitReciet()">Submit</button>
+                </span>
+            </div>
+            <div class=" navbar navbar-answer justify-content-center col-lg-12 mb-1" *ngIf="isPrint">
+                <span>
+                    <button mat-button mat-raised-button [printStyle]="{table : {'padding': '10px'}}" class="customized"
+                        color="warn" printSectionId="printOriginalTable" ngxPrint>Print
+                        Receipt</button>
+                </span>&nbsp;
+            </div>
+        </div>
+    </div>
+</div>

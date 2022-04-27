@@ -1,0 +1,31 @@
+
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+
+$mzmanage-primary: mat-palette($mat-indigomodified);
+$mzmanage-accent: mat-palette($mat-grey, A200, A100, A400);
+$mzmanage-yellow: mat-palette($mat-yellow, 300, 200 );
+
+$mzmanage-warn: mat-palette($mat-red);
+
+
+$mzmanage-theme: mat-light-theme((
+  color: (
+    primary: $mzmanage-primary,
+    secondary: $mzmanage-yellow,
+    accent: $mzmanage-accent,
+    warn: $mzmanage-warn,
+    
+  )
+));
+
+
+@include angular-material-theme($mzmanage-theme);
+
+$primary: mat-color($mzmanage-primary);
+$accent: mat-color($mzmanage-accent);
+$warn: mat-color($mzmanage-warn);
+$yellow: mat-color($mzmanage-yellow);

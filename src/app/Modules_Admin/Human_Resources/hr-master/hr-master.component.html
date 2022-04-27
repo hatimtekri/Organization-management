@@ -1,0 +1,43 @@
+<div class="col-sm-12 col-lg-12 p-1">
+    <mat-toolbar class="mat-elevation-z6 page-header-toolbar">
+        <span>Human Resources</span>
+    </mat-toolbar>
+    <br />
+    <!-- <div class="justify-content-center">
+        <nav>
+            <div class="nav col-lg-12 m-auto" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/admin/medical/billclearance-audit']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 1" (click)="selectedvalue = 1">
+                    Bill Clearance & Audit
+                </a>
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/admin/medical/billentries-status']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 2" (click)="selectedvalue = 2">
+                    Bill Entries & Status
+                </a>
+                <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/admin/medical/mumbai-audit']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 3" (click)="selectedvalue = 3">
+                    Mumbai Audit
+                </a>
+               <a class="nav-item nav-link active col-lg" id="nav-home-tab" data-toggle="tab"
+                    [routerLink]="['/admin/medical/final-sanction']" role="tab" aria-controls="nav-home"
+                    [attr.aria-selected]="selectedvalue == 4" (click)="selectedvalue = 4">
+                    Final Sanction
+                </a>
+            </div>
+        </nav>
+    </div>
+    <br /> -->
+    <div class="col-lg-12 col-sm-12">
+
+        <div class="tab-content" id="nav-tabContent">
+
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>
+
+

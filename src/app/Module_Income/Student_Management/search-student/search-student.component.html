@@ -1,0 +1,372 @@
+<div class="row justify-content-center align-items-center mb-2 p-3">
+    <nav class="navbar navbar-answer col-lg-12 p-2 text-center">
+        <div class="col-lg-4 p-1">
+            <ng-select class="col-lg-12" [items]="programDD" appearance="string" [searchable]="true" bindLabel="name"
+                bindValue="name" placeholder="Select" appendTo="body" [closeOnSelect]="false" [multiple]="true">
+            </ng-select>
+        </div>
+        <div class="col-lg-6 p-1">
+            <ng-select [items]="activeStatusDD" appearance="string" [searchable]="true" bindLabel="reportName"
+                bindValue="rId" placeholder="Select Program" appendTo="body" [closeOnSelect]="true" [multiple]="false">
+            </ng-select>
+        </div>
+        <div class="col-lg-2 p-1">
+            <button mat-button mat-raised-button color="primary" class="col-lg-9">Search</button>
+        </div>
+    </nav>
+</div>
+
+<div id="accordion">
+    <div class="card">
+        <div class="card-header p-1" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="false" aria-controls="collapseOne">
+                    <span class="pull-left">Bulk Update:</span>
+                    <i class="fa fa-caret-down pull-right"></i>
+                </button>
+            </h5>
+        </div>
+        <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row justify-content-center align-items-center mb-2 p-3">
+                    <nav class="navbar navbar-answer col-lg-12 p-2 text-center">
+                        <div class="col-lg-4 p-1">
+                            <textarea class="form-control" rows="1" placeholder="ITS CSV"></textarea>
+                        </div>
+                        <div class="col-lg-6 p-1">
+                            <ng-select [items]="feecategoryDD" appearance="string" [searchable]="true"
+                                bindLabel="reportName" bindValue="rId" placeholder="Select Program" appendTo="body"
+                                [closeOnSelect]="true" [multiple]="false">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-2 p-1">
+                            <button mat-button mat-raised-button color="primary" class="col-lg-9">Submit</button>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<div id="accordion1" class="mb-1">
+    <div class="card">
+        <div class="card-header p-1" id="headingtwo">
+            <h5 class="mb-0">
+                <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsetwo"
+                    aria-expanded="false" aria-controls="collapsetwo">
+                    <span class="pull-left">Basic Search:</span>
+                    <i class="fa fa-caret-down pull-right"></i>
+                </button>
+            </h5>
+        </div>
+        <div id="collapsetwo" class="collapse hide" aria-labelledby="headingtwo" data-parent="#accordion1">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 p-0">
+                        <nav class="navbar navbar-answer m-1">
+                            <span class="col-lg-12">ITS ID:</span>
+                            <ng-select class="col-lg-12" [items]="itsIdDD" appearance="string" [searchable]="true"
+                                bindLabel="name" bindValue="name" placeholder="Select" appendTo="body"
+                                [closeOnSelect]="false" [(ngModel)]="searchObject.itsId" [multiple]="true">
+                            </ng-select>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 p-0">
+                        <nav class="navbar navbar-answer m-1">
+                            <span class="col-lg-12">Name:</span>
+                            <ng-select class="col-lg-12" [items]="nameDD" appearance="string" [searchable]="true"
+                                bindLabel="name" bindValue="name" placeholder="Select" appendTo="body"
+                                [closeOnSelect]="false" [(ngModel)]="searchObject.studentName" [multiple]="true">
+                            </ng-select>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 p-0">
+                        <nav class="navbar navbar-answer m-1">
+                            <span class="col-lg-12">Program:</span>
+                            <ng-select class="col-lg-12" [items]="programDD" appearance="string" [searchable]="true"
+                                bindLabel="name" bindValue="name" placeholder="Select" appendTo="body"
+                                [closeOnSelect]="false" [multiple]="true">
+                            </ng-select>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 p-0">
+                        <nav class="navbar navbar-answer m-1">
+                            <span class="col-lg-12">Fee Category:</span>
+                            <ng-select class="col-lg-12" [items]="feecategoryDD" appearance="string" [searchable]="true"
+                                bindLabel="name" bindValue="name" placeholder="Select" appendTo="body"
+                                [closeOnSelect]="false" [(ngModel)]="searchObject.fc_name" [multiple]="true">
+                            </ng-select>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-start">
+    <div class="btn btn-group pb-2 pt-2">
+        <button mat-button mat-flat-button color="accent">
+            Total Students&nbsp;&nbsp;
+            <span class="badge badge-info" [innerText]="filterMetadata.count"></span>
+        </button>&nbsp;
+        <!-- <button mat-button mat-flat-button color="primary" (click)="edit = !edit" *ngIf="!edit">
+            Edit Fee Category
+        </button>
+        <button mat-button mat-flat-button color="primary" *ngIf="edit">
+            Save Fee Category
+        </button> -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="text-center col-lg-12 col-sm-12 table-responsive-sm">
+        <table class="table table-bordered">
+            <tr class="table-header">
+                <!-- <td class="align-middle p-2">
+                    <input type="checkbox" id="exampleCheck1" />
+                </td> -->
+                <td class="align-middle p-2">Sr No.</td>
+                <td class="align-middle p-2">Photo</td>
+                <td class="align-middle p-2">ITS No.</td>
+                <td class="align-middle p-2">Name</td>
+                <td class="align-middle p-2">Age</td>
+                <td class="align-middle p-2">Contact Details</td>
+                <td class="align-middle p-2">Program</td>
+                <td class="align-middle p-2">Fee Category</td>
+                <td class="align-middle p-2">Action</td>
+            </tr>
+            <tr class="text-center" *ngFor="let m of students | multiSearchIncome : {
+                itsId: searchObject.itsId,
+                studentName: searchObject.studentName,
+                fc_Name: searchObject.fc_name,
+                activeStatusString: [
+                      searchObject.search_Active ? '1' : undefined,
+                      searchObject.search_Inactive ? '0' : undefined
+                    ]
+              }
+            : filterMetadata;
+        let i = index
+      ">
+                <!-- <td class="align-middle p-2">
+                    <input type="checkbox" id="exampleCheck1" />
+                </td> -->
+                <td class="align-middle p-2">{{ i + 1 }}</td>
+                <td class="align-middle p-2">
+                    <img src="https://www.mahadalzahra.org/uploads/Huffaz_images/{{m.itsId}}.jpeg"
+                        onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" alt="{{ m.itsId }}"
+                        width="60" height="60" class="img-responsive rounded-circle" />
+                </td>
+                <td class="align-middle p-2">{{m.itsId}}</td>
+                <td class="align-middle text-left text-wrap p-2">{{m.studentName}}</td>
+                <td class="align-middle p-2">{{m.age}}</td>
+                <td class="align-middle p-2"><u><a href="#" data-toggle="modal" (click)="contactClick(m)"
+                            data-target=".bd-example-modal-sm">View</a></u></td>
+                <td class="align-middle text-left text-wrap p-2">{{m.pset_Name}}</td>
+                <td class="align-middle text-wrap p-2">
+                    <div *ngIf="!edit">{{m.fc_Name}}</div>
+                    <!-- <ng-select *ngIf="edit" class="col-lg-12" [items]="stdfeecategoryDD" appearance="string"
+                        [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select" appendTo="body"
+                        [closeOnSelect]="false" [multiple]="true">
+                    </ng-select> -->
+                </td>
+                <td class="align-middle p-2">
+                    <a (click)="changeStudentStatus(m.itsId!,'dummy')" type="button" title="Active/In-active"
+                        class="btn p-1"><img src="./assets/decision.png" width="27" height="28" /></a>
+                    <a type="button" title="View Fee Ledger" data-toggle="modal" data-target=".bd-example-modal-lg"
+                        class="btn p-1"><img src="./assets/ledger.png" width="27" height="28" /></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<input type="hidden" readonly [(ngModel)]="filterMetadata.count" />
+
+<!-- contact modal -->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="mySmallModalLabel">
+                    <b class="text-danger">Contact Details</b><br />({{studentContacts.studentName}})
+                </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 p-1 pl-4">
+                    <nav class="navbar navbar-answer2 m-1 p-0">
+                        <div class="col-lg-12">
+                            <strong>Email Id:</strong>
+                            <div class="input-group">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary p-1" (click)="copyInputMessage(semailid)">
+                                        <i class="fa fa-clipboard"></i>
+                                    </span>
+                                </label>
+                                <input class="form-control" type="text" [value]="studentContacts.emailId" readonly
+                                    #semailid>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-lg-5 p-1 pr-4">
+                    <nav class="navbar navbar-answer2 m-1 p-0">
+                        <div class="col-lg-12">
+                            <strong class="align-middle">Mobile No:</strong>
+                            <div class="input-group">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary p-1" (click)="copyInputMessage(smobno)">
+                                        <i class="fa fa-clipboard"></i>
+                                    </span>
+                                </label>
+                                <input class="form-control" type="text" [value]="studentContacts.mobileNo" readonly
+                                    #smobno>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-lg-7 p-1 pl-4">
+                    <nav class="navbar navbar-answer2 m-1 p-0">
+                        <div class="col-lg-12">
+                            <strong class="align-middle">Father Email ID:</strong>
+                            <div class="input-group">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary p-1" (click)="copyInputMessage(femailid)">
+                                        <i class="fa fa-clipboard"></i>
+                                    </span>
+                                </label>
+                                <input class="form-control" type="text" [value]="studentContacts.fatherEmail" readonly
+                                    #femailid>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-lg-5 p-1 pr-4">
+                    <nav class="navbar navbar-answer2 m-1 p-0">
+                        <div class="col-lg-12">
+                            <strong class="align-middle">Father Mobile No:</strong>
+                            <div class="input-group">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary p-1" (click)="copyInputMessage(fmobno)">
+                                        <i class="fa fa-clipboard"></i>
+                                    </span>
+                                </label>
+                                <input class="form-control" type="text" [value]="studentContacts.fatherMobile" readonly
+                                    #fmobno>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-lg-7 p-1 pl-4">
+                    <nav class="navbar navbar-answer2 m-1 p-0">
+                        <div class="col-lg-12">
+                            <strong class="align-middle">Mother Email ID:</strong>
+                            <div class="input-group">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary p-1" (click)="copyInputMessage(memailid)">
+                                        <i class="fa fa-clipboard"></i>
+                                    </span>
+                                </label>
+                                <input class="form-control" type="text" [value]="studentContacts.motherEmail" readonly
+                                    #memailid>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-lg-5 p-1 pr-4">
+                    <nav class="navbar navbar-answer2 m-1 p-0">
+                        <div class="col-lg-12">
+                            <strong class="align-middle">Mother Mobile No:</strong>
+                            <div class="input-group">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary p-1" (click)="copyInputMessage(mmobno)">
+                                        <i class="fa fa-clipboard"></i>
+                                    </span>
+                                </label>
+                                <input class="form-control" type="text" [value]="studentContacts.motherMobile" readonly
+                                    #mmobno>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- fee ledger -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="btn-group pb-2 pt-2">
+                <div class="row justify-content-start">
+
+                    <div class="col-lg col-sm-6 p-1">
+                        <button mat-button mat-flat-button color="accent">
+                            Alloted&nbsp;&nbsp;
+                            <span class="badge badge-primary" [innerText]="40000"></span>
+                        </button>
+                    </div>
+                    <div class="col-lg col-sm-6 p-1">
+                        <button mat-button mat-flat-button color="accent">
+                            Paid&nbsp;&nbsp;
+                            <span class="badge badge-success" [innerText]="250000"></span>
+                        </button>
+                    </div>
+                    <div class="col-lg col-sm-6 p-1">
+                        <button mat-button mat-flat-button color="accent">
+                            Waived&nbsp;&nbsp;
+                            <span class="badge badge-info" [innerText]="5000"></span>
+                        </button>
+                    </div>
+                    <div class="col-lg col-sm-6 p-1">
+                        <button mat-button mat-flat-button color="accent">
+                            Reversed&nbsp;&nbsp;
+                            <span class="badge badge-info" [innerText]="5000"></span>
+                        </button>
+                    </div>
+                    <div class="col-lg col-sm-6 p-1">
+                        <button mat-button mat-flat-button color="accent">
+                            Due&nbsp;&nbsp;
+                            <span class="badge badge-danger" [innerText]="10000"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="text-center col-lg-12 col-sm-12 table-responsive">
+                    <table class="table table-bordered table-sm">
+                        <tr class="table-header">
+                            <td class="align-middle p-2">ID</td>
+                            <td class="align-middle p-2">Date & Time</td>
+                            <td class="align-middle p-2">Hub Allocated</td>
+                            <td class="align-middle p-2">Hub Paid</td>
+                            <td class="align-middle p-2">Balance</td>
+                            <td class="align-middle p-2">Payment Type</td>
+                            <td class="align-middle p-2">Note</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="align-middle p-2">ID</td>
+                            <td class="align-middle p-2">Date & Time</td>
+                            <td class="align-middle p-2">Hub Allocated</td>
+                            <td class="align-middle p-2">Hub Paid</td>
+                            <td class="align-middle p-2">Balance</td>
+                            <td class="align-middle p-2">Payment Type</td>
+                            <td class="align-middle p-2">Note</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<div *ngIf="page">
+
+
+
+
+<div class="row justify-content-center scrollable-div-x"  >
+    <div class="text-center col-lg-12 col-sm-12 scrollable-table-x">
+        <table class="table table-bordered table-sm">
+            <tr class="table-header">
+                <td>Photo</td>
+                <td>ITS</td>
+                <td>Name</td>
+                <td>Khidmat Mauze</td>
+                <td>Self Audit</td>
+                <td>Spouse Audit</td>
+                <td>Children Audit</td>
+                <td>Total Audit</td>
+                <td>Action</td>
+            </tr>
+            <tr >
+                <td class="align-middle">
+                  <img
+                  src="https://mahadalzahra.org{{ userData.photo }}"
+                  alt="{{ userData.aplicantItsId }}"
+                  width="100"
+                  height="100"
+                  class="img-responsive img-thumbnail"
+                />
+                </td>
+                <td class="align-middle">{{userData.aplicantItsId}}</td>
+                <td class="align-middle text-left">{{userData.aplicantName}}</td>
+                <td class="align-middle">{{userData.moze}}</td>
+                <td class="align-middle">{{userData.selfAmount}}</td>
+                <td class="align-middle">{{userData.spouseAmount}}</td>
+                <td class="align-middle">{{userData.childerenAmount}}</td>
+                <td class="align-middle text-danger">{{userData.billAmount}}</td>
+                <td class="align-middle">
+                    <button mat-button mat-raised-button color="primary" (click)="submitSuratAudit()" >Submit</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br />
+<br />
+<div class="btn-group pull-left">
+    <a (click)="AcceptBills('a')" ><button class="btn btn-success">Accept
+        </button></a>
+    &nbsp;
+    <a (click)="AcceptBills('r')"  ><button class="btn btn-danger">Reject
+    </button></a>
+</div>
+<br />
+<br />
+
+<div class="col-lg-12 col-sm-12 p-0">
+    <div class="row justify-content-center mb-2">
+        <nav class="navbar navbar-part3 col-lg-12">
+            <span class="col-lg-12 text-center">Bill Summary</span>
+        </nav>
+    </div>
+    <div class="row justify-content-center mb-2">
+
+        <div class="row justify-content-center col-lg-12 col-sm-12 scrollable-div-x">
+
+            <div class="text-center col-lg-12 col-sm-12 scrollable-table-x">
+                <table class="table table-bordered">
+                    <tr class="table-header">
+                        <td>
+                            <input type="checkbox" (change)="select()"  [(ngModel)]="selectAll" id="exampleCheck1">
+                        </td>
+                        <td>Relation</td>
+                        <td>Bill Category</td>
+                        <td>Bill Type</td>
+                        <td>Date</td>
+                        <td>Bill No.</td>
+                        <td>Doctor/Place Name</td>
+                        <td>File</td>
+                        <td>Treatment Details</td>
+                        <td>Araz Amount</td>
+                        <td>Audit Amount</td>
+
+                    </tr>
+                    <tr class="text-center" *ngFor="let m of MedicalBillsList" [class]="m.rowCss" >
+                        <td class="align-middle">
+                            <input type="checkbox" [(ngModel)]="m.select" id="exampleCheck1">
+                        </td>
+                        <td class="align-middle">{{m.billRelationName}}</td>
+                        <td class="align-middle">{{m.billRequestFor}}</td>
+                        <td class="align-middle">{{m.billType}}</td>
+                        <td class="align-middle">{{m.billDate | date: 'dd-MM-yyyy' }}</td>
+                        <td class="align-middle">{{m.billNumber}}</td>
+                        <td class="align-middle">{{m.billFrom}}</td>
+
+                        <td class="align-middle">
+                            <a class="btn btn-warning btn-sm rounded-circle" href="https://mahadalzahra.org/uploads/medicalBills/{{m.id}}.pdf" target="_blank"><i
+                                    class="fa fa-file-pdf-o"></i></a>
+                        </td>
+                        <td class="align-middle">{{m.illness}}</td>
+                        <td class="align-middle">{{m.billAmount}}</td>
+                        <td class="align-middle">
+                            <input placeholder="Type" (change)="changeAmount(m,m.amount_billClearance!)" [(ngModel)]="m.amount_billClearance"  class="form-control" type="number"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

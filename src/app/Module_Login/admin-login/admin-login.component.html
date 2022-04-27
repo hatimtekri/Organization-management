@@ -1,0 +1,59 @@
+<!-- <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#153E71" type="ball-clip-rotate-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner> -->
+  <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#153E71" type="ball-clip-rotate-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner>
+
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-6 align-self-lg-center align-self-sm-start">
+              <div class="col-lg-8 mx-lg-auto d-none d-sm-block">
+                  <img style="margin-top: 15px" src="./assets/QismLogoMain.png" alt="Mz-Management" width="600"
+                      height="600" />
+              </div>
+          </div>
+          <div class="col-lg-6 col-sm-12 align-self-center">
+              <div class="card col-lg-6 col-sm-12 mx-lg-auto">
+                  <div class="card-body">
+                      <div class="text-center align-middle justify-content-center d-block d-sm-none">
+                          <img style="margin-top: 15px" src="./assets/QismLogoMain.png" width="120" height="115"
+                              alt="Mz-Management" />
+                      </div>
+                      <mat-toolbar class="page-subheader-toolbar justify-content-center">
+                          <span>Admin Login</span>
+                      </mat-toolbar>
+                      <div>
+                          <div class="alert alert-{{status.type}}" role="alert">
+                              <!-- <button type="button" class="close" ng-click="status.hide()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+                              {{status.message}}
+                          </div>
+                          <div class="row mb-4 form-group">
+                              <div class="col-lg-12 col-sm-12">
+                                  <!-- <strong
+                                  class="text-center align-middle">UserName</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                                  <input matInput [(ngModel)]="loginData.itsId" class="form-control" name="itsId"
+                                      placeholder="ItsId">
+                              </div>
+
+                          </div>
+                          <div class="row mb-4 form-group">
+                              <div class="col-lg-12 col-sm-12">
+                                  <!-- <strong
+                                  class="text-center align-middle">Password</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                                  <input type="password" matInput [(ngModel)]="loginData.password" class="form-control" name="password" (keyup.enter)="loginButton()"
+                                      placeholder="Password">
+
+                              </div>
+                          </div>
+
+                          <button mat-button mat-raised-button (click)="loginButton()" color="primary"
+                              class="form-control login-btn">
+                              Login </button>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>

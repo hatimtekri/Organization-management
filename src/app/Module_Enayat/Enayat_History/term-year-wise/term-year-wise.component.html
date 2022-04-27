@@ -1,0 +1,94 @@
+<div class="btn-group pull-right">
+    <a><button mat-button mat-raised-button color="warns">Export</button></a>
+</div>
+<br />
+<br />
+<br />
+<div class="row justify-content-center">
+    <div class="text-center col-lg-12 col-sm-12 table-responsive">
+        <table class="table table-bordered table-sm">
+            <tr class="table-header table-font-yellow">
+                <td class="align-middle">Select QTM Category</td>
+                <td class="align-middle">Enayat Type</td>
+                <td class="align-middle">Enayat Year & Term<br />(Multiple options can be selected)</td>
+                <td class="align-middle">Action</td>
+            </tr>
+            <tr>
+                <td class="align-middle">
+                    <ng-select [items]="category" appearance="string" [searchable]="true" bindLabel="name"
+                        bindValue="name" placeholder="Select" [(ngModel)]="serach.category"  appendTo="body" [multiple]="false">
+                    </ng-select>
+                </td>
+                <td class="align-middle">
+                    <ng-select [items]="type" appearance="string" [searchable]="true" bindLabel="name"
+                        bindValue="name" (change)="setPeriod()" placeholder="Select" [(ngModel)]="serach.type" appendTo="body" [multiple]="false">
+                    </ng-select>
+                </td>
+                <td class="align-middle">
+                    <ng-select *ngIf="serach.type == 'Medical'" [items]="periods_m" appearance="string" [searchable]="true" bindLabel="periodName"
+                        bindValue="id" placeholder="Select"periodId appendTo="body" [multiple]="false">
+                    </ng-select>
+                    <ng-select *ngIf="serach.type == 'Scholarship'" [items]="periods_s" appearance="string" [searchable]="true" bindLabel="periodName"
+                    bindValue="id" placeholder="Select" [(ngModel)]="serach.periodId" appendTo="body" [multiple]="false">
+                </ng-select>
+                </td>
+                <td class="align-middle">
+                    <button class="btn btn-yellow" type="button">Search</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br />
+<div class="row justify-content-center scrollable-div-x">
+    <div class="text-center col-lg-12 col-sm-12 scrollable-table-x">
+        <table class="table table-bordered table-sm">
+            <tr class="table-header">
+                <td>Sr No.</td>
+                <td>Photo</td>
+                <td>ITS</td>
+                <td>Name</td>
+                <td>Khidmat Mauze</td>
+                <td>Category</td>
+                <td>Type</td>
+                <td>Year</td>
+                <td>Term</td>
+                <td>Bill Period</td>
+                <td>Original Bills</td>
+                <td>Cover Page</td>
+                <td>Bills Summary</td>
+                <td>Currency</td>
+                <td>Self</td>
+                <td>Spouse</td>
+                <td>1st Child</td>
+                <td>2nd Child</td>
+                <td>3rd Child</td>
+                <td>4th Child</td>
+                <td>Enayat Amount</td>
+            </tr>
+            <tr>
+                <td class="align-middle">Sr No.</td>
+                <td class="align-middle">Photo</td>
+                <td class="align-middle">ITS</td>
+                <td class="align-middle text-left">Name</td>
+                <td class="align-middle">Khidmat Mauze</td>
+                <td class="align-middle">Category</td>
+                <td class="align-middle">Type</td>
+                <td class="align-middle">Year</td>
+                <td class="align-middle">Term</td>
+                <td class="align-middle">Bill Period</td>
+                <td class="align-middle">Original Bills</td>
+                <td class="align-middle">Cover Page</td>
+                <td class="align-middle">Bills Summary</td>
+                <td class="align-middle">Currency</td>
+                <td class="align-middle">Self</td>
+                <td class="align-middle">Spouse</td>
+                <td class="align-middle">1st Child</td>
+                <td class="align-middle">2nd Child</td>
+                <td class="align-middle">3rd Child</td>
+                <td class="align-middle">4th Child</td>
+                <td class="align-middle">Enayat Amount</td>
+            </tr>
+        </table>
+    </div>
+</div>

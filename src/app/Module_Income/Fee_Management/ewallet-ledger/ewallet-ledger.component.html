@@ -1,0 +1,93 @@
+<div class="row align-items-center pr-5 pl-5 mb-2">
+    <div class="col-lg-6 p-2 text-center">
+        <div class="navbar navbar-answer col-lg-12 mb-1">
+            <div class="input-group">
+                <input placeholder="ITS No" class="form-control" (keyup.enter)="loadData(itsId)" type="number"
+                    [(ngModel)]="itsId" />&nbsp;&nbsp;
+                <button mat-button mat-raised-button color="primary" (click)="loadData(itsId)">View
+                    Ledger</button>&nbsp;
+                <button mat-button mat-raised-button color="warn">Clear</button>
+            </div>
+        </div>
+        <div *ngIf="isShow" class=" navbar navbar-answer col-lg-12 mb-1">
+            <span><b>Name:</b>&nbsp;&nbsp;{{name}}</span>
+        </div>
+        
+    </div>
+    <div *ngIf="isShow" class="navbar col-lg-1 p-0 justify-content-center">
+        <img src="https://www.mahadalzahra.org/uploads/Its_Photos/{{itsId}}.jpeg"
+            onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" width="85" height="100"
+            class="img-responsive img-thumbnail" />
+    </div>
+    <div *ngIf="isShow && transfer" class="col-lg-5 p-0 pt-lg-1">
+        <div class=" navbar navbar-answer col-lg-12 mb-1">
+
+            <input placeholder="To ITS ID" class="form-control" type="number" [(ngModel)]="obj.itsId_to" />
+
+        </div>
+        <div class=" navbar navbar-answer col-lg-12 mb-1">
+
+            <input placeholder="Type Amount" class="form-control" type="number" [(ngModel)]="obj.debitNo" />
+
+        </div>
+        <div class=" navbar navbar-answer col-lg-12 mb-1">
+            <textarea class="form-control" placeholder="Note" [(ngModel)]="obj.note"></textarea>
+        </div>
+        
+        <div class=" navbar navbar-answer justify-content-center col-lg-12 mb-1">
+            <span>
+                <button mat-button mat-raised-button color="warn" (click)="submit()">Transfer</button>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isShow" class="row justify-content-start-lg">
+    <div class="btn-group pb-2 pt-2">
+
+        <button class="btn btn-light" color="accent">
+            Credited&nbsp;&nbsp;
+            <span class="badge badge-primary" [innerText]="credit"></span>
+        </button>
+
+
+        <button class="btn btn-light" color="accent">
+            Debited&nbsp;&nbsp;
+            <span class="badge badge-success" [innerText]="debit"></span>
+        </button>
+
+
+        <button class="btn btn-light" color="accent">
+            Balance&nbsp;&nbsp;
+            <span class="badge badge-info" [innerText]="balance"></span>
+        </button>
+
+    </div>
+</div>
+
+<div *ngIf="isShow" class="row">
+    <div class="text-center col-lg-12 col-sm-12 table-responsive">
+        <table class="table table-bordered table-sm">
+            <tr class="table-header">
+                <td class="align-middle p-2">ID</td>
+                <td class="align-middle p-2">Date & Time</td>
+                <td class="align-middle p-2">Debit</td>
+                <td class="align-middle p-2">Credit</td>
+                <td class="align-middle p-2">Balance</td>
+                <td class="align-middle p-2">Type</td>
+                <td class="align-middle p-2">Note</td>
+                <td class="align-middle p-2">CreatedBy</td>
+            </tr>
+            <tr class="text-center" *ngFor="let m of leaders">
+                <td class="align-middle p-2">{{m.id}}</td>
+                <td class="align-middle p-2">{{m.dateTime | date}}</td>
+                <td class="align-middle p-2">{{m.debit}}</td>
+                <td class="align-middle p-2">{{m.credit}}</td>
+                <td class="align-middle p-2">{{m.balance}}</td>
+                <td class="align-middle p-2">{{m.paymentType}}</td>
+                <td class="align-middle p-2">{{m.note}}</td>
+                <td class="align-middle p-2">{{m.createdBy}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

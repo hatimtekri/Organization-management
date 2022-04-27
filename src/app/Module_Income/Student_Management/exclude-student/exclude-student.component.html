@@ -1,0 +1,180 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div class="row justify-content-center">
+        <div class="navbar navbar-answer col-lg-12 mb-2">
+            <div class="input-group">
+                <ng-select class="col-lg-11" [items]="programDD" appearance="string" [searchable]="true"
+                    bindLabel="reportName" bindValue="rId" [(ngModel)]="allocateManual.monthList"
+                    placeholder="Select Program" appendTo="body" [closeOnSelect]="false" [multiple]="true">
+                </ng-select>&nbsp;&nbsp;
+                <button mat-button mat-raised-button color="primary" (click)="search()">Search</button>&nbsp;
+            </div>
+        </div>
+        <div *ngIf="students.length == 0 && isloaded">
+            <div class="row justify-content-center">
+                <h2><strong class="text-danger">No students found.</strong></h2>
+            </div>
+        </div>
+        <div class="row justify-content-center" *ngIf="students.length != 0">
+            <div class="col-lg-12 col-sm-12 table table-responsive">
+                <table class="table-bordered">
+                    <tr class="text-center table-header">
+
+                        <td class="align-middle p-2">Sr No.</td>
+                        <td class="align-middle p-2">Photo</td>
+                        <td class="align-middle p-2">ITS No.</td>
+                        <td class="align-middle p-2">Name</td>
+                        <td class="align-middle p-2">Age</td>
+                        <!-- <td class="align-middle p-2">Contact Details</td> -->
+                        <td class="align-middle p-2">Program</td>
+                        <td class="align-middle p-2">Excluded Month</td>
+                        <td class="align-middle p-2">Excluded Year</td>
+                        <td class="align-middle p-2" *ngIf="delete && onOffModule">Action</td>
+                    </tr>
+                    <tr class="text-center" *ngFor="let m of students ; let i = index" [class]="m.activeStatusString2">
+                        <td class="align-middle p-2">{{ i + 1 }}</td>
+                        <td class="align-middle p-2">
+                            <div id="stdphoto">
+                                <img src="https://www.mahadalzahra.org/uploads/Its_Photos/{{m.itsId}}.jpeg"
+                                    onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`"
+                                    width="60" height="60" class="img-responsive rounded-circle" />
+                            </div>
+                        </td>
+                        <td class="align-middle p-2">{{m.itsId}}</td>
+                        <td class="align-middle text-left text-wrap p-2">{{m.studentName}}</td>
+                        <td class="align-middle p-2">{{m.age}}</td>
+                        <!-- <td class="align-middle p-2"><u><a href="#" data-toggle="modal" (click)="contactClick(m)"
+                                    data-target=".bd-example-modal-sm">View</a></u></td> -->
+                        <td class="align-middle text-left text-wrap p-2">{{m.pset_Name}}</td>
+                        <td class="align-middle p-2"><b class="text-danger">{{m.hijriMonthName}}</b></td>
+                        <td class="align-middle p-2"><b class="text-danger">{{m.hijriyear}}</b></td>
+                        <td class="align-middle p-2" *ngIf="delete && onOffModule">
+                            <button mat-button mat-raised-button color="warn" (click)="deleteFromExcluded(m.id)">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- contact modal -->
+    <!-- <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="mySmallModalLabel">
+                        <b class="text-danger">Contact Details</b><br />({{studentContacts.studentName}})
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-lg-7 p-1 pl-4">
+                        <nav class="navbar navbar-answer2 m-1 p-0">
+                            <div class="col-lg-12">
+                                <strong>Email Id:</strong>
+                                <div class="input-group">
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-primary p-1" (click)="copyInputMessage(semailid)">
+                                            <i class="fa fa-clipboard"></i>
+                                        </span>
+                                    </label>
+                                    <input class="form-control" type="text" [value]="studentContacts.emailId" readonly
+                                        #semailid>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-lg-5 p-1 pr-4">
+                        <nav class="navbar navbar-answer2 m-1 p-0">
+                            <div class="col-lg-12">
+                                <strong class="align-middle">Mobile No:</strong>
+                                <div class="input-group">
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-primary p-1" (click)="copyInputMessage(smobno)">
+                                            <i class="fa fa-clipboard"></i>
+                                        </span>
+                                    </label>
+                                    <input class="form-control" type="text" [value]="studentContacts.mobileNo" readonly
+                                        #smobno>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-lg-7 p-1 pl-4">
+                        <nav class="navbar navbar-answer2 m-1 p-0">
+                            <div class="col-lg-12">
+                                <strong class="align-middle">Father Email ID:</strong>
+                                <div class="input-group">
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-primary p-1" (click)="copyInputMessage(femailid)">
+                                            <i class="fa fa-clipboard"></i>
+                                        </span>
+                                    </label>
+                                    <input class="form-control" type="text" [value]="studentContacts.fatherEmail"
+                                        readonly #femailid>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-lg-5 p-1 pr-4">
+                        <nav class="navbar navbar-answer2 m-1 p-0">
+                            <div class="col-lg-12">
+                                <strong class="align-middle">Father Mobile No:</strong>
+                                <div class="input-group">
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-primary p-1" (click)="copyInputMessage(fmobno)">
+                                            <i class="fa fa-clipboard"></i>
+                                        </span>
+                                    </label>
+                                    <input class="form-control" type="text" [value]="studentContacts.fatherMobile"
+                                        readonly #fmobno>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-lg-7 p-1 pl-4">
+                        <nav class="navbar navbar-answer2 m-1 p-0">
+                            <div class="col-lg-12">
+                                <strong class="align-middle">Mother Email ID:</strong>
+                                <div class="input-group">
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-primary p-1" (click)="copyInputMessage(memailid)">
+                                            <i class="fa fa-clipboard"></i>
+                                        </span>
+                                    </label>
+                                    <input class="form-control" type="text" [value]="studentContacts.motherEmail"
+                                        readonly #memailid>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-lg-5 p-1 pr-4">
+                        <nav class="navbar navbar-answer2 m-1 p-0">
+                            <div class="col-lg-12">
+                                <strong class="align-middle">Mother Mobile No:</strong>
+                                <div class="input-group">
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-primary p-1" (click)="copyInputMessage(mmobno)">
+                                            <i class="fa fa-clipboard"></i>
+                                        </span>
+                                    </label>
+                                    <input class="form-control" type="text" [value]="studentContacts.motherMobile"
+                                        readonly #mmobno>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

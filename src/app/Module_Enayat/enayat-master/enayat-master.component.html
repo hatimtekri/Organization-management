@@ -1,0 +1,184 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#153E71" type="ball-clip-rotate-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<mat-toolbar color="primary" class="mat-elevation-z6 navbar fixed-top">
+  <div class="d-none d-sm-block">
+    <button mat-icon-button id="sidebarCollapse">
+      <mat-icon>menu</mat-icon>
+
+    </button>
+    <img src="./assets/QismLogoMain.png" alt="Avatar" class="avatar">
+    MZ Management Admin Login
+  </div>
+  <div class="d-block d-sm-none">
+    <button mat-icon-button id="sidebarCollapse">
+      <mat-icon>menu</mat-icon>
+
+    </button>
+    <img src="./assets/QismLogoMain.png" alt="Avatar" class="avatar">
+    Admin Login
+  </div>
+  <div class="float-right">
+    <!-- <img src="../../../assets/30402940.jpeg" alt="Avatar" class="avatar d-none d-sm-block"> -->
+    <img src="https://mahadalzahra.org/uploads/User_images/{{user1.itsId}}.jpeg" alt="{{user1.itsId}}" class="avatar"
+      [matMenuTriggerFor]="menu">
+
+    <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>view_headline</mat-icon>
+                </button> -->
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>account_circle</mat-icon>
+        <span>{{user1.userName}}</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span><a [routerLink]="['/facultylogin']">Logout</a></span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+<br />
+<br />
+<br />
+
+<div class="wrapper">
+  <nav id="sidebar">
+    <!-- <div class="sidebar-header">
+        <h3>Modules</h3>
+      </div> -->
+
+
+    <ul class="list-unstyled components">
+      <li class="anything">
+        <a [routerLink]="['/dashboard']" target="_blank">Dashboard</a>
+      </li>
+
+
+      <li class="active">
+        <a href="#personal" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Enayat</a>
+        <ul class="collapse list-unstyled" id="personal">
+          <li>
+            <a [routerLink]="['/enayat/enayat-history']">Enayat History</a>
+          </li>
+          <li>
+            <a [routerLink]="['/enayat/medical']">Medical</a>
+          </li>
+          <li>
+            <a [routerLink]="['/enayat/scholarship']">Scholarship</a>
+          </li>
+
+        </ul>
+      </li>
+      <!-- <li class="active">
+        <a href="#hr" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Human Resources</a>
+        <ul class="collapse list-unstyled" id="hr">
+          <li>
+            <a [routerLink]="['/admin/hr-master']">Faculty Search</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/kg-management']">Faculty Management</a>
+          </li>
+        </ul>
+      </li>
+      <li class="active">
+        <a href="#pd" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Professional Development</a>
+        <ul class="collapse list-unstyled" id="pd">
+          <li>
+            <a [routerLink]="['/admin/training']">WH Training</a>
+          </li>
+        </ul>
+      </li> -->
+
+
+      <!-- <li class="active">
+            <a href="#academic" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Academic</a>
+            <ul class="collapse list-unstyled" id="academic">
+              <li >
+                <a [routerLink]="['/faculty/training-teacher']">Training Teacher</a>
+              </li>
+              <li >
+                <a [routerLink]="['/faculty/training-masool']">Training Masul</a>
+              </li>
+              <li >
+                <a [routerLink]="['/faculty/tadrees']">Nisaab Tadrees</a>
+              </li>
+              <li>
+                <a [routerLink]="['/faculty/diraasat-quraniyah']">Diraasat Quraniyah</a>
+              </li>
+            </ul>
+          </li> -->
+
+
+      <!-- <li class="active">
+          <a href="#admin" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Administrative</a>
+          <ul class="collapse list-unstyled" id="admin">
+            <li>
+              <a href="#">Profile</a>
+            </li>
+            <li>
+              <a href="#">Leave Application</a>
+            </li>
+            <li>
+              <a href="#">Medical Araz</a>
+            </li>
+            <li>
+              <a href="#">Scholarship Araz</a>
+            </li>
+          </ul>
+        </li> -->
+
+
+      <!-- <li class="active" >
+            <a href="#professional" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Professional
+              Development</a>
+            <ul class="collapse list-unstyled" id="professional">
+              <li>
+                <a [routerLink]="['/faculty/training']">Training</a>
+              </li>
+            </ul>
+          </li> -->
+
+
+
+      <!-- <li class="anything">
+            <a [routerLink]="['/faculty/instructions']">Instructions</a>
+          </li> -->
+
+
+
+      <!-- <li class="anything">
+          <a href="#">Feedback</a>
+        </li> -->
+
+
+
+    </ul>
+
+
+
+
+  </nav>
+  <div id="content">
+    <!-- <div class="row">
+      </div> -->
+    <!-- <div class="alert alert-danger" role="alert">
+       <button type="button" class="close" ng-click="status.hide()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        Error Try
+      </div> -->
+
+    <router-outlet></router-outlet>
+
+  </div>
+
+</div>
+<!-- <a id="back-to-top" class="btn btn-light btn-lg back-to-top" role="button"><i
+    class="fa fa-chevron-up"></i></a> -->
+<div class="scroll-to-top rounded-circle" [ngClass]="{'show-scrollTop': windowScrolled}">
+  <button type="button" class="btn active" data-toggle="button" aria-pressed="true" (click)="scrollToTop()"
+    title="Scroll to top">
+    <i class="fa fa-chevron-up"></i>
+  </button>
+</div>

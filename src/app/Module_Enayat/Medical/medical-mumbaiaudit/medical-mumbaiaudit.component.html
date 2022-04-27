@@ -1,0 +1,173 @@
+<div *ngIf="page">
+    <div id="navbar-example3" class="btn-group pull-right">
+        <a href="#item-1"><button mat-button mat-flat-button color="accent">Part-1 Audit&nbsp;&nbsp;
+                <span class="badge badge-warning">{{pending}}</span>
+            </button></a>
+        &nbsp;
+        <a href="#item-2"><button mat-button mat-flat-button color="accent">Part-2 Enayat Nizam&nbsp;&nbsp;
+                <span class="badge badge-success">{{pending2}}</span>
+            </button></a>
+    </div>
+    <br />
+    <br />
+    <div data-spy="scroll" data-target="#navbar-example3" data-offset="0">
+        <input [(ngModel)]="searchText" class="form-control justify-content-center col-lg-12" placeholder="Search" />
+        <br />
+        <div class="btn-group pull-left">
+            <button mat-button mat-raised-button color="primary" (click)="submitBulkPart1()">Submit Selected</button>
+        </div>
+        <br />
+        <br />
+        <div id="item-1" class="row justify-content-center mb-2">
+            <nav class="navbar navbar-part3 col-lg-12">
+                <span class="col-lg-12 text-center">Part-1 Audit</span>
+            </nav>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+                <table class="table table-bordered table-sm">
+                    <tr class="table-header">
+                        <td>
+                            <input type="checkbox" (change)="select()" [(ngModel)]="selectAll" id="exampleCheck1">
+                        </td>
+                        <td class="align-middle">Sr No.</td>
+                        <td class="align-middle">Photo</td>
+                        <td class="align-middle">ITS</td>
+                        <td class="align-middle">Name</td>
+                        <td class="align-middle">Khidmat Mauze</td>
+                        <td class="align-middle">Year & Term</td>
+                        <td class="align-middle">Currency</td>
+                        <td class="align-middle">Relation</td>
+                        <td class="align-middle">Araz Amount</td>
+                        <td class="align-middle">Surat Audit</td>
+                        <td class="align-middle">Mumbai Audit</td>
+                        <!-- <td class="align-middle">Remarks</td> -->
+                        <!-- <td class="align-middle">Action</td> -->
+                    </tr>
+                    <tr *ngFor="let m of MedicaldataForMumbaiAudit | searchnew : searchText "
+                        [class.foreigner]="m.currencysymbol !== 'INR' ">
+                        <td *ngIf="m.display" [attr.rowspan]="m.rowSpan" class="align-middle">
+                            <input type="checkbox" [(ngModel)]="m.selected" id="exampleCheck1">
+                        </td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.srNo}}</td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+                            <img src="https://mahadalzahra.org{{ m.photo }}" alt="{{ m.aplicantItsId }}" width="85"
+                                height="100" class="img-responsive" />
+                        </td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.aplicantItsId}}</td>
+                        <td *ngIf="m.display" class="align-middle text-left" [attr.rowspan]="m.rowSpan">
+                            {{m.aplicantName}}
+                        </td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.moze}}</td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.year}}<br />{{m.term}}
+                        </td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.currencysymbol}}</td>
+                        <td class="align-middle">{{m.billRelationName}}</td>
+                        <td class="align-middle">{{m.totalBillAmount}}</td>
+                        <td class="align-middle">{{m.level1Amount}}</td>
+                        <td class="align-middle">
+                            <input placeholder="Type" [(ngModel)]="m.level1_1Amount" class="form-control max-content"
+                                type="number" />
+                        </td>
+                        <!-- <td *ngIf="m.display" class="align-middle pending" [attr.rowspan]="m.rowSpan">
+                  <input placeholder="Type" class="form-control"   type="text"/>
+              </td> -->
+                        <!-- <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+                        <button mat-button mat-raised-button color="primary" (click)="submitPart1(m)">Submit</button>
+                    </td> -->
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <input [(ngModel)]="searchText1" class="form-control justify-content-center col-lg-12" placeholder="Search" />
+        <br />
+        <div class="btn-group pull-left">
+            <button mat-button mat-raised-button color="primary" (click)="submitBulkPart2()">Submit Selected</button>
+            &nbsp;
+            <a (click)="backtoPart1()"><button mat-button mat-raised-button color="warn">Back to Part-1</button></a>
+
+        </div>
+
+        <br />
+        <br />
+        <div id="item-2" class="row justify-content-center mb-2">
+            <nav class="navbar navbar-part3 col-lg-12">
+                <span class="col-lg-12 text-center">Part-2 Enayat Nizam</span>
+            </nav>
+        </div>
+        <div class="row justify-content-center">
+
+            <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+                <table class="table table-bordered table-sm">
+                    <tr class="table-header">
+                        <td>
+                            <input type="checkbox" (change)="select2()" [(ngModel)]="selectAll2" id="exampleCheck1">
+                        </td>
+                        <td class="align-middle">Sr No.</td>
+                        <td class="align-middle">Photo</td>
+                        <td class="align-middle">ITS</td>
+                        <td class="align-middle">Name</td>
+                        <td class="align-middle">Khidmat Mauze</td>
+                        <td class="align-middle">Year & Term</td>
+                        <td class="align-middle">Currency</td>
+                        <td class="align-middle">Relation</td>
+                        <td class="align-middle">Araz Amount</td>
+                        <td class="align-middle">Surat Audit</td>
+                        <td class="align-middle">Mumbai Audit</td>
+                        <td class="align-middle">Nizaam</td>
+                        <td class="align-middle">Remarks<br />(For Araz)</td>
+                        <td class="align-middle">Remarks<br />(For Office)</td>
+                        <!-- <td class="align-middle">Action</td> -->
+                    </tr>
+                    <tr *ngFor="let m of MedicaldataForMumbaiAudit_part2 | searchnew : searchText1 ">
+                        <td *ngIf="m.display" [attr.rowspan]="m.rowSpan" class="align-middle">
+                            <input type="checkbox" [(ngModel)]="m.selected" id="exampleCheck1">
+                        </td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.srNo}}</td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+                            <div id="kgphoto">
+                                <img src="https://mahadalzahra.org{{ m.photo }}"
+                                    onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`"
+                                    alt="{{ m.itsId }}" width="60" height="60" class="img-responsive rounded-circle" />
+                            </div>
+                        </td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.aplicantItsId}}</td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.aplicantName}}</td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.moze}}</td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.year}}<br />{{m.term}}
+                        </td>
+                        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">{{m.currencysymbol}}</td>
+                        <td class="align-middle">{{m.billRelationName}}</td>
+                        <td class="align-middle">{{m.totalBillAmount}}</td>
+                        <td class="align-middle">{{m.level1Amount}}</td>
+                        <td class="align-middle">{{m.level1_1Amount}}</td>
+                        <td class="align-middle">
+                            <input placeholder="Type" [(ngModel)]="m.level2Amount" class="form-control" type="number" />
+                        </td>
+                        <td *ngIf="m.display" [(ngModel)]="m.level2Amount" class="align-middle pending"
+                            [attr.rowspan]="m.rowSpan">
+                            <textarea placeholder="Type" [(ngModel)]="m.mumbaiAudit_Remarks"
+                                class="form-control"></textarea>
+                            <!-- <input placeholder="For Araz" [(ngModel)]="m.mumbaiAudit_Remarks" class="form-control"
+                            type="text" /> -->
+                        </td>
+                        <td *ngIf="m.display" class="align-middle pending" [attr.rowspan]="m.rowSpan">
+                            <textarea placeholder="Type" [(ngModel)]="m.remarks_ForOfficeUse"
+                                class="form-control"></textarea>
+                        </td>
+                        <!-- <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+                        <button mat-button mat-raised-button color="primary" (click)="submitPart2(m)">Submit</button>
+                    </td> -->
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

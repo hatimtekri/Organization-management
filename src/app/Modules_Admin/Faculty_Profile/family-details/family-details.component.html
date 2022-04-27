@@ -1,0 +1,108 @@
+<!-- <div class="row">
+  <div class="col-lg-12">
+    <div class="btn btn-group pull-right">
+      <button (click)="updateFromIts()" mat-button mat-raised-button color="warn">
+        Refresh ITS Data
+      </button>
+    </div>
+  </div>
+</div> -->
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+          aria-controls="collapseOne">
+          <span class="pull-left">Add Family Member:</span>
+          <i class="fa fa-caret-down pull-right"></i>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <div class="row justify-content-center align-items-center mb-2">
+          <nav class="navbar navbar-answer col-lg-4 p-2 align-middle text-center">
+            <span class="col-lg-3 col-sm-3 p-0">Family Member ITS:</span>
+            <input placeholder="Type" *ngIf="!authenticated" class="form-control col-lg-6 col-sm-7"
+              [(ngModel)]="f.itsId" type="number" />
+            <input placeholder="Type" *ngIf="authenticated" class="form-control col-lg-6 col-sm-7" [(ngModel)]="f.itsId"
+              type="number" readonly />
+            <button mat-button mat-raised-button color="primary" (click)="fetchName(f.itsId!)">Search</button>
+          </nav>&nbsp;
+          <div class="navbar col-lg-1 p-0 justify-content-center" *ngIf="authenticated">
+            <img src="https://www.mahadalzahra.org/uploads/Its_Photos/{{f.itsId}}.jpeg" *ngIf="authenticated"
+              onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" width="85" height="100"
+              class="img-responsive img-thumbnail" />
+          </div>&nbsp;
+          <div class="col-lg-6 p-0 pt-lg-1" *ngIf="authenticated">
+            <nav class=" navbar navbar-answer col-lg-12 mb-1">
+              <span>Name:&nbsp;{{name}}</span>
+            </nav>
+            <nav class=" navbar navbar-answer col-lg-12 mb-1">
+              <div class="row col-lg-12 form-group align-middle">
+                <span class="pt-2">Relation:</span>&nbsp;
+                <ng-select [items]="relationDD" appearance="string" [searchable]="true" bindLabel="name"
+                  bindValue="name" placeholder="Select " [(ngModel)]="f.relation" appendTo="body" [multiple]="false"
+                  class="col-lg-10 col-sm-10">
+                </ng-select>
+              </div>
+            </nav>
+            <nav *ngIf="authenticated" class=" navbar navbar-answer justify-content-center col-lg-12 mb-1">
+              <span>
+                <button mat-button mat-raised-button color="warn" *ngIf="authenticated" (click)="Add()">Add</button>
+              </span>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+<div class="row justify-content-center scrollable-div-x" *ngIf="faimalyDetails">
+  <div class="text-center col-lg-12 col-sm-12 scrollable-table-x">
+    <table class="table table-bordered table-sm small medium">
+      <tr class="text-center table-header">
+        <td class="align-middle">Photo</td>
+        <td class="align-middle">ITS ID</td>
+        <td class="align-middle">Name</td>
+        <td class="align-middle">Age</td>
+        <td class="align-middle">Relation</td>
+        <td class="align-middle">Jamaat</td>
+        <td class="align-middle">Idara</td>
+        <td class="align-middle">Occupation</td>
+        <td class="align-middle">Hifz Status</td>
+        <td class="align-middle">Nationality</td>
+        <td class="align-middle">Action</td>
+      </tr>
+      <tr *ngFor="let m of faimalyDetails">
+        <td class="align-middle">
+          <img src="https://www.mahadalzahra.org/uploads/Its_Photos/{{m.itsId}}.jpeg"
+            onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" width="45" height="45"
+            class="img-responsive rounded-circle" />
+
+        </td>
+        <td class="align-middle">{{ m.itsId }}</td>
+        <td class="align-middle text-left">{{ m.name }}</td>
+        <td class="align-middle">{{ m.age }}</td>
+        <td class="align-middle">{{ m.relation }}</td>
+        <td class="align-middle">{{ m.jamaat }}</td>
+        <td class="align-middle">
+          <div *ngIf="m.idara == ''">N/A</div>
+          {{ m.idara }}
+        </td>
+        <td class="align-middle">{{ m.occupation }}</td>
+        <td class="align-middle">
+          <div *ngIf="m.hifzStatus == '' || m.hifzStatus == null ">N/A</div>
+          {{ m.hifzStatus }}
+        </td>
+        <td class="align-middle">{{ m.nationality }}</td>
+        <td class="align-middle">
+          <a class="btn btn-danger btn-sm rounded-circle" (click)="Delete(m.id!)" title="Delete" role="button"><i
+              class="fa fa-trash-o"></i></a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

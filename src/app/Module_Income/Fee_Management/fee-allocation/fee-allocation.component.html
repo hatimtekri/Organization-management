@@ -1,0 +1,285 @@
+<div *ngIf="!page">
+    <div class="row justify-content-center">
+        <h1><strong class="text-danger">You are not authorised to access this page.</strong></h1>
+    </div>
+</div>
+<div *ngIf="page">
+    <div id="accordion" class="mb-2">
+        <div class="card">
+            <div class="card-header p-1" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                        <span class="pull-left">Bulk Allocation:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="row justify-content-center align-items-center mb-2">
+                        <nav class="navbar navbar-answer col-lg-10 p-2 align-middle text-center">
+                            <ng-select class="col-lg-7 p-1" [items]="allocatepsetDD" appearance="string"
+                                [(ngModel)]="allocateBulk.pSetId" [searchable]="true" bindLabel="name" bindValue="id"
+                                placeholder="Select Program" appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                            </ng-select>
+                            <ng-select class="col-lg-3 p-1" [items]="allocateMonthDD" appearance="string"
+                                [(ngModel)]="allocateBulk.monthId" [searchable]="true" bindLabel="name" bindValue="id"
+                                placeholder="Select Month" appendTo="body" [closeOnSelect]="true" [multiple]="false">
+                            </ng-select>
+                            <ng-select class="col-lg-2 p-1" [items]="allocateYearDD" appearance="string"
+                                [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select Year"
+                                appendTo="body" [(ngModel)]="allocateBulk.hijriYear" [closeOnSelect]="true"
+                                [multiple]="false">
+                            </ng-select>
+                            <div class="col-lg-10 p-1"><textarea class="form-control" rows="1"
+                                    [(ngModel)]="allocateBulk.remarks" placeholder="Note"></textarea>
+                            </div>
+                            <button mat-button mat-raised-button color="warn" class="col-lg-2"
+                                (click)="bulkAllocateFee()">Allocate</button>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="accordion2" class="mb-2">
+        <div class="card">
+            <div class="card-header p-1" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree">
+                        <span class="pull-left">Student Wise Allocation:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse hide" aria-labelledby="headingThree" data-parent="#accordion2">
+                <div class="card-body">
+                    <div class="row justify-content-center align-items-center mb-2">
+                        <nav class="navbar navbar-answer col-lg-8 p-2 align-middle justify-content-center text-center">
+                            <div class="col-lg-10 p-1"><textarea class="form-control"
+                                    [(ngModel)]="allocateManual.itsIdCSV" rows="2" placeholder="ITS CSV"></textarea>
+                            </div>
+                            <button mat-button mat-raised-button color="primary" (click)="getStudents()"
+                                class="col-lg-2">Check</button>
+                        </nav>
+                    </div>
+                    <div class="row justify-content-center align-items-center mb-2">
+                        <nav class="navbar navbar-answer col-lg-10 p-2 align-middle text-center">
+
+                            <ng-select class="col-lg-4 p-1" [items]="allocateMonthDD" appearance="string"
+                                [searchable]="true" bindLabel="name" bindValue="id"
+                                [(ngModel)]="allocateManual.monthList" placeholder="Select Month (Multiple Selection)"
+                                appendTo="body" [closeOnSelect]="false" [multiple]="true">
+                            </ng-select>
+                            <ng-select class="col-lg-2 p-1" [items]="allocateYearDD" appearance="string"
+                                [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select Year"
+                                appendTo="body" [(ngModel)]="allocateManual.hijriYear" [closeOnSelect]="true"
+                                [multiple]="false">
+                            </ng-select>
+                            <div class="col-lg-4 p-1"><textarea class="form-control" rows="1"
+                                    [(ngModel)]="allocateManual.remarks" placeholder="Note"></textarea>
+                            </div>
+                            <button mat-button mat-raised-button color="warn" (click)="manualAllocateFee()"
+                                class="col-lg-2">Allocate</button>
+                        </nav>
+                    </div>
+                    <div class="row" *ngIf="students.length != 0">
+                        <div class="text-center col-lg-12 col-sm-12 table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <tr class="table-header">
+                                    <td class="align-middle p-2">Photo</td>
+                                    <td class="align-middle p-2">ITS ID</td>
+                                    <td class="align-middle p-2">Name</td>
+                                    <td class="align-middle p-2">Program</td>
+                                    <td class="align-middle p-2">Fee Category</td>
+                                    <td class="align-middle p-2">Amount</td>
+                                </tr>
+                                <tr class="text-center" *ngFor="let m of students">
+                                    <td class="align-middle p-2">
+                                        <img src="https://www.mahadalzahra.org/uploads/Its_Photos/{{m.itsId}}.jpeg"
+                                            onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`"
+                                            width="60" height="60" class="img-responsive rounded-circle" />
+                                    </td>
+                                    <td class="align-middle p-2">{{m.itsId}}
+                                    </td>
+                                    <td class="align-middle text-left p-2">{{m.studentName}}</td>
+                                    <td class="align-middle text-left p-2">{{m.pset_Name}}</td>
+                                    <td class="align-middle text-left p-2">{{m.fc_name}}</td>
+                                    <td class="align-middle text-left p-2">{{m.amount | currency: m.currency}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="accordion1" class="mb-2">
+        <div class="card">
+            <div class="card-header p-1" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                        <span class="pull-left">Miscellaneous Allocation:</span>
+                        <i class="fa fa-caret-down pull-right"></i>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse hide" aria-labelledby="headingTwo" data-parent="#accordion1">
+                <div class="card-body">
+                    <div class="row justify-content-center align-items-center mb-2">
+                        <nav class="navbar navbar-answer col-lg-8 p-2 align-middle justify-content-center text-center">
+                            <div class="col-lg-10 p-1"><textarea class="form-control" rows="2"
+                                    [(ngModel)]="allocateMiscellaneous.itsIdCSV" placeholder="ITS CSV"></textarea></div>
+                            <button mat-button mat-raised-button color="primary" (click)="getStudents2()"
+                                class="col-lg-2">Check</button>
+                        </nav>
+                    </div>
+                    <div class="row justify-content-center align-items-center mb-2">
+                        <nav class="navbar navbar-answer col-lg-8 p-2 align-middle text-center">
+                            <div class="col-lg-5 p-1"><input placeholder="Amount"
+                                    [(ngModel)]="allocateMiscellaneous.feeAlloted" class="form-control" type="number" />
+                            </div>
+                            <div class="col-lg-5 p-1"><textarea class="form-control" rows="1"
+                                    [(ngModel)]="allocateMiscellaneous.remarks" placeholder="Note"></textarea>
+                            </div>
+                            <button mat-button mat-raised-button color="warn" (click)="MiscellaneousAllocateFee()"
+                                class="col-lg-2">Allocate</button>
+                        </nav>
+                    </div>
+                    <div class="row" *ngIf="students2.length != 0">
+                        <div class="text-center col-lg-12 col-sm-12 table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <tr class="table-header">
+                                    <td class="align-middle p-2">Photo</td>
+                                    <td class="align-middle p-2">ITS ID</td>
+                                    <td class="align-middle p-2">Name</td>
+                                    <td class="align-middle p-2">Program</td>
+                                </tr>
+                                <tr class="text-center" *ngFor="let m of students2">
+                                    <td class="align-middle p-2">
+                                        <img id="stdphoto"
+                                            src="https://www.mahadalzahra.org/uploads/Huffaz_images/{{m.itsId}}.jpeg"
+                                            onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`"
+                                            width="45" height="45" class="img-responsive rounded-circle" />
+                                    </td>
+                                    <td class="align-middle p-2">{{m.itsId}}
+                                    </td>
+                                    <td class="align-middle text-left p-2">{{m.studentName}}</td>
+                                    <td class="align-middle text-left p-2">{{m.pset_Name}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center align-items-center mb-2 p-3">
+        <nav class="navbar navbar-answer col-lg-8 p-2 text-center">
+            <div class="col-lg-5 p-1">
+                <ng-select [items]="allocateMonthDD" appearance="string" [searchable]="true" bindLabel="name"
+                    bindValue="id" placeholder="Select Month (Multiple Selection)" appendTo="body"
+                    [(ngModel)]="loadData1.monthList" [closeOnSelect]="true" [multiple]="true">
+                </ng-select>
+            </div>
+            <div class="col-lg-5 p-1">
+                <ng-select [items]="allocateYearDD" appearance="string" [searchable]="true" bindLabel="name"
+                    [(ngModel)]="loadData1.hijriYear" bindValue="name" placeholder="Select Year" appendTo="body"
+                    [closeOnSelect]="true" [multiple]="false">
+                </ng-select>
+            </div>
+            <div class="col-lg-2 p-1">
+                <button mat-button mat-raised-button color="primary" (click)="loadData()" class="col-lg-9">Load
+                    Data</button>
+            </div>
+        </nav>
+    </div>
+    <div *ngIf="show3">
+        <h2 *ngIf="students3.length == 0" class="col-lg-12 text-danger text-center">No Data Found</h2>
+
+        <!-- Display ONLY when the DATA is Loaded -->
+        <div *ngIf="students3.length != 0">
+            <div id="accordion1" class="mb-1">
+                <div class="card">
+                    <div class="card-header p-1" id="headingtwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-instruction" data-toggle="collapse" data-target="#collapsetwo"
+                                aria-expanded="false" aria-controls="collapsetwo">
+                                <span class="pull-left">Filters:</span>
+                                <i class="fa fa-caret-down pull-right"></i>
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapsetwo" class="collapse hide" aria-labelledby="headingtwo" data-parent="#accordion1">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-4 p-0">
+                                    <nav class="navbar navbar-answer1 m-1">
+                                        <span class="col-lg-12">Fee Category:</span>
+                                        <ng-select class="col-lg-12" [items]="CategoryDD" appearance="string"
+                                            [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                            appendTo="body" [closeOnSelect]="false" [multiple]="true">
+                                        </ng-select>
+                                    </nav>
+                                </div>
+                                <div class="col-lg-4 p-0">
+                                    <nav class="navbar navbar-answer1 m-1">
+                                        <span class="col-lg-12">Program:</span>
+                                        <ng-select class="col-lg-12" [items]="ProgramDD" appearance="string"
+                                            [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                            appendTo="body" [closeOnSelect]="false" [multiple]="true">
+                                        </ng-select>
+                                    </nav>
+                                </div>
+                                <div class="col-lg-4 p-0">
+                                    <nav class="navbar navbar-answer1 m-1">
+                                        <span class="col-lg-12">Amount:</span>
+                                        <ng-select class="col-lg-12" [items]="AmountDD" appearance="string"
+                                            [searchable]="true" bindLabel="name" bindValue="name" placeholder="Select"
+                                            appendTo="body" [closeOnSelect]="false" [multiple]="true">
+                                        </ng-select>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="text-center col-lg-12 col-sm-12 table-responsive">
+                    <table class="table table-bordered table-sm">
+                        <tr class="table-header">
+                            <td class="align-middle p-2">Sr No.</td>
+                            <td class="align-middle p-2">Photo</td>
+                            <td class="align-middle p-2">Name</td>
+                            <td class="align-middle p-2">Program</td>
+                            <td class="align-middle p-2">Fee Category</td>
+                            <td class="align-middle p-2">Hub Allocated</td>
+                        </tr>
+                        <tr class="text-center" *ngFor="let m of students3">
+                            <td class="align-middle p-2">{{m.id}}</td>
+                            <td class="align-middle p-2">
+                                <img id="stdphoto"
+                                    src="https://www.mahadalzahra.org/uploads/Its_Photos/{{m.itsIdCSV}}.jpeg"
+                                    onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`"
+                                    width="45" height="45" class="img-responsive rounded-circle" />
+                            </td>
+                            <td class="align-middle p-2">{{m.studentName}}</td>
+                            <td class="align-middle p-2">{{m.psetName}}</td>
+                            <td class="align-middle p-2">{{m.fc_Name}}</td>
+                            <td class="align-middle p-2">{{m.feeAlloted}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

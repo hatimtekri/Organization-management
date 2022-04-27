@@ -1,0 +1,176 @@
+/* You can add global styles to this file, and also import other style files */
+//@import "/src/custom-theme.scss";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+html,
+body {
+    height: 100%;
+}
+// @font-face {
+//     font-family: al_kanz;
+//     src: url(./assets/css/Kanz-al-Marjaan.ttf);
+// }
+
+// @font-face {
+//     font-family: 'AL-KANZ';
+//     src: url('./assets/css/fonts/alkanz/AL-KANZ.eot');
+//     src: url('./assets/css/fonts/alkanz/AL-KANZ.eot?#iefix') format('embedded-opentype'),
+//         url('./assets/css/fonts/alkanz/AL-KANZ.woff2') format('woff2'),
+//         url('./assets/css/fonts/alkanz/AL-KANZ.woff') format('woff'),
+//         url('./assets/css/fonts/alkanz/AL-KANZ.ttf') format('truetype'),
+//         url('./assets/css/fonts/alkanz/AL-KANZ.svg#AL-KANZ') format('svg');
+//     font-weight: 500;
+//     font-style: normal;
+//     font-display: swap;
+// }
+
+// @font-face {
+//     font-family: 'AL-FATEMI(Lisaan-ud-Dawat)';
+//     src: url('./assets/css/fonts/alfatemi/AL-FATEMILisaan-ud-Dawat.eot');
+//     src: url('./assets/css/fonts/alfatemi/AL-FATEMILisaan-ud-Dawat.eot?#iefix') format('embedded-opentype'),
+//         url('./assets/css/fonts/alfatemi/AL-FATEMILisaan-ud-Dawat.woff2') format('woff2'),
+//         url('./assets/css/fonts/alfatemi/AL-FATEMILisaan-ud-Dawat.woff') format('woff'),
+//         url('./assets/css/fonts/alfatemi/AL-FATEMILisaan-ud-Dawat.ttf') format('truetype'),
+//         url('./assets/css/fonts/alfatemi/AL-FATEMILisaan-ud-Dawat.svg#AL-FATEMILisaan-ud-Dawat') format('svg');
+//     font-weight: 500;
+//     font-style: normal;
+//     font-display: swap;
+// }
+
+.textArALKANZ {
+    font: 18px/18px "AL-KANZ", "lisan-ud-dawat", "AL-FATEMI-Lisaan-ud-Dawat", "Al-Fatemi(lisaan-ud-Dawat)",
+        "colaborate-lightregular", arial, serif;
+    text-align: right;
+    direction: rtl;
+}
+.textArALKANZ-MARJAAN {
+    font: 18px/18px "kanz-al-marjaan", "lisan-ud-dawat", "AL-FATEMI-Lisaan-ud-Dawat", "Al-Fatemi(lisaan-ud-Dawat)",
+        "colaborate-lightregular", arial, serif;
+    text-align: right;
+    direction: rtl;
+}
+
+@font-face {
+    font-family: "AL-KANZ";
+    src: url("./assets/css/fonts/alkanz/AL-KANZ.eot");
+    src: url("./assets/css/fonts/alkanz/AL-KANZ.eot?#iefix") format("embedded-opentype"),
+        url("./assets/css/fonts/alkanz/AL-KANZ.woff") format("woff"),
+        url("./assets/css/fonts/alkanz/AL-KANZ.ttf") format("truetype"),
+        url("./assets/css/fonts/alkanz/AL-KANZ.svg#Coronet-webfont") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+// @font-face {
+// font-family: 'kanz-al-marjaan';
+// src: url('../fonts/kanz-al-marjaan.eot');
+// src: url('../fonts/kanz-al-marjaan.eot?#iefix') format('embedded-opentype'),
+// url('../fonts/kanz-al-marjaan.woff') format('woff'),
+// url('../fonts/kanz-al-marjaan.ttf') format('truetype'),
+// url('../fonts/kanz-al-marjaan.svg#Coronet-webfont') format('svg');
+// font-weight: normal;
+// font-style: normal;
+// }
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif, "Helvetica Neue", sans-serif;
+}
+.w3-tangerine {
+    font-family: "Tangerine", serif;
+    color: #005e80;
+}
+
+.page-header-toolbar {
+    background: #fff176;
+}
+
+.view-attachment {
+    cursor: pointer;
+    color: darkred;
+}
+
+.table-header {
+    background: #153e71;
+    font-weight: normal;
+    height: fit-content;
+    font-size: 11pt;
+    color: #fff;
+    //text-decoration: none;
+}
+
+.page-subheader-toolbar {
+    background: #153e71;
+    height: fit-content;
+    font-size: 12pt;
+    color: #fff;
+    //font-weight: bold;
+}
+
+.card {
+    border: black 1px solid;
+}
+
+.text-arabic {
+    direction: rtl;
+    text-align: left;
+    font-family: "AL-FATEMI(Lisaan-ud-Dawat)", "AL-KANZ", arial, serif;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.btn-yellow {
+    background: #fff176;
+}
+
+.on-edit-header {
+    background: #fff176;
+}
+
+input[type="text"] {
+    font-size: 11pt;
+}
+
+.scrollable-div-x {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.scrollable-table-x {
+    display: table;
+    table-layout: fixed;
+    //overflow: auto;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.max-content {
+    //width: max-content;
+    width: fit-content;
+}
+
+.btn-instruction {
+    width: 100%;
+    color: #153e71;
+    font-weight: bold;
+}
+
+.foreigner {
+    background: rgba(253, 227, 167, 0.6);
+}
+
+table.table-bordered > tr > th {
+    border: 1px solid black;
+}
+
+table.table-bordered > tr > td {
+    border: 1px solid black;
+}
+
+.btn-primary {
+    background: #153e71;
+}
+
+.btn-primary:hover {
+    background: #153e71;
+}

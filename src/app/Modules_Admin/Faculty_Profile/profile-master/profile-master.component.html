@@ -1,0 +1,85 @@
+<div *ngIf="page">
+  <div class="col-sm-12 col-lg-12 p-1">
+    <mat-toolbar class="mat-elevation-z6 page-header-toolbar">
+
+
+      <img src="https://www.mahadalzahra.org/uploads/Huffaz_images/{{profileData.itsId}}.jpeg"
+        onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" width="60" height="60"
+        class="img-responsive rounded-circle" />&nbsp;
+      {{profileData.fullName}}
+    </mat-toolbar>
+    <br />
+    <!-- <div class="row justify-content-center">
+      <h1 class="text-danger"><strong>The page is under maintenance. Will be live soon!</strong></h1>
+    </div> -->
+    <div class="justify-content-center">
+      <nav>
+        <div class="nav col-lg-12 m-auto" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active col-lg col-sm-12 btn" id="nav-home-tab" data-toggle="tab" role="tab"
+            aria-controls="nav-home" [attr.aria-selected]="selectedvalue == 1"
+            (click)="routeLink('/admin/profile/personal-info',1)">
+            Basic
+          </a>
+          <a class="nav-item nav-link active col-lg col-sm-12 btn" id="nav-home-tab" data-toggle="tab" role="tab"
+            aria-controls="nav-home" [attr.aria-selected]="selectedvalue == 2"
+            (click)="routeLink('/admin/profile/family-details',2)">
+            Family
+          </a>
+          <a class="nav-item nav-link col-lg col-sm-12 btn" id="nav-contact-tab" data-toggle="tab" role="tab"
+            aria-controls="nav-contact" [attr.aria-selected]="selectedvalue == 3"
+            (click)="routeLink('/admin/profile/academic',3)">
+            Academic
+          </a>
+          <a class="nav-item nav-link col-lg col-sm-12 btn" id="nav-contact-tab" data-toggle="tab" role="tab"
+            aria-controls="nav-contact" [attr.aria-selected]="selectedvalue == 4"
+            (click)="routeLink('/admin/profile/self-info',4)">
+            Self-Assessment
+          </a>
+          <a class="nav-item nav-link col-lg col-sm-12 btn" id="nav-contact-tab" data-toggle="tab" role="tab"
+            aria-controls="nav-contact" [attr.aria-selected]="selectedvalue == 5"
+            (click)="routeLink('/admin/profile/khidmat-details',5)">
+            Khidmat
+          </a>
+          <a class="nav-item nav-link col-lg col-sm-12 btn" id="nav-contact-tab" data-toggle="tab" role="tab"
+            aria-controls="nav-contact" [attr.aria-selected]="selectedvalue == 6"
+            (click)="routeLink('/admin/profile/mawaze',6)">
+            Mawaze
+          </a>
+          <a class="nav-item nav-link col-lg col-sm-12 btn" id="nav-contact-tab" data-toggle="tab" role="tab"
+            aria-controls="nav-contact" [attr.aria-selected]="selectedvalue == 7"
+            (click)="routeLink('/admin/profile/bank-details',7)">
+            Bank
+          </a>
+          <a class="nav-item nav-link col-lg col-sm-12 btn" id="nav-contact-tab" data-toggle="tab" role="tab"
+            aria-controls="nav-contact" [attr.aria-selected]="selectedvalue == 8"
+            (click)="routeLink('/admin/profile/passport-details',8)">
+            Documents
+          </a>
+          <!-- <a *ngIf="facultyVariablesData.isMedical" class="nav-item nav-link col-lg col-sm-12 btn" id="nav-contact-tab"
+          data-toggle="tab" [routerLink]="['/admin/profile/enaayat']" role="tab" aria-controls="nav-contact"
+          [attr.aria-selected]="selectedvalue == 9" (click)="selectedvalue = 9">
+          Enayat
+        </a>-->
+          <a *ngIf="SalaryPage" class="nav-item nav-link col-lg col-sm-12 btn" id="nav-contact-tab" data-toggle="tab"
+            role="tab" aria-controls="nav-contact" [attr.aria-selected]="selectedvalue == 10"
+            (click)="routeLink('/admin/profile/salary',10)">
+            Salary
+          </a>
+        </div>
+      </nav>
+    </div>
+    <br />
+    <div class="col-lg-12 col-sm-12">
+
+      <div class="tab-content" id="nav-tabContent">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Husain Bekhushi</div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">Hatim Tekri</div>
+      </div> -->

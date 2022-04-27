@@ -1,0 +1,103 @@
+<div class="btn-group pull-right">
+  <button mat-button mat-flat-button color="primary">
+    Total Applicants&nbsp;&nbsp;
+    <span class="badge badge-success">{{ total }}</span>
+  </button>
+  &nbsp;
+  <button mat-button mat-flat-button color="primary">
+    Original Bills Received&nbsp;&nbsp;
+    <span class="badge badge-success">{{ originalBills }}</span>
+  </button>
+  &nbsp;
+  <button mat-button mat-flat-button color="primary">
+    Surat Audit Done&nbsp;&nbsp;
+    <span class="badge badge-success">{{ suratAudit }}</span>
+  </button>
+</div>
+<br />
+<br />
+<input [(ngModel)]="searchText" class="form-control justify-content-center col-lg-12" placeholder="Search" />
+
+<br />
+<div class="row justify-content-center">
+  <div class="text-center col-lg-12 col-sm-12 table table-responsive">
+    <table class="table table-bordered table-sm">
+
+      <tr class="table-header">
+        <td class="align-middle">Sr No.</td>
+        <td class="align-middle">Photo</td>
+        <td class="align-middle">ITS</td>
+        <td class="align-middle">Name</td>
+        <td class="align-middle">Khidmat Mauze</td>
+        <td class="align-middle">Year & Term</td>
+        <td class="align-middle">Currency</td>
+        <td class="align-middle">Cover<br />Page</td>
+        <td class="align-middle">Bill<br />Summary</td>
+        <td class="align-middle">Original<br />Bills</td>
+        <td class="align-middle">Relation</td>
+        <td class="align-middle">Category</td>
+        <td class="align-middle">Subcategory</td>
+        <td class="align-middle">Araz Amount</td>
+        <td class="align-middle">Original Bill<br />Status</td>
+        <td class="align-middle">Surat Audit</td>
+      </tr>
+
+      <tr *ngFor="let m of MedicalEntriesStatusList | searchnew: searchText"
+        [class.foreigner]="m.currencySymbolString !== 'INR'">
+        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+          {{ m.srNo }}
+        </td>
+        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+          <div id="kgphoto">
+            <img src="https://mahadalzahra.org{{ m.photo }}"
+              onerror="this.src=`https://www.its52.com/GetImage.aspx?ID=HJRjRIqk4b8=&G=M`" alt="{{ m.itsId }}"
+              width="60" height="60" class="img-responsive rounded-circle" />
+          </div>
+        </td>
+        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+          {{ m.applicantItsId }}
+        </td>
+        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+          {{ m.applicantName }}
+        </td>
+        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+          {{ m.moze }}
+        </td>
+        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+          {{ m.year }}<br />{{ m.term }}
+        </td>
+        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+          {{ m.currencySymbolString }}
+        </td>
+        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan" class="align-middle">
+          <a class="btn btn-warning btn-sm rounded-circle"
+            (click)="printBills(m.applicantItsId!, m.currencySymbolString!)"><i class="fa fa-file-pdf-o"></i></a>
+        </td>
+        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan" class="align-middle">
+          <a class="btn btn-warning btn-sm rounded-circle" (click)="printBillSummary(m.applicantItsId!)"><i
+              class="fa fa-file-pdf-o"></i></a>
+        </td>
+        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan" class="align-middle">
+          <a class="btn btn-warning btn-sm rounded-circle" (click)="openBulk(m.applicantItsId!)"><i
+              class="fa fa-file-pdf-o"></i></a>
+        </td>
+
+        <td class="align-middle">{{ m.relation }}</td>
+        <td class="align-middle">{{ m.category }}</td>
+        <td class="align-middle">{{ m.subCategory1 }}</td>
+        <td class="align-middle">{{ m.totalAmount }}</td>
+        <td *ngIf="m.display" class="align-middle" [class]="m.originalBillStatusCss" [attr.rowspan]="m.rowSpan">
+          {{ m.originalBillStatus }}
+        </td>
+        <td *ngIf="m.display" class="align-middle" [attr.rowspan]="m.rowSpan">
+          <div *ngIf="!m.userAmount" [class]="m.suratAuditStatuscss">
+            {{ m.suratAuditStatus }}
+          </div>
+          <!-- <div *ngIf="!m.userAmount" class="pending">Pending</div>
+                    <div *ngIf="m.userAmount" class="received">Done</div> -->
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</div>
